@@ -186,81 +186,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IconsAtlass_0
-      rect:
-        serializedVersion: 2
-        x: 374
-        y: 1072
-        width: 202
-        height: 168
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c575203183ea6cd0800000000000000
-      internalID: -2563986893836028473
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_1
-      rect:
-        serializedVersion: 2
-        x: 860
-        y: 1189
-        width: 91
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6dd513d131964c7e0800000000000000
-      internalID: -1746155224697840170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_2
-      rect:
-        serializedVersion: 2
-        x: 978
-        y: 1068
-        width: 120
-        height: 168
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 47de5d412ab9d7860800000000000000
-      internalID: 7529345272469908852
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: IconsAtlass_3
       rect:
         serializedVersion: 2
-        x: 1119
-        y: 647
-        width: 362
-        height: 591
+        x: 1097
+        y: 638
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -274,37 +208,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconsAtlass_4
-      rect:
-        serializedVersion: 2
-        x: 769
-        y: 1152
-        width: 14
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f7314be0e4a46df20800000000000000
-      internalID: 3447024263913280383
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: IconsAtlass_5
       rect:
         serializedVersion: 2
-        x: 647
-        y: 629
-        width: 334
-        height: 488
+        x: 592
+        y: 637
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -318,59 +230,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconsAtlass_6
-      rect:
-        serializedVersion: 2
-        x: 882
-        y: 1115
-        width: 27
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 84c945e44e1e219f0800000000000000
-      internalID: -499088238001742776
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_7
-      rect:
-        serializedVersion: 2
-        x: 1467
-        y: 1101
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 763eb005b33beb930800000000000000
-      internalID: 4160960173064315751
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: IconsAtlass_8
       rect:
         serializedVersion: 2
-        x: 186
-        y: 635
-        width: 310
-        height: 454
+        x: 120
+        y: 626
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -384,59 +252,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconsAtlass_9
-      rect:
-        serializedVersion: 2
-        x: 992
-        y: 1064
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8073f23f98c3995f0800000000000000
-      internalID: -749501299792333048
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_10
-      rect:
-        serializedVersion: 2
-        x: 1138
-        y: 747
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4d92a1a8ee1e11b50800000000000000
-      internalID: 6562274546690959828
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: IconsAtlass_11
       rect:
         serializedVersion: 2
-        x: 1693
-        y: 615
-        width: 315
+        x: 1638
+        y: 638
+        width: 442
         height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -450,37 +274,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconsAtlass_12
-      rect:
-        serializedVersion: 2
-        x: 1307
-        y: 604
-        width: 61
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 31dccaff3d2cf4240800000000000000
-      internalID: 4778251945446788371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: IconsAtlass_13
       rect:
         serializedVersion: 2
-        x: 234
-        y: 41
-        width: 262
-        height: 519
+        x: 149
+        y: 145
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -497,12 +299,12 @@ TextureImporter:
       name: IconsAtlass_14
       rect:
         serializedVersion: 2
-        x: 682
-        y: 47
-        width: 233
-        height: 537
+        x: 579
+        y: 145
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -519,12 +321,12 @@ TextureImporter:
       name: IconsAtlass_15
       rect:
         serializedVersion: 2
-        x: 1166
-        y: 192
-        width: 331
-        height: 371
+        x: 1103
+        y: 141
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -541,12 +343,12 @@ TextureImporter:
       name: IconsAtlass_16
       rect:
         serializedVersion: 2
-        x: 1636
-        y: 197
-        width: 368
-        height: 321
+        x: 1625
+        y: 140
+        width: 442
+        height: 442
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -559,99 +361,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_17
-      rect:
-        serializedVersion: 2
-        x: 1646
-        y: 515
-        width: 142
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 170114f0036f7ec60800000000000000
-      internalID: 7847511561991164017
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_18
-      rect:
-        serializedVersion: 2
-        x: 934
-        y: 143
-        width: 81
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb2c4181f87a695b0800000000000000
-      internalID: -5361914073311821125
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_19
-      rect:
-        serializedVersion: 2
-        x: 341
-        y: 75
-        width: 14
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ac9ba0429fe4cdaf0800000000000000
-      internalID: -370334237392717366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconsAtlass_20
-      rect:
-        serializedVersion: 2
-        x: 962
-        y: 41
-        width: 106
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5199c9aa3609df900800000000000000
-      internalID: 719890273187698965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cf21e0030d2bba344a3f6ff9ffe2b64c
     internalID: 0
     vertices: []
     indices: 
