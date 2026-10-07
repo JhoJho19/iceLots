@@ -233,8 +233,8 @@ TextureImporter:
       name: IconsAtlass_8
       rect:
         serializedVersion: 2
-        x: 120
-        y: 626
+        x: 124
+        y: 637
         width: 442
         height: 442
       alignment: 0
@@ -256,7 +256,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1638
-        y: 638
+        y: 619
         width: 442
         height: 442
       alignment: 0

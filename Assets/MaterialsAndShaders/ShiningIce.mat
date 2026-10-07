@@ -43,11 +43,14 @@ Material:
     m_Floats:
     - _ColorMask: 15
     - _EnableExternalAlpha: 0
+    - _MidBoost: 1.37
+    - _MidBoostPosition: 1
+    - _MidBoostWidth: 0.16
     - _PauseAfterSecond: 3
     - _SecondWaveDelay: 0.25
     - _ShineIntensity: 0.8
-    - _ShineTilt: 0.45
-    - _ShineWidth: 0.045
+    - _ShineTilt: 1
+    - _ShineWidth: 0.059
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

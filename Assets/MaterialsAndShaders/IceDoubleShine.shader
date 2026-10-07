@@ -7,12 +7,17 @@ Shader "Custom/UI/IceDoubleShine"
 
         [Header(Shine)]
         _ShineColor ("Shine Color", Color) = (0.8, 0.95, 1, 1)
-        _ShineIntensity ("Shine Intensity", Range(0, 3)) = 0.8
-        _ShineWidth ("Shine Width", Range(0.01, 0.5)) = 0.01
+        _ShineIntensity ("Shine Intensity", Range(0, 3)) = 1.2
+        _ShineWidth ("Shine Width", Range(0.01, 0.2)) = 0.055
         _WaveDuration ("Wave Duration", Range(0.1, 2)) = 0.7
-        _SecondWaveDelay ("Second Wave Delay", Range(0, 2)) = 0.2
+        _SecondWaveDelay ("Second Wave Delay", Range(0, 2)) = 0.25
         _PauseAfterSecond ("Pause After Second", Range(0, 10)) = 3.0
         _ShineTilt ("Shine Tilt", Range(-2, 2)) = 0.45
+
+        [Header(Mid Flash)]
+        _MidBoost ("Mid Boost", Range(0, 3)) = 1.2
+        _MidBoostWidth ("Mid Boost Width", Range(0.01, 0.3)) = 0.07
+        _MidBoostPosition ("Mid Boost Position", Range(0, 1)) = 0.55
 
         [Header(UI)]
         _StencilComp ("Stencil Comparison", Float) = 8
@@ -50,6 +55,7 @@ Shader "Custom/UI/IceDoubleShine"
         Lighting Off
         ZWrite Off
         ZTest [unity_GUIZTestMode]
+
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask [_ColorMask]
 
@@ -85,6 +91,7 @@ Shader "Custom/UI/IceDoubleShine"
             };
 
             sampler2D _MainTex;
+
             float4 _MainTex_ST;
             float4 _TextureSampleAdd;
 
@@ -98,6 +105,10 @@ Shader "Custom/UI/IceDoubleShine"
             float _PauseAfterSecond;
             float _ShineTilt;
 
+            float _MidBoost;
+            float _MidBoostWidth;
+            float _MidBoostPosition;
+
             float4 _ClipRect;
 
             v2f vert(appdata_t v)
@@ -106,8 +117,12 @@ Shader "Custom/UI/IceDoubleShine"
 
                 OUT.worldPosition = v.vertex;
                 OUT.vertex = UnityObjectToClipPos(v.vertex);
-                OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
-                OUT.color = v.color * _Color;
+
+                OUT.texcoord =
+                    TRANSFORM_TEX(v.texcoord, _MainTex);
+
+                OUT.color =
+                    v.color * _Color;
 
                 return OUT;
             }
@@ -117,81 +132,181 @@ Shader "Custom/UI/IceDoubleShine"
                 float startTime,
                 float2 uv)
             {
-                float elapsed = currentTime - startTime;
+                float elapsed =
+                    currentTime - startTime;
 
+                // Волна существует только в течение WaveDuration.
                 float active =
                     step(0.0, elapsed) *
                     step(elapsed, _WaveDuration);
 
                 float phase =
-                    saturate(elapsed / max(_WaveDuration, 0.001));
+                    saturate(
+                        elapsed /
+                        max(_WaveDuration, 0.001)
+                    );
 
-                float minCoord = min(0.0, _ShineTilt);
-                float maxCoord = 1.0 + max(0.0, _ShineTilt);
+                // --------------------------------
+                // Короткий всплеск яркости
+                // --------------------------------
+
+                float boostDistance =
+                    abs(
+                        phase -
+                        _MidBoostPosition
+                    );
+
+                float midPulse =
+                    1.0 -
+                    smoothstep(
+                        0.0,
+                        _MidBoostWidth,
+                        boostDistance
+                    );
+
+                float brightnessMultiplier =
+                    1.0 +
+                    midPulse *
+                    _MidBoost;
+
+                // --------------------------------
+                // Положение диагонального блика
+                // --------------------------------
+
+                float minCoord =
+                    min(
+                        0.0,
+                        _ShineTilt
+                    );
+
+                float maxCoord =
+                    1.0 +
+                    max(
+                        0.0,
+                        _ShineTilt
+                    );
 
                 float coord =
                     uv.x +
-                    uv.y * _ShineTilt;
+                    uv.y *
+                    _ShineTilt;
 
-                float travelPadding = _ShineWidth * 2.0;
+                float travelPadding =
+                    _ShineWidth *
+                    2.0;
 
-                float center = lerp(
-                    minCoord - travelPadding,
-                    maxCoord + travelPadding,
-                    phase
-                );
+                float center =
+                    lerp(
+                        minCoord -
+                        travelPadding,
+
+                        maxCoord +
+                        travelPadding,
+
+                        phase
+                    );
 
                 float distanceToCenter =
-                    abs(coord - center);
+                    abs(
+                        coord -
+                        center
+                    );
 
-                float shine = 1.0 -
+                // --------------------------------
+                // Мягкая внешняя часть блика
+                // --------------------------------
+
+                float shine =
+                    1.0 -
                     smoothstep(
                         _ShineWidth * 0.15,
                         _ShineWidth,
                         distanceToCenter
                     );
 
-                float core = 1.0 -
+                // --------------------------------
+                // Узкое яркое ядро
+                // --------------------------------
+
+                float core =
+                    1.0 -
                     smoothstep(
                         0.0,
-                        _ShineWidth * 0.2,
+                        _ShineWidth * 0.12,
                         distanceToCenter
                     );
 
-                shine += core * 0.65;
+                shine +=
+                    core *
+                    0.65;
 
-                return shine * active;
+                // Базовую форму ограничиваем,
+                // а усиление применяем уже после.
+                shine =
+                    saturate(shine);
+
+                return
+                    shine *
+                    active *
+                    brightnessMultiplier;
             }
 
             fixed4 frag(v2f IN) : SV_Target
             {
                 fixed4 color =
-                    (tex2D(_MainTex, IN.texcoord) +
-                     _TextureSampleAdd) *
+                    (
+                        tex2D(
+                            _MainTex,
+                            IN.texcoord
+                        )
+                        +
+                        _TextureSampleAdd
+                    )
+                    *
                     IN.color;
+
+                /*
+                    Тайминг:
+
+                    0.00  -> первый блик
+                    0.25  -> второй блик
+
+                    3.25  -> первый блик
+                    3.50  -> второй блик
+                */
 
                 float cycleDuration =
                     _SecondWaveDelay +
                     _PauseAfterSecond;
 
                 float cycleTime =
-                    fmod(_Time.y, cycleDuration);
+                    fmod(
+                        _Time.y,
+                        cycleDuration
+                    );
 
-                float wave1 = GetShineWave(
-                    cycleTime,
-                    0.0,
-                    IN.texcoord
-                );
+                float wave1 =
+                    GetShineWave(
+                        cycleTime,
+                        0.0,
+                        IN.texcoord
+                    );
 
-                float wave2 = GetShineWave(
-                    cycleTime,
-                    _SecondWaveDelay,
-                    IN.texcoord
-                );
+                float wave2 =
+                    GetShineWave(
+                        cycleTime,
+                        _SecondWaveDelay,
+                        IN.texcoord
+                    );
 
+                // Не используем saturate здесь,
+                // иначе Mid Boost будет обрезаться.
                 float shine =
-                    saturate(wave1 + wave2);
+                    wave1 +
+                    wave2;
 
+                // Блик только на непрозрачной
+                // части изображения.
                 color.rgb +=
                     _ShineColor.rgb *
                     shine *
@@ -199,14 +314,22 @@ Shader "Custom/UI/IceDoubleShine"
                     color.a;
 
                 #ifdef UNITY_UI_CLIP_RECT
-                    color.a *= UnityGet2DClipping(
-                        IN.worldPosition.xy,
-                        _ClipRect
-                    );
+
+                    color.a *=
+                        UnityGet2DClipping(
+                            IN.worldPosition.xy,
+                            _ClipRect
+                        );
+
                 #endif
 
                 #ifdef UNITY_UI_ALPHACLIP
-                    clip(color.a - 0.001);
+
+                    clip(
+                        color.a -
+                        0.001
+                    );
+
                 #endif
 
                 return color;
