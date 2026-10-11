@@ -1,0 +1,7 @@
+{
+  "noEngineReferences": true,
+  "references": [],
+  "name": "IceP.Domain",
+  "autoReferenced": false,
+  "rootNamespace": "IceP.Domain"
+}

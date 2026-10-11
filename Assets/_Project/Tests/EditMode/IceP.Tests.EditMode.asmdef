@@ -1,0 +1,8 @@
+{
+  "name": "IceP.Tests.EditMode",
+  "rootNamespace": "IceP.Tests",
+  "references": ["IceP.Domain", "IceP.Application", "IceP.Infrastructure"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

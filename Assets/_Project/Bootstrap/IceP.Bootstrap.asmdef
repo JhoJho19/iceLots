@@ -1,0 +1,12 @@
+{
+  "noEngineReferences": false,
+  "references": [
+    "IceP.Domain",
+    "IceP.Application",
+    "IceP.Infrastructure",
+    "IceP.Presentation"
+  ],
+  "name": "IceP.Bootstrap",
+  "autoReferenced": false,
+  "rootNamespace": "IceP.Bootstrap"
+}

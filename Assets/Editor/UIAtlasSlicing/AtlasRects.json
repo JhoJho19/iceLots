@@ -1,0 +1,1604 @@
+{
+  "atlases": [
+    {
+      "path": "Assets/Sprites/UiAtlas.png",
+      "width": 1448,
+      "height": 1086,
+      "sprites": [
+        {
+          "name": "Button_Rect_Blue",
+          "x": 0,
+          "top": 0,
+          "width": 297,
+          "height": 141,
+          "border": [
+            108,
+            40,
+            112,
+            55
+          ]
+        },
+        {
+          "name": "Button_Rect_Green",
+          "x": 297,
+          "top": 0,
+          "width": 283,
+          "height": 141,
+          "border": [
+            108,
+            40,
+            112,
+            55
+          ]
+        },
+        {
+          "name": "Button_Rect_Amber",
+          "x": 580,
+          "top": 0,
+          "width": 284,
+          "height": 141,
+          "border": [
+            108,
+            40,
+            112,
+            55
+          ]
+        },
+        {
+          "name": "Button_Rect_Red",
+          "x": 864,
+          "top": 0,
+          "width": 287,
+          "height": 141,
+          "border": [
+            108,
+            40,
+            112,
+            55
+          ]
+        },
+        {
+          "name": "Button_Rect_Gray",
+          "x": 1151,
+          "top": 0,
+          "width": 297,
+          "height": 141,
+          "border": [
+            108,
+            40,
+            112,
+            55
+          ]
+        },
+        {
+          "name": "Button_Pill_Blue",
+          "x": 0,
+          "top": 141,
+          "width": 301,
+          "height": 114,
+          "border": [
+            100,
+            32,
+            100,
+            35
+          ]
+        },
+        {
+          "name": "Button_Pill_Green",
+          "x": 301,
+          "top": 141,
+          "width": 288,
+          "height": 114,
+          "border": [
+            100,
+            32,
+            100,
+            35
+          ]
+        },
+        {
+          "name": "Button_Pill_Amber",
+          "x": 589,
+          "top": 141,
+          "width": 285,
+          "height": 114,
+          "border": [
+            100,
+            32,
+            100,
+            35
+          ]
+        },
+        {
+          "name": "Button_Pill_Red",
+          "x": 874,
+          "top": 141,
+          "width": 283,
+          "height": 114,
+          "border": [
+            100,
+            32,
+            100,
+            35
+          ]
+        },
+        {
+          "name": "Button_Pill_Gray",
+          "x": 1157,
+          "top": 141,
+          "width": 291,
+          "height": 114,
+          "border": [
+            100,
+            32,
+            100,
+            35
+          ]
+        },
+        {
+          "name": "Button_Round_Blue",
+          "x": 0,
+          "top": 255,
+          "width": 115,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Round_Green",
+          "x": 115,
+          "top": 255,
+          "width": 98,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Round_Amber",
+          "x": 213,
+          "top": 255,
+          "width": 96,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Round_Red",
+          "x": 309,
+          "top": 255,
+          "width": 99,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Round_Gray",
+          "x": 408,
+          "top": 255,
+          "width": 101,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Square_Blue",
+          "x": 509,
+          "top": 255,
+          "width": 94,
+          "height": 122,
+          "border": [
+            35,
+            28,
+            35,
+            30
+          ]
+        },
+        {
+          "name": "Button_Square_Green",
+          "x": 603,
+          "top": 255,
+          "width": 92,
+          "height": 122,
+          "border": [
+            35,
+            28,
+            35,
+            30
+          ]
+        },
+        {
+          "name": "Button_Square_Amber",
+          "x": 695,
+          "top": 255,
+          "width": 90,
+          "height": 122,
+          "border": [
+            35,
+            28,
+            35,
+            30
+          ]
+        },
+        {
+          "name": "Button_Square_Red",
+          "x": 785,
+          "top": 255,
+          "width": 91,
+          "height": 122,
+          "border": [
+            35,
+            28,
+            35,
+            30
+          ]
+        },
+        {
+          "name": "Button_Square_Gray",
+          "x": 876,
+          "top": 255,
+          "width": 90,
+          "height": 122,
+          "border": [
+            35,
+            28,
+            35,
+            30
+          ]
+        },
+        {
+          "name": "Button_Hex_Blue",
+          "x": 966,
+          "top": 255,
+          "width": 97,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Hex_Green",
+          "x": 1063,
+          "top": 255,
+          "width": 94,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Hex_Amber",
+          "x": 1157,
+          "top": 255,
+          "width": 92,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Hex_Red",
+          "x": 1249,
+          "top": 255,
+          "width": 92,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Hex_Gray",
+          "x": 1341,
+          "top": 255,
+          "width": 107,
+          "height": 122,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Round_Blue",
+          "x": 0,
+          "top": 377,
+          "width": 134,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Round_Green",
+          "x": 134,
+          "top": 377,
+          "width": 116,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Round_Amber",
+          "x": 250,
+          "top": 377,
+          "width": 115,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Round_Red",
+          "x": 365,
+          "top": 377,
+          "width": 119,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Round_Gray",
+          "x": 484,
+          "top": 377,
+          "width": 122,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Left_Round_Blue",
+          "x": 606,
+          "top": 377,
+          "width": 119,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Right_Round_Blue",
+          "x": 725,
+          "top": 377,
+          "width": 117,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Up_Round_Blue",
+          "x": 842,
+          "top": 377,
+          "width": 119,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Down_Round_Blue",
+          "x": 961,
+          "top": 377,
+          "width": 122,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Left_Diamond_Blue",
+          "x": 1083,
+          "top": 377,
+          "width": 135,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Right_Diamond_Blue",
+          "x": 1218,
+          "top": 377,
+          "width": 139,
+          "height": 137,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Plus_Round_Blue",
+          "x": 0,
+          "top": 514,
+          "width": 94,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Plus_Round_Green",
+          "x": 94,
+          "top": 514,
+          "width": 77,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Plus_Round_Amber",
+          "x": 171,
+          "top": 514,
+          "width": 78,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Plus_Round_Red",
+          "x": 249,
+          "top": 514,
+          "width": 78,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Plus_Round_Gray",
+          "x": 327,
+          "top": 514,
+          "width": 81,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Minus_Round_Blue",
+          "x": 408,
+          "top": 514,
+          "width": 79,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Minus_Round_Green",
+          "x": 487,
+          "top": 514,
+          "width": 77,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Minus_Round_Amber",
+          "x": 564,
+          "top": 514,
+          "width": 77,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Minus_Round_Red",
+          "x": 641,
+          "top": 514,
+          "width": 76,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Minus_Round_Gray",
+          "x": 717,
+          "top": 514,
+          "width": 85,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Check_Round_Blue",
+          "x": 802,
+          "top": 514,
+          "width": 85,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Check_Round_Green",
+          "x": 887,
+          "top": 514,
+          "width": 79,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Check_Round_Amber",
+          "x": 966,
+          "top": 514,
+          "width": 78,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Check_Round_Red",
+          "x": 1044,
+          "top": 514,
+          "width": 77,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Check_Round_Gray",
+          "x": 1121,
+          "top": 514,
+          "width": 81,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Close_Round_Blue",
+          "x": 1202,
+          "top": 514,
+          "width": 80,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Close_Round_Red",
+          "x": 1282,
+          "top": 514,
+          "width": 77,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Close_Round_Gray",
+          "x": 1359,
+          "top": 514,
+          "width": 89,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_Off_Blue",
+          "x": 0,
+          "top": 615,
+          "width": 202,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_Off_Green",
+          "x": 202,
+          "top": 615,
+          "width": 195,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_Off_Amber",
+          "x": 397,
+          "top": 615,
+          "width": 196,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_Off_Red",
+          "x": 593,
+          "top": 615,
+          "width": 190,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_Off_Gray",
+          "x": 783,
+          "top": 615,
+          "width": 193,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Indicator_Green",
+          "x": 976,
+          "top": 615,
+          "width": 98,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Indicator_Blue",
+          "x": 1074,
+          "top": 615,
+          "width": 92,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Indicator_Amber",
+          "x": 1166,
+          "top": 615,
+          "width": 92,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Indicator_Red",
+          "x": 1258,
+          "top": 615,
+          "width": 90,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Indicator_Gray",
+          "x": 1348,
+          "top": 615,
+          "width": 100,
+          "height": 92,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Tabs_Three_Blue",
+          "x": 0,
+          "top": 707,
+          "width": 326,
+          "height": 96,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Tabs_Three_Green",
+          "x": 326,
+          "top": 707,
+          "width": 283,
+          "height": 96,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Tabs_Three_Amber",
+          "x": 609,
+          "top": 707,
+          "width": 286,
+          "height": 96,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Tabs_Three_Red",
+          "x": 895,
+          "top": 707,
+          "width": 266,
+          "height": 96,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Tabs_Three_Gray",
+          "x": 1161,
+          "top": 707,
+          "width": 287,
+          "height": 96,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Panel_Bar_Blue",
+          "x": 0,
+          "top": 803,
+          "width": 360,
+          "height": 88,
+          "border": [
+            110,
+            28,
+            105,
+            34
+          ]
+        },
+        {
+          "name": "Panel_Bar_Green",
+          "x": 360,
+          "top": 803,
+          "width": 352,
+          "height": 88,
+          "border": [
+            110,
+            28,
+            105,
+            34
+          ]
+        },
+        {
+          "name": "Panel_Bar_Amber",
+          "x": 712,
+          "top": 803,
+          "width": 280,
+          "height": 88,
+          "border": [
+            110,
+            28,
+            105,
+            34
+          ]
+        },
+        {
+          "name": "Ribbon_Blue",
+          "x": 992,
+          "top": 803,
+          "width": 95,
+          "height": 174,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Ribbon_Green",
+          "x": 1087,
+          "top": 803,
+          "width": 88,
+          "height": 174,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Ribbon_Amber",
+          "x": 1175,
+          "top": 803,
+          "width": 89,
+          "height": 174,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Ribbon_Red",
+          "x": 1264,
+          "top": 803,
+          "width": 86,
+          "height": 174,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Ribbon_Gray",
+          "x": 1350,
+          "top": 803,
+          "width": 98,
+          "height": 174,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Panel_Bar_Red",
+          "x": 0,
+          "top": 891,
+          "width": 398,
+          "height": 86,
+          "border": [
+            120,
+            28,
+            120,
+            34
+          ]
+        },
+        {
+          "name": "Panel_Bar_Gray",
+          "x": 398,
+          "top": 891,
+          "width": 391,
+          "height": 86,
+          "border": [
+            120,
+            28,
+            120,
+            34
+          ]
+        },
+        {
+          "name": "Button_Arrow_Blue",
+          "x": 0,
+          "top": 977,
+          "width": 164,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Arrow_Green",
+          "x": 164,
+          "top": 977,
+          "width": 142,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Arrow_Amber",
+          "x": 306,
+          "top": 977,
+          "width": 143,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Arrow_Red",
+          "x": 449,
+          "top": 977,
+          "width": 146,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Arrow_Gray",
+          "x": 595,
+          "top": 977,
+          "width": 149,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Arrow_Left_Ice",
+          "x": 744,
+          "top": 977,
+          "width": 66,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Arrow_Right_Ice",
+          "x": 810,
+          "top": 977,
+          "width": 59,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Arrow_Up_Ice",
+          "x": 869,
+          "top": 977,
+          "width": 69,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Arrow_Down_Ice",
+          "x": 938,
+          "top": 977,
+          "width": 78,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Progress_Star_Blue",
+          "x": 1016,
+          "top": 977,
+          "width": 432,
+          "height": 109,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "Assets/Sprites/UiAtlas1.png",
+      "width": 1448,
+      "height": 1086,
+      "sprites": [
+        {
+          "name": "Button_Play_Green",
+          "x": 15,
+          "top": 32,
+          "width": 344,
+          "height": 157,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Spin_Blue",
+          "x": 359,
+          "top": 32,
+          "width": 317,
+          "height": 157,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Settings_Blue",
+          "x": 676,
+          "top": 25,
+          "width": 139,
+          "height": 144,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Sound_Blue",
+          "x": 815,
+          "top": 25,
+          "width": 143,
+          "height": 144,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Music_Blue",
+          "x": 958,
+          "top": 25,
+          "width": 148,
+          "height": 144,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Info_Blue",
+          "x": 1106,
+          "top": 25,
+          "width": 148,
+          "height": 144,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Close_Blue",
+          "x": 1254,
+          "top": 25,
+          "width": 166,
+          "height": 144,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Buy_Amber",
+          "x": 15,
+          "top": 189,
+          "width": 341,
+          "height": 130,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Collect_Blue",
+          "x": 356,
+          "top": 189,
+          "width": 321,
+          "height": 130,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Home_Wood",
+          "x": 682,
+          "top": 169,
+          "width": 143,
+          "height": 140,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Shop_Wood",
+          "x": 825,
+          "top": 169,
+          "width": 145,
+          "height": 140,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Gift_Wood",
+          "x": 970,
+          "top": 169,
+          "width": 147,
+          "height": 140,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Trophy_Wood",
+          "x": 1117,
+          "top": 169,
+          "width": 147,
+          "height": 140,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Menu_Wood",
+          "x": 1264,
+          "top": 169,
+          "width": 151,
+          "height": 140,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Info_Ice",
+          "x": 20,
+          "top": 319,
+          "width": 337,
+          "height": 131,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Locked_Gray",
+          "x": 357,
+          "top": 319,
+          "width": 322,
+          "height": 131,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_On_Green",
+          "x": 682,
+          "top": 309,
+          "width": 152,
+          "height": 85,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Toggle_Off_Blue_Compact",
+          "x": 834,
+          "top": 309,
+          "width": 145,
+          "height": 85,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Green_Compact",
+          "x": 979,
+          "top": 309,
+          "width": 115,
+          "height": 111,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Play_Amber_Compact",
+          "x": 1094,
+          "top": 309,
+          "width": 104,
+          "height": 111,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Left_Blue",
+          "x": 1198,
+          "top": 309,
+          "width": 107,
+          "height": 111,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Right_Blue",
+          "x": 1305,
+          "top": 309,
+          "width": 118,
+          "height": 111,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Plus_Green",
+          "x": 687,
+          "top": 394,
+          "width": 116,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Button_Minus_Blue",
+          "x": 803,
+          "top": 394,
+          "width": 120,
+          "height": 101,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Progress_Runner_Blue",
+          "x": 934,
+          "top": 420,
+          "width": 481,
+          "height": 77,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Window_Congratulations",
+          "x": 16,
+          "top": 460,
+          "width": 625,
+          "height": 350,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Window_Ice_Close",
+          "x": 647,
+          "top": 497,
+          "width": 509,
+          "height": 313,
+          "border": [
+            135,
+            90,
+            145,
+            80
+          ]
+        },
+        {
+          "name": "Panel_Ice_Vertical",
+          "x": 1157,
+          "top": 497,
+          "width": 283,
+          "height": 363,
+          "border": [
+            100,
+            85,
+            100,
+            68
+          ]
+        },
+        {
+          "name": "Panel_Landscape_Ice",
+          "x": 17,
+          "top": 810,
+          "width": 666,
+          "height": 247,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Panel_Ice_Horizontal",
+          "x": 695,
+          "top": 810,
+          "width": 403,
+          "height": 115,
+          "border": [
+            100,
+            34,
+            130,
+            47
+          ]
+        },
+        {
+          "name": "Panel_Wood_Snow",
+          "x": 694,
+          "top": 925,
+          "width": 407,
+          "height": 129,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Counter_Coins",
+          "x": 1103,
+          "top": 860,
+          "width": 332,
+          "height": 90,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Counter_Gems",
+          "x": 1103,
+          "top": 950,
+          "width": 332,
+          "height": 104,
+          "border": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

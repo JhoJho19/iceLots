@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57a8bd461d127b4cba53a918d281cdb, type: 3}
+  m_Name: SlotVisualConfigSO
+  m_EditorClassIdentifier: IceP.Infrastructure::IceP.Infrastructure.Configuration.SlotVisualConfigSO
+  Symbols:
+  - Symbol: 0
+    Sprite: {fileID: -1854583000558344529, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 1
+    Sprite: {fileID: -5160333196690641990, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 2
+    Sprite: {fileID: 3421362365996630558, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 3
+    Sprite: {fileID: 4858663778437693601, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 4
+    Sprite: {fileID: -2258647246482584597, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 5
+    Sprite: {fileID: 4358566104935374139, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 6
+    Sprite: {fileID: 2192169412105343514, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  - Symbol: 7
+    Sprite: {fileID: 4503505820367040415, guid: fb538c472a0f8ab46b0acddf98f14962, type: 3}
+  SlotBackground: {fileID: 21300000, guid: ecd44d7846accb04fbfdc303ad15e456, type: 3}
+  SlotFrame: {fileID: 21300000, guid: 848fc6f279054034599223533fd3e754, type: 3}
+  SpinDurationSeconds: 1.5
+  ReelStopStaggerSeconds: 0.15
+  EnableWinEffect: 0
+  WinEffectPrefab: {fileID: 0}
+  EnableSpinAudio: 0
+  SpinAudio: {fileID: 0}

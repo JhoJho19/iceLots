@@ -1,0 +1,2206 @@
+fileFormatVersion: 2
+guid: 21ce4eb9cde226949bd25ee208a703b5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6735394299070150985
+    second: UiAtlas_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Button_Rect_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 945
+        width: 297
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 108, y: 40, z: 112, w: 55}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f1e7a95807cb0f42b24cefdde9157dd
+      internalID: -1748133806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Rect_Green
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 945
+        width: 283
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 108, y: 40, z: 112, w: 55}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10a6989e576fbdd42b9f9f25ffce4ec9
+      internalID: 1388602845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Rect_Amber
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 945
+        width: 284
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 108, y: 40, z: 112, w: 55}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4269568e11d52458155b378719c442
+      internalID: 278350497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Rect_Red
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 945
+        width: 287
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 108, y: 40, z: 112, w: 55}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4665110c914a043be0b3c2b0d2f42e
+      internalID: 1540197851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Rect_Gray
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 945
+        width: 297
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 108, y: 40, z: 112, w: 55}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4814937dad03e5c4891a71123f0d7e15
+      internalID: -1975497915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Pill_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 831
+        width: 301
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 32, z: 100, w: 35}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d02a749fade46384e8b382f5d6860fc9
+      internalID: 1915558248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Pill_Green
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 831
+        width: 288
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 32, z: 100, w: 35}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 491ac81e774e9044aa6be0467eac8419
+      internalID: -656192706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Pill_Amber
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 831
+        width: 285
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 32, z: 100, w: 35}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 723e38447b3eb7b408b27dd8bc0da9c9
+      internalID: 1731801319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Pill_Red
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 831
+        width: 283
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 32, z: 100, w: 35}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd8556e49ad38c429bcf878974489a4
+      internalID: -1238920908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Pill_Gray
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 831
+        width: 291
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 100, y: 32, z: 100, w: 35}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db960b11b6d8eb246b05e6a944d1c7cc
+      internalID: 1792979464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 709
+        width: 115
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc01e651c869fcb4da43e4c9eb8c5c50
+      internalID: 1733287202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Round_Green
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 709
+        width: 98
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19617c3d257be954e9db980f35126364
+      internalID: -783691158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Round_Amber
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 709
+        width: 96
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1040d81aec37dac43b99cb9eeb8cf61f
+      internalID: 687224570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Round_Red
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 709
+        width: 99
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cce36797dc0220d42b69f622f663bd51
+      internalID: 1356160588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Round_Gray
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 709
+        width: 101
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e05a9f8e7e107142b16e62e58cdf589
+      internalID: 1806723391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Square_Blue
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 709
+        width: 94
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 35, y: 28, z: 35, w: 30}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77d71558a0719ae4b89170c014db0088
+      internalID: 890449807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Square_Green
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 709
+        width: 92
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 35, y: 28, z: 35, w: 30}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea240a2954fbdc04bb65603b2552255d
+      internalID: 1221868430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Square_Amber
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 709
+        width: 90
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 35, y: 28, z: 35, w: 30}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7e81356120221e47be293e0da16b1ff
+      internalID: -1658935218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Square_Red
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 709
+        width: 91
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 35, y: 28, z: 35, w: 30}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b659c9e2b0ce649827c9e76d82812a
+      internalID: 1100684747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Square_Gray
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 709
+        width: 90
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 35, y: 28, z: 35, w: 30}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d04f1c72058ee54b9cca580132b3a1c
+      internalID: 1522939149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Hex_Blue
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 709
+        width: 97
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830011af686312a49b460b454658e446
+      internalID: -336539497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Hex_Green
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 709
+        width: 94
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2af9e8328f4814dadc51a47f853b03
+      internalID: 644911119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Hex_Amber
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 709
+        width: 92
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd37e3a63e619441955d85b8aa83220
+      internalID: -79768829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Hex_Red
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 709
+        width: 92
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caff7c5d1396a6b48843871d5d7dd283
+      internalID: -1212759304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Hex_Gray
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 709
+        width: 107
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14057a7be7c11674aa3d3ffdae020694
+      internalID: -1097616269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Play_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 572
+        width: 134
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e0fd2dfa8780db4c9ae765845616564
+      internalID: 1711011324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Play_Round_Green
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 572
+        width: 116
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11c09139b72256d46b1ba5ece0f46dbd
+      internalID: 555648118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Play_Round_Amber
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 572
+        width: 115
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa21e8a2fc14bed46920de489703c482
+      internalID: -1667471894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Play_Round_Red
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 572
+        width: 119
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f267ce42b047564b96c53ed83c980bf
+      internalID: 1840535646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Play_Round_Gray
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 572
+        width: 122
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8e00b9aa242ecf4d861b2768271b497
+      internalID: -1937975724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Left_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 572
+        width: 119
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cf1bfea96af76944b4d1107add9be65
+      internalID: -382068839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Right_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 572
+        width: 117
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06be71da9e2f5f242b43921b5a6c84e4
+      internalID: 163418814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Up_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 572
+        width: 119
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f857d71c642e9ab4882f2ab2b53b5d7e
+      internalID: -1508901650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Down_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 572
+        width: 122
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab900c8791bb3104eabe883a9e4ec94b
+      internalID: -529182684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Left_Diamond_Blue
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 572
+        width: 135
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94cfc3329bef37a47b9df8411ef1e995
+      internalID: 913330638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Right_Diamond_Blue
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 572
+        width: 139
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed074c4343a87064d891aecdc0d25e0f
+      internalID: -620754921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Plus_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 471
+        width: 94
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13ad58018dea3b84abadfd91d5bda8e1
+      internalID: -1849536830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Plus_Round_Green
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 471
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69582fd6b9b959498b62860c566d63b
+      internalID: 110352868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Plus_Round_Amber
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 471
+        width: 78
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df222789cc7c9d74587224838e997bdc
+      internalID: 2021765484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Plus_Round_Red
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 471
+        width: 78
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f925cde1a77df5e4599a7024b88cb305
+      internalID: 1650207307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Plus_Round_Gray
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 471
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e649649f1cd7134bad34be968bcdd4f
+      internalID: -1142540474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Minus_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 471
+        width: 79
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59b01a2efb3df564fad4ee1f350497cb
+      internalID: -1768602890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Minus_Round_Green
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 471
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4becbead0c1dde4da84c3a753e8d243
+      internalID: 278942160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Minus_Round_Amber
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 471
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae1a3516be778241b17e2a68e37638e
+      internalID: -73307508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Minus_Round_Red
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 471
+        width: 76
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29796e0093166884c9c7353661b2201c
+      internalID: -48633415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Minus_Round_Gray
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 471
+        width: 85
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 893dd87f4e1a90648a1a76d4cc17c2d2
+      internalID: 796883960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Check_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 471
+        width: 85
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b194061b50e2914b902c43e104f8346
+      internalID: -820906715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Check_Round_Green
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 471
+        width: 79
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b321cbe4e48adfa4fbd413ce7c98c903
+      internalID: 1890984605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Check_Round_Amber
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 471
+        width: 78
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ed670bfb5285034b827257c410d7438
+      internalID: 1112664358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Check_Round_Red
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 471
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c961ba1958850094c9fe2af291c77885
+      internalID: 1602754348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Check_Round_Gray
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 471
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1797d275a5054f64fb22649e7f5cc0e3
+      internalID: 2117732035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Close_Round_Blue
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 471
+        width: 80
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb813caaf892fa546997920ee48f4c80
+      internalID: -540545357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Close_Round_Red
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 471
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eb0224714b6ede4498ff1fe916d8ba2
+      internalID: 650370934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Close_Round_Gray
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 471
+        width: 89
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 169355d04ce69704fbbc7ea9f14f80a4
+      internalID: -1906194499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_Off_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 379
+        width: 202
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c1317c3dafdd3f46b15e526b6942176
+      internalID: -871033763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_Off_Green
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 379
+        width: 195
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa9adf776103fd9498c9e170e57dad90
+      internalID: -1379125562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_Off_Amber
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 379
+        width: 196
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a81a95226fbd44dbbbb0daed507ac6
+      internalID: -1786627055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_Off_Red
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 379
+        width: 190
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4760efbf9459dcd429f340bcb1d9ebec
+      internalID: 1618029444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_Off_Gray
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 379
+        width: 193
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e5b3ee033c8b464ea3a8451644f00ce
+      internalID: 527428914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Indicator_Green
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 379
+        width: 98
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3164003f1d9c9c45a57fd7c7a7e85eb
+      internalID: -20683621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Indicator_Blue
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 379
+        width: 92
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 976d78fc101de2d4594762720aecfac2
+      internalID: 1912740845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Indicator_Amber
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 379
+        width: 92
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44a55c55b0bd0a444937e0fa076fa4d1
+      internalID: 1087290571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Indicator_Red
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 379
+        width: 90
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 229a7da85dd3cea4a99d8a3ada56b883
+      internalID: -684181944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Indicator_Gray
+      rect:
+        serializedVersion: 2
+        x: 1348
+        y: 379
+        width: 100
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d627c3e1a0af74ba7650c1c98dd2f1
+      internalID: 522051914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tabs_Three_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 283
+        width: 326
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4e0c558a0bf0cf479eb408841c8eb91
+      internalID: 583586599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tabs_Three_Green
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 283
+        width: 283
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec9182fbd6daed247ba680c04ed70188
+      internalID: -392783700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tabs_Three_Amber
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 283
+        width: 286
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e541513116e4d124eb76833a57748b25
+      internalID: 145505908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tabs_Three_Red
+      rect:
+        serializedVersion: 2
+        x: 895
+        y: 283
+        width: 266
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b59d5a6f88e9c4c9b809b1631ebdab
+      internalID: -1135796425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tabs_Three_Gray
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 283
+        width: 287
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f79bc55e93229478c3b8011afdb9d5
+      internalID: -83606973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel_Bar_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 195
+        width: 360
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 110, y: 28, z: 105, w: 34}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8cf341a1acaeae4b873259996fed5d2
+      internalID: -366789292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel_Bar_Green
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 195
+        width: 352
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 110, y: 28, z: 105, w: 34}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5828f77071755743878822b790d5153
+      internalID: 1720150772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel_Bar_Amber
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 195
+        width: 280
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 110, y: 28, z: 105, w: 34}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd74afa4e5a3ea6479b6ebe88d1904f8
+      internalID: 1442631422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ribbon_Blue
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 109
+        width: 95
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca61e895aef94d84384602f3a58c8626
+      internalID: 68825827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ribbon_Green
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 109
+        width: 88
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35eadaa066ce36c4a85c43bfbf94e06a
+      internalID: -75626288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ribbon_Amber
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 109
+        width: 89
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17e7135aa5fefb43a9bc436a639abfe
+      internalID: 1274967780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ribbon_Red
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 109
+        width: 86
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d20de9040c7884aa9629f7e5d0624b
+      internalID: -1315193990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ribbon_Gray
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 109
+        width: 98
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 444f7fff294b74a448e2ec8c7f272720
+      internalID: -1640771883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel_Bar_Red
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 109
+        width: 398
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 120, y: 28, z: 120, w: 34}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4000851c1b8ba74c86d00a41aec3cc0
+      internalID: 180099895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel_Bar_Gray
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 109
+        width: 391
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 120, y: 28, z: 120, w: 34}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8cc1f4ce9803154487af93caa8b3e78
+      internalID: -1534328909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Arrow_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 164
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b35ef2052fc6b5740ac884f93a1a0485
+      internalID: 680286806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Arrow_Green
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 142
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5feb31bf12761d4f83456a97fda4d67
+      internalID: -1620177100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Arrow_Amber
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 0
+        width: 143
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adfa43266cb8dcc41a239490d54517d7
+      internalID: -60613380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Arrow_Red
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 0
+        width: 146
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dacf6264a1cfd9d4a9c16857d28f5780
+      internalID: 105387492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Arrow_Gray
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 0
+        width: 149
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efeeca6c4f74d7c478774c990acd1cbc
+      internalID: 431251881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Left_Ice
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 0
+        width: 66
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47ed7657db4029743af2a7533c4d235c
+      internalID: 332564909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Right_Ice
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 59
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0291a5f399a8a624ea98d4c8c763a4b3
+      internalID: -108513869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Up_Ice
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 0
+        width: 69
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a1c4d7970f08948a4f04c1e1403350
+      internalID: 1388180937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Down_Ice
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 0
+        width: 78
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70609dd99adaf6a4d9b408c59d4991f7
+      internalID: -1864762318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Progress_Star_Blue
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 0
+        width: 432
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6119eaa6d1c4c1a40af78b80a814e472
+      internalID: 1173020497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: aba5f6c15b711994db3b7472bc795983
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Arrow_Down_Ice: -1864762318
+      Arrow_Left_Ice: 332564909
+      Arrow_Right_Ice: -108513869
+      Arrow_Up_Ice: 1388180937
+      Button_Arrow_Amber: -60613380
+      Button_Arrow_Blue: 680286806
+      Button_Arrow_Gray: 431251881
+      Button_Arrow_Green: -1620177100
+      Button_Arrow_Red: 105387492
+      Button_Check_Round_Amber: 1112664358
+      Button_Check_Round_Blue: -820906715
+      Button_Check_Round_Gray: 2117732035
+      Button_Check_Round_Green: 1890984605
+      Button_Check_Round_Red: 1602754348
+      Button_Close_Round_Blue: -540545357
+      Button_Close_Round_Gray: -1906194499
+      Button_Close_Round_Red: 650370934
+      Button_Down_Round_Blue: -529182684
+      Button_Hex_Amber: -79768829
+      Button_Hex_Blue: -336539497
+      Button_Hex_Gray: -1097616269
+      Button_Hex_Green: 644911119
+      Button_Hex_Red: -1212759304
+      Button_Left_Diamond_Blue: 913330638
+      Button_Left_Round_Blue: -382068839
+      Button_Minus_Round_Amber: -73307508
+      Button_Minus_Round_Blue: -1768602890
+      Button_Minus_Round_Gray: 796883960
+      Button_Minus_Round_Green: 278942160
+      Button_Minus_Round_Red: -48633415
+      Button_Pill_Amber: 1731801319
+      Button_Pill_Blue: 1915558248
+      Button_Pill_Gray: 1792979464
+      Button_Pill_Green: -656192706
+      Button_Pill_Red: -1238920908
+      Button_Play_Round_Amber: -1667471894
+      Button_Play_Round_Blue: 1711011324
+      Button_Play_Round_Gray: -1937975724
+      Button_Play_Round_Green: 555648118
+      Button_Play_Round_Red: 1840535646
+      Button_Plus_Round_Amber: 2021765484
+      Button_Plus_Round_Blue: -1849536830
+      Button_Plus_Round_Gray: -1142540474
+      Button_Plus_Round_Green: 110352868
+      Button_Plus_Round_Red: 1650207307
+      Button_Rect_Amber: 278350497
+      Button_Rect_Blue: -1748133806
+      Button_Rect_Gray: -1975497915
+      Button_Rect_Green: 1388602845
+      Button_Rect_Red: 1540197851
+      Button_Right_Diamond_Blue: -620754921
+      Button_Right_Round_Blue: 163418814
+      Button_Round_Amber: 687224570
+      Button_Round_Blue: 1733287202
+      Button_Round_Gray: 1806723391
+      Button_Round_Green: -783691158
+      Button_Round_Red: 1356160588
+      Button_Square_Amber: -1658935218
+      Button_Square_Blue: 890449807
+      Button_Square_Gray: 1522939149
+      Button_Square_Green: 1221868430
+      Button_Square_Red: 1100684747
+      Button_Up_Round_Blue: -1508901650
+      Indicator_Amber: 1087290571
+      Indicator_Blue: 1912740845
+      Indicator_Gray: 522051914
+      Indicator_Green: -20683621
+      Indicator_Red: -684181944
+      Panel_Bar_Amber: 1442631422
+      Panel_Bar_Blue: -366789292
+      Panel_Bar_Gray: -1534328909
+      Panel_Bar_Green: 1720150772
+      Panel_Bar_Red: 180099895
+      Progress_Star_Blue: 1173020497
+      Ribbon_Amber: 1274967780
+      Ribbon_Blue: 68825827
+      Ribbon_Gray: -1640771883
+      Ribbon_Green: -75626288
+      Ribbon_Red: -1315193990
+      Tabs_Three_Amber: 145505908
+      Tabs_Three_Blue: 583586599
+      Tabs_Three_Gray: -83606973
+      Tabs_Three_Green: -392783700
+      Tabs_Three_Red: -1135796425
+      Toggle_Off_Amber: -1786627055
+      Toggle_Off_Blue: -871033763
+      Toggle_Off_Gray: 527428914
+      Toggle_Off_Green: -1379125562
+      Toggle_Off_Red: 1618029444
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

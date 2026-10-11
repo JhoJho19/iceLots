@@ -1,0 +1,754 @@
+{
+  "unchangedFiles": {
+    "Assets/Sprites/UiAtlas.png": true,
+    "Assets/Sprites/UiAtlas1.png": true,
+    "Assets/Scenes/SC.unity": true,
+    "Assets/Settings/Scenes/URP2DSceneTemplate.unity": true
+  },
+  "alphaDiagnostics": {
+    "Assets/Sprites/UiAtlas.png": {
+      "uncoveredPixelsAbove128": 0,
+      "uncoveredPixelsAbove32": 0,
+      "edges": [
+        {
+          "name": "Button_Rect_Blue",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Rect_Green",
+          "edgeAlphaMax": 5,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Rect_Amber",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Rect_Red",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Rect_Gray",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Pill_Blue",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Pill_Green",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Pill_Amber",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Pill_Red",
+          "edgeAlphaMax": 12,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Pill_Gray",
+          "edgeAlphaMax": 11,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Round_Blue",
+          "edgeAlphaMax": 18,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Round_Green",
+          "edgeAlphaMax": 49,
+          "edgePixelsAbove32": 15,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Round_Amber",
+          "edgeAlphaMax": 56,
+          "edgePixelsAbove32": 18,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Round_Red",
+          "edgeAlphaMax": 42,
+          "edgePixelsAbove32": 10,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Round_Gray",
+          "edgeAlphaMax": 16,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Square_Blue",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Square_Green",
+          "edgeAlphaMax": 12,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Square_Amber",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Square_Red",
+          "edgeAlphaMax": 14,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Square_Gray",
+          "edgeAlphaMax": 14,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Hex_Blue",
+          "edgeAlphaMax": 16,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Hex_Green",
+          "edgeAlphaMax": 29,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Hex_Amber",
+          "edgeAlphaMax": 51,
+          "edgePixelsAbove32": 29,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Hex_Red",
+          "edgeAlphaMax": 48,
+          "edgePixelsAbove32": 28,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Hex_Gray",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Round_Blue",
+          "edgeAlphaMax": 11,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Round_Green",
+          "edgeAlphaMax": 34,
+          "edgePixelsAbove32": 5,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Round_Amber",
+          "edgeAlphaMax": 54,
+          "edgePixelsAbove32": 12,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Round_Red",
+          "edgeAlphaMax": 59,
+          "edgePixelsAbove32": 31,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Round_Gray",
+          "edgeAlphaMax": 61,
+          "edgePixelsAbove32": 18,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Left_Round_Blue",
+          "edgeAlphaMax": 17,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Right_Round_Blue",
+          "edgeAlphaMax": 19,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Up_Round_Blue",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Down_Round_Blue",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Left_Diamond_Blue",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Right_Diamond_Blue",
+          "edgeAlphaMax": 14,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Plus_Round_Blue",
+          "edgeAlphaMax": 21,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Plus_Round_Green",
+          "edgeAlphaMax": 136,
+          "edgePixelsAbove32": 25,
+          "edgePixelsAbove128": 7
+        },
+        {
+          "name": "Button_Plus_Round_Amber",
+          "edgeAlphaMax": 158,
+          "edgePixelsAbove32": 50,
+          "edgePixelsAbove128": 10
+        },
+        {
+          "name": "Button_Plus_Round_Red",
+          "edgeAlphaMax": 167,
+          "edgePixelsAbove32": 27,
+          "edgePixelsAbove128": 12
+        },
+        {
+          "name": "Button_Plus_Round_Gray",
+          "edgeAlphaMax": 31,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Minus_Round_Blue",
+          "edgeAlphaMax": 26,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Minus_Round_Green",
+          "edgeAlphaMax": 76,
+          "edgePixelsAbove32": 17,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Minus_Round_Amber",
+          "edgeAlphaMax": 43,
+          "edgePixelsAbove32": 22,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Minus_Round_Red",
+          "edgeAlphaMax": 84,
+          "edgePixelsAbove32": 34,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Minus_Round_Gray",
+          "edgeAlphaMax": 92,
+          "edgePixelsAbove32": 22,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Check_Round_Blue",
+          "edgeAlphaMax": 23,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Check_Round_Green",
+          "edgeAlphaMax": 78,
+          "edgePixelsAbove32": 18,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Check_Round_Amber",
+          "edgeAlphaMax": 56,
+          "edgePixelsAbove32": 28,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Check_Round_Red",
+          "edgeAlphaMax": 60,
+          "edgePixelsAbove32": 31,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Check_Round_Gray",
+          "edgeAlphaMax": 55,
+          "edgePixelsAbove32": 18,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Close_Round_Blue",
+          "edgeAlphaMax": 73,
+          "edgePixelsAbove32": 18,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Close_Round_Red",
+          "edgeAlphaMax": 111,
+          "edgePixelsAbove32": 44,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Close_Round_Gray",
+          "edgeAlphaMax": 54,
+          "edgePixelsAbove32": 27,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_Off_Blue",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_Off_Green",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_Off_Amber",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_Off_Red",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_Off_Gray",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Indicator_Green",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Indicator_Blue",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Indicator_Amber",
+          "edgeAlphaMax": 8,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Indicator_Red",
+          "edgeAlphaMax": 8,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Indicator_Gray",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Tabs_Three_Blue",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Tabs_Three_Green",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Tabs_Three_Amber",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Tabs_Three_Red",
+          "edgeAlphaMax": 8,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Tabs_Three_Gray",
+          "edgeAlphaMax": 8,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Bar_Blue",
+          "edgeAlphaMax": 16,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Bar_Green",
+          "edgeAlphaMax": 18,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Bar_Amber",
+          "edgeAlphaMax": 83,
+          "edgePixelsAbove32": 21,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Ribbon_Blue",
+          "edgeAlphaMax": 7,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Ribbon_Green",
+          "edgeAlphaMax": 23,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Ribbon_Amber",
+          "edgeAlphaMax": 23,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Ribbon_Red",
+          "edgeAlphaMax": 16,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Ribbon_Gray",
+          "edgeAlphaMax": 17,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Bar_Red",
+          "edgeAlphaMax": 43,
+          "edgePixelsAbove32": 9,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Bar_Gray",
+          "edgeAlphaMax": 27,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Arrow_Blue",
+          "edgeAlphaMax": 18,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Arrow_Green",
+          "edgeAlphaMax": 20,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Arrow_Amber",
+          "edgeAlphaMax": 22,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Arrow_Red",
+          "edgeAlphaMax": 19,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Arrow_Gray",
+          "edgeAlphaMax": 18,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Arrow_Left_Ice",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Arrow_Right_Ice",
+          "edgeAlphaMax": 7,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Arrow_Up_Ice",
+          "edgeAlphaMax": 37,
+          "edgePixelsAbove32": 2,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Arrow_Down_Ice",
+          "edgeAlphaMax": 103,
+          "edgePixelsAbove32": 7,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Progress_Star_Blue",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        }
+      ]
+    },
+    "Assets/Sprites/UiAtlas1.png": {
+      "uncoveredPixelsAbove128": 0,
+      "uncoveredPixelsAbove32": 0,
+      "edges": [
+        {
+          "name": "Button_Play_Green",
+          "edgeAlphaMax": 10,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Spin_Blue",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Settings_Blue",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Sound_Blue",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Music_Blue",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Info_Blue",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Close_Blue",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Buy_Amber",
+          "edgeAlphaMax": 10,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Collect_Blue",
+          "edgeAlphaMax": 10,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Home_Wood",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Shop_Wood",
+          "edgeAlphaMax": 5,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Gift_Wood",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Trophy_Wood",
+          "edgeAlphaMax": 3,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Menu_Wood",
+          "edgeAlphaMax": 3,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Info_Ice",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Locked_Gray",
+          "edgeAlphaMax": 3,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_On_Green",
+          "edgeAlphaMax": 5,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Toggle_Off_Blue_Compact",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Green_Compact",
+          "edgeAlphaMax": 17,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Play_Amber_Compact",
+          "edgeAlphaMax": 16,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Left_Blue",
+          "edgeAlphaMax": 5,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Right_Blue",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Plus_Green",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Button_Minus_Blue",
+          "edgeAlphaMax": 3,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Progress_Runner_Blue",
+          "edgeAlphaMax": 13,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Window_Congratulations",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Window_Ice_Close",
+          "edgeAlphaMax": 4,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Ice_Vertical",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Landscape_Ice",
+          "edgeAlphaMax": 1,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Ice_Horizontal",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Panel_Wood_Snow",
+          "edgeAlphaMax": 2,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Counter_Coins",
+          "edgeAlphaMax": 6,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        },
+        {
+          "name": "Counter_Gems",
+          "edgeAlphaMax": 3,
+          "edgePixelsAbove32": 0,
+          "edgePixelsAbove128": 0
+        }
+      ]
+    }
+  }
+}

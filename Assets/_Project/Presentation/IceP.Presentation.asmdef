@@ -1,0 +1,10 @@
+{
+  "noEngineReferences": false,
+  "references": [
+    "IceP.Application",
+    "Unity.ugui"
+  ],
+  "name": "IceP.Presentation",
+  "autoReferenced": false,
+  "rootNamespace": "IceP.Presentation"
+}
