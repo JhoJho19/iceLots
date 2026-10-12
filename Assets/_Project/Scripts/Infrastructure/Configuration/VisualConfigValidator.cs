@@ -30,6 +30,10 @@ namespace IceP.Infrastructure.Configuration
                 errors.Add("Visual.SpinDurationSeconds: must be finite and positive.");
             if (float.IsNaN(visual.ReelStopStaggerSeconds) || float.IsInfinity(visual.ReelStopStaggerSeconds) || visual.ReelStopStaggerSeconds < 0)
                 errors.Add("Visual.ReelStopStaggerSeconds: must be finite and non-negative.");
+            if (float.IsNaN(visual.ReelCellsPerSecond) || float.IsInfinity(visual.ReelCellsPerSecond) || visual.ReelCellsPerSecond <= 0)
+                errors.Add("Visual.ReelCellsPerSecond: must be finite and positive.");
+            if (float.IsNaN(visual.ReelStopEasePower) || float.IsInfinity(visual.ReelStopEasePower) || visual.ReelStopEasePower < 1)
+                errors.Add("Visual.ReelStopEasePower: must be finite and at least one.");
             if (visual.EnableWinEffect && !visual.WinEffectPrefab) errors.Add("Visual.WinEffectPrefab: required when EnableWinEffect is true.");
             if (visual.EnableSpinAudio && !visual.SpinAudio) errors.Add("Visual.SpinAudio: required when EnableSpinAudio is true.");
             return errors.AsReadOnly();

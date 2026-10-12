@@ -1,7 +1,7 @@
 {
   "noEngineReferences": false,
   "references": [
-    "IceP.Application",
+    "IceP.Application", "IceP.Domain",
     "Unity.ugui"
   ],
   "name": "IceP.Presentation",

@@ -7,13 +7,15 @@ namespace IceP.Presentation
     {
         private readonly GameNavigationService navigation;
         private readonly GameNavigationView view;
+        private readonly bool ownsBack;
 
-        public GameNavigationPresenter(GameNavigationService navigation, GameNavigationView view)
+        public GameNavigationPresenter(GameNavigationService navigation, GameNavigationView view, bool ownsBack = true)
         {
             this.navigation = navigation;
             this.view = view;
+            this.ownsBack = ownsBack;
             navigation.ScreenChanged += ShowScreen;
-            view.BackButton.onClick.AddListener(navigation.NavigateToMainMenu);
+            if (ownsBack) view.BackButton.onClick.AddListener(navigation.NavigateToMainMenu);
             ShowScreen(navigation.CurrentScreen);
         }
 
@@ -29,7 +31,7 @@ namespace IceP.Presentation
         public void Dispose()
         {
             navigation.ScreenChanged -= ShowScreen;
-            view.BackButton.onClick.RemoveListener(navigation.NavigateToMainMenu);
+            if (ownsBack) view.BackButton.onClick.RemoveListener(navigation.NavigateToMainMenu);
         }
     }
 }

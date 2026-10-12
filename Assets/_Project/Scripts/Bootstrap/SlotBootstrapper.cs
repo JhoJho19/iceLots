@@ -14,10 +14,14 @@ namespace IceP.Bootstrap
     public sealed class SlotBootstrapper : MonoBehaviour
     {
         [SerializeField] private GameNavigationView navigationView;
+        [SerializeField] private SlotView slotView;
         [SerializeField] private SlotGameConfigSO gameConfig;
         [SerializeField] private SlotVisualConfigSO visualConfig;
         private GameNavigationPresenter presenter;
         private MainMenuPresenter menuPresenter;
+        private SlotPresenter slotPresenter;
+        private float slotRefreshElapsed;
+        public SlotPresenter SlotPresenter => slotPresenter;
         public SettingsService Settings { get; private set; }
 
         public SlotRuntimeConfig RuntimeConfig { get; private set; }
@@ -35,7 +39,7 @@ namespace IceP.Bootstrap
 
         private void Awake()
         {
-            if (!navigationView || !navigationView.HasRequiredReferences)
+            if (!navigationView || !navigationView.HasRequiredReferences || !slotView || !slotView.HasRequiredReferences)
             {
                 InitializationError = "Missing required UI references.";
                 Debug.LogError("SlotBootstrapper requires all navigation view references.", this);
@@ -97,7 +101,10 @@ namespace IceP.Bootstrap
             navigationView.SettingsButton.interactable = true;
             navigationView.DailyBonusButton.interactable = true;
             Navigation = new GameNavigationService(Session);
-            presenter = new GameNavigationPresenter(Navigation, navigationView);
+            slotView.Initialize(RuntimeConfig, new SlotVisualSettings(visualConfig.Resolve, visualConfig.SpinDurationSeconds,
+                visualConfig.ReelStopStaggerSeconds, visualConfig.ReelCellsPerSecond, visualConfig.ReelStopEasePower));
+            slotPresenter = new SlotPresenter(Session, Spins, Navigation, RuntimeConfig.Economy.AvailableBets, slotView);
+            presenter = new GameNavigationPresenter(Navigation, navigationView, false);
             menuPresenter = new MainMenuPresenter(Session, Navigation, navigationView, DailyBonus, Settings);
             presenter.RefreshAvailability();
         }
@@ -116,6 +123,8 @@ namespace IceP.Bootstrap
         {
             presenter?.RefreshAvailability();
             menuPresenter?.Tick(Time.unscaledDeltaTime);
+            slotRefreshElapsed += Time.unscaledDeltaTime;
+            if (slotRefreshElapsed >= .15f) { slotRefreshElapsed = 0; slotPresenter?.Refresh(); }
         }
         private void OnApplicationPause(bool paused)
         { if (paused) menuPresenter?.FlushSettings(); else menuPresenter?.Refresh(); }
@@ -144,6 +153,6 @@ namespace IceP.Bootstrap
             return UnityEngine.Application.persistentDataPath;
         }
 
-        private void OnDestroy() { menuPresenter?.Dispose(); presenter?.Dispose(); }
+        private void OnDestroy() { slotPresenter?.Dispose(); menuPresenter?.Dispose(); presenter?.Dispose(); }
     }
 }
