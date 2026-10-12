@@ -9,17 +9,21 @@ namespace IceP.Application
         private readonly GameSession session;
         public GameNavigationService(GameSession session)
         { this.session = session ?? throw new ArgumentNullException(nameof(session)); }
-        public bool CanNavigateBack => session.CanNavigateBack;
+        public bool CanNavigateBack { get { lock (session.Gate) return session.CanNavigateBack && !session.CommandExecuting; } }
         public GameScreen CurrentScreen { get; private set; } = GameScreen.MainMenu;
         public event Action<GameScreen> ScreenChanged;
 
-        public void NavigateToSlot() => Navigate(GameScreen.Slot);
+        public void NavigateToSlot()
+        {
+            lock (session.Gate)
+                if (session.CanStartSpin && !session.CommandExecuting) Navigate(GameScreen.Slot);
+        }
         public void NavigateToMainMenu() => TryNavigateToMainMenu();
         public bool TryNavigateToMainMenu()
         {
             lock (session.Gate)
             {
-                if (!session.CanNavigateBack) return false;
+                if (!CanNavigateBack) return false;
                 Navigate(GameScreen.MainMenu);
                 return true;
             }

@@ -13,12 +13,7 @@ namespace IceP.Presentation
             this.navigation = navigation;
             this.view = view;
             navigation.ScreenChanged += ShowScreen;
-            view.PlayButton.onClick.AddListener(navigation.NavigateToSlot);
             view.BackButton.onClick.AddListener(navigation.NavigateToMainMenu);
-            view.SettingsButton.onClick.AddListener(view.ShowSettings);
-            view.DailyBonusButton.onClick.AddListener(view.ShowDailyBonus);
-            view.CloseSettingsButton.onClick.AddListener(CloseSettings);
-            view.CloseDailyBonusButton.onClick.AddListener(CloseDailyBonus);
             ShowScreen(navigation.CurrentScreen);
         }
 
@@ -31,27 +26,10 @@ namespace IceP.Presentation
 
         public void RefreshAvailability() => view.BackButton.interactable = navigation.CanNavigateBack;
 
-        private void CloseSettings()
-        {
-            view.ClosePopups();
-            view.SettingsButton.Select();
-        }
-
-        private void CloseDailyBonus()
-        {
-            view.ClosePopups();
-            view.DailyBonusButton.Select();
-        }
-
         public void Dispose()
         {
             navigation.ScreenChanged -= ShowScreen;
-            view.PlayButton.onClick.RemoveListener(navigation.NavigateToSlot);
             view.BackButton.onClick.RemoveListener(navigation.NavigateToMainMenu);
-            view.SettingsButton.onClick.RemoveListener(view.ShowSettings);
-            view.DailyBonusButton.onClick.RemoveListener(view.ShowDailyBonus);
-            view.CloseSettingsButton.onClick.RemoveListener(CloseSettings);
-            view.CloseDailyBonusButton.onClick.RemoveListener(CloseDailyBonus);
         }
     }
 }

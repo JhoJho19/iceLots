@@ -12,6 +12,7 @@ namespace IceP.Application
         internal bool HasOwner;
         internal bool HasDailyBonusOwner;
         internal bool HasJackpotOwner;
+        internal bool HasSettingsOwner;
         internal bool CommandExecuting;
         private SaveData snapshot;
         private GameSessionState state;

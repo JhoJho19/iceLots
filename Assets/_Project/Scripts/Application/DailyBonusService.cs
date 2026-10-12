@@ -16,6 +16,7 @@ namespace IceP.Application
         // Only an unconfirmed transaction is retained here; GameSession remains authoritative.
         private SaveData proposed;
         private long proposedReward;
+        public bool CanRetry { get { lock (session.Gate) return proposed != null && session.State == GameSessionState.Error && !session.CommandExecuting; } }
 
         public DailyBonusService(GameSession session, SlotRuntimeConfig config, BalanceService balance,
             ISaveRepository repository, IClock clock)

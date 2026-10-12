@@ -17,6 +17,8 @@ namespace IceP.Bootstrap
         [SerializeField] private SlotGameConfigSO gameConfig;
         [SerializeField] private SlotVisualConfigSO visualConfig;
         private GameNavigationPresenter presenter;
+        private MainMenuPresenter menuPresenter;
+        public SettingsService Settings { get; private set; }
 
         public SlotRuntimeConfig RuntimeConfig { get; private set; }
         public OutcomeGenerator OutcomeGenerator { get; private set; }
@@ -35,6 +37,7 @@ namespace IceP.Bootstrap
         {
             if (!navigationView || !navigationView.HasRequiredReferences)
             {
+                InitializationError = "Missing required UI references.";
                 Debug.LogError("SlotBootstrapper requires all navigation view references.", this);
                 enabled = false;
                 return;
@@ -73,6 +76,7 @@ namespace IceP.Bootstrap
                 Spins = new SpinService(Session, config, new SlotEngine(config, random),
                     balance, SaveRepository, () => Clock.UtcNow, WeeklyJackpot);
                 DailyBonus = new DailyBonusService(Session, config, balance, SaveRepository, Clock);
+                Settings = new SettingsService(Session, config, SaveRepository);
                 var recovery = Spins.RecoverInterruptedSpin();
                 if (!recovery.Success) { FailInitialization(recovery.Diagnostic); return; }
                 ConnectNavigation();
@@ -94,6 +98,7 @@ namespace IceP.Bootstrap
             navigationView.DailyBonusButton.interactable = true;
             Navigation = new GameNavigationService(Session);
             presenter = new GameNavigationPresenter(Navigation, navigationView);
+            menuPresenter = new MainMenuPresenter(Session, Navigation, navigationView, DailyBonus, Settings);
             presenter.RefreshAvailability();
         }
 
@@ -107,7 +112,15 @@ namespace IceP.Bootstrap
             return true;
         }
 
-        private void Update() => presenter?.RefreshAvailability();
+        private void Update()
+        {
+            presenter?.RefreshAvailability();
+            menuPresenter?.Tick(Time.unscaledDeltaTime);
+        }
+        private void OnApplicationPause(bool paused)
+        { if (paused) menuPresenter?.FlushSettings(); else menuPresenter?.Refresh(); }
+        private void OnApplicationQuit() => menuPresenter?.FlushSettings();
+        private void OnApplicationFocus(bool focused) { if (focused) menuPresenter?.Refresh(); }
 
         private void FailInitialization(string diagnostic)
         {
@@ -116,6 +129,7 @@ namespace IceP.Bootstrap
             navigationView.PlayButton.interactable = false;
             navigationView.SettingsButton.interactable = false;
             navigationView.DailyBonusButton.interactable = false;
+            navigationView.ShowMenuMessage("Unable to initialize. Controls unavailable.");
             Debug.LogError("SlotBootstrapper initialization failed: " + diagnostic, this);
             enabled = false;
         }
@@ -130,6 +144,6 @@ namespace IceP.Bootstrap
             return UnityEngine.Application.persistentDataPath;
         }
 
-        private void OnDestroy() => presenter?.Dispose();
+        private void OnDestroy() { menuPresenter?.Dispose(); presenter?.Dispose(); }
     }
 }

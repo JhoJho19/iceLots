@@ -16,6 +16,20 @@ namespace IceP.Presentation
         [SerializeField] private Button dailyBonusButton;
         [SerializeField] private Button closeSettingsButton;
         [SerializeField] private Button closeDailyBonusButton;
+        [SerializeField] private SettingsView settingsView;
+        [SerializeField] private DailyBonusView dailyBonusView;
+        [SerializeField] private GameObject dailyAvailabilityIndicator;
+        [SerializeField] private Text balanceLabel;
+        [SerializeField] private Text menuMessage;
+
+        public SettingsView SettingsView => settingsView;
+        public DailyBonusView DailyBonusView => dailyBonusView;
+        public bool HasOpenPopup => settingsPopup.activeSelf || dailyBonusPopup.activeSelf;
+        public bool DailyAvailable => dailyAvailabilityIndicator.activeSelf;
+        public string BalanceText => balanceLabel.text;
+        public void ShowDailyAvailability(bool available) => dailyAvailabilityIndicator.SetActive(available);
+        public void ShowBalance(long balance) => balanceLabel.text = $"Coins: {balance:N0}";
+        public void ShowMenuMessage(string message) => menuMessage.text = message;
 
         public Button PlayButton => playButton;
         public Button BackButton => backButton;
@@ -26,7 +40,9 @@ namespace IceP.Presentation
 
         public bool HasRequiredReferences => mainMenuScreen && slotScreen &&
             settingsPopup && dailyBonusPopup && mainMenuGroup && playButton && backButton &&
-            settingsButton && dailyBonusButton && closeSettingsButton && closeDailyBonusButton;
+            settingsButton && dailyBonusButton && closeSettingsButton && closeDailyBonusButton &&
+            settingsView && settingsView.HasRequiredReferences && dailyBonusView && dailyBonusView.HasRequiredReferences &&
+            dailyAvailabilityIndicator && balanceLabel && menuMessage;
 
         public void ShowScreen(bool showSlot)
         {
