@@ -173,7 +173,7 @@ namespace IceP.Domain.Configuration
                 jackpot.BaseProbability < 0 || jackpot.BaseProbability > 1)
                 errors.Add("Jackpot.BaseProbability: must be finite and within [0, 1].");
             if (jackpot.ReferenceBet <= 0) errors.Add("Jackpot.ReferenceBet: must be positive.");
-            if (jackpot.MaxWinsPerWeek != 1) errors.Add("Jackpot.MaxWinsPerWeek: version 1 requires a limit of 1.");
+            if (jackpot.MaxWinsPerWeek <= 0) errors.Add("Jackpot.MaxWinsPerWeek: must be positive.");
             if (!Enum.IsDefined(typeof(DayOfWeek), jackpot.ResetWeekday)) errors.Add("Jackpot.ResetWeekday: unknown weekday.");
             ValidateTime(jackpot.ResetTimeUtc, "Jackpot.ResetTimeUtc", errors);
             if (jackpot.StartUtc.HasValue && jackpot.StartUtc.Value.Offset != TimeSpan.Zero)

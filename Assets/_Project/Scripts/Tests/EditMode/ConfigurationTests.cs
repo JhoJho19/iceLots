@@ -183,7 +183,7 @@ namespace IceP.Tests
                 case "daily-time": game.DailyBonus.ResetSecondsUtc = 86400; break;
                 case "daily-policy": game.DailyBonus.StreakResetBehavior = (StreakResetBehavior)99; break;
                 case "jackpot-reference": game.Jackpot.ReferenceBet = 0; break;
-                case "jackpot-limit": game.Jackpot.MaxWinsPerWeek = 2; break;
+                case "jackpot-limit": game.Jackpot.MaxWinsPerWeek = 0; break;
                 case "jackpot-negative": game.Jackpot.Amount = -1; break;
                 case "jackpot-weekday": game.Jackpot.ResetWeekday = (DayOfWeek)99; break;
                 case "jackpot-time": game.Jackpot.ResetSecondsUtc = -1; break;

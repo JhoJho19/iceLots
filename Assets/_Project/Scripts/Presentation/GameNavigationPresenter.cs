@@ -29,6 +29,8 @@ namespace IceP.Presentation
             else view.PlayButton.Select();
         }
 
+        public void RefreshAvailability() => view.BackButton.interactable = navigation.CanNavigateBack;
+
         private void CloseSettings()
         {
             view.ClosePopups();

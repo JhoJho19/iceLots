@@ -2,7 +2,8 @@
   "noEngineReferences": false,
   "references": [
     "IceP.Domain",
-    "IceP.Application"
+    "IceP.Application",
+    "Unity.Newtonsoft.Json"
   ],
   "name": "IceP.Infrastructure",
   "autoReferenced": false,

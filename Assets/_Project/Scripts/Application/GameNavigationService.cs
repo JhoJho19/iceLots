@@ -4,14 +4,26 @@ namespace IceP.Application
 {
     public enum GameScreen { MainMenu, Slot }
 
-    // Section 4.1 has no session or spin. Session guards belong to section 4.6.
     public sealed class GameNavigationService
     {
+        private readonly GameSession session;
+        public GameNavigationService(GameSession session)
+        { this.session = session ?? throw new ArgumentNullException(nameof(session)); }
+        public bool CanNavigateBack => session.CanNavigateBack;
         public GameScreen CurrentScreen { get; private set; } = GameScreen.MainMenu;
         public event Action<GameScreen> ScreenChanged;
 
         public void NavigateToSlot() => Navigate(GameScreen.Slot);
-        public void NavigateToMainMenu() => Navigate(GameScreen.MainMenu);
+        public void NavigateToMainMenu() => TryNavigateToMainMenu();
+        public bool TryNavigateToMainMenu()
+        {
+            lock (session.Gate)
+            {
+                if (!session.CanNavigateBack) return false;
+                Navigate(GameScreen.MainMenu);
+                return true;
+            }
+        }
 
         private void Navigate(GameScreen screen)
         {
