@@ -31,6 +31,7 @@ namespace IceP.Tests
             Assert.That(Object.FindObjectsByType<SlotBootstrapper>(FindObjectsSortMode.None).Length, Is.EqualTo(1));
             var bootstrapper = Object.FindFirstObjectByType<SlotBootstrapper>();
             Assert.That(bootstrapper.IsInitialized, Is.True);
+            Assert.That(bootstrapper.OutcomeGenerator, Is.Not.Null);
             Assert.That(bootstrapper.RuntimeConfig.ConfigVersion, Is.EqualTo("1.0.0"));
             Assert.That(Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length, Is.EqualTo(1));
             Assert.That(EventSystem.current.GetComponent<InputSystemUIInputModule>(), Is.Not.Null);
