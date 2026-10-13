@@ -16,6 +16,7 @@ namespace IceP.Presentation
         private bool completionReceived, disposed;
         private RetryOperation retry;
         public SpinResult ActiveSpin => active;
+        public event Action<SpinResult, SpinOperationResult> SettlementConfirmed;
 
         public SlotPresenter(GameSession session, SpinService spins, GameNavigationService navigation,
             IReadOnlyList<long> bets, ISlotView view)
@@ -59,6 +60,7 @@ namespace IceP.Presentation
             if (active != null && result.SettledSpinId == active.SpinId)
             {
                 view.ShowConfirmedWin(active);
+                SettlementConfirmed?.Invoke(active, result);
                 int awarded = active.Evaluation.Scatter.AwardedFreeSpins;
                 view.ShowMessage(awarded > 0 ? $"Win: {result.ConfirmedPayout:N0} · +{awarded} Free Spins!" : $"Win: {result.ConfirmedPayout:N0}");
             }

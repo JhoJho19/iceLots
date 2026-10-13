@@ -31,6 +31,21 @@ namespace IceP.Presentation
         public void ShowBalance(long balance) => balanceLabel.text = $"Coins: {balance:N0}";
         public void ShowMenuMessage(string message) => menuMessage.text = message;
 
+        // Startup can fail because a serialized reference is missing. Keep the remaining
+        // controls safe without requiring the very references that failed validation.
+        public void ShowInitializationFailure()
+        {
+            if (mainMenuScreen) mainMenuScreen.SetActive(true);
+            if (slotScreen) slotScreen.SetActive(false);
+            if (settingsPopup) settingsPopup.SetActive(false);
+            if (dailyBonusPopup) dailyBonusPopup.SetActive(false);
+            if (playButton) playButton.interactable = false;
+            if (settingsButton) settingsButton.interactable = false;
+            if (dailyBonusButton) dailyBonusButton.interactable = false;
+            if (backButton) backButton.interactable = false;
+            if (menuMessage) menuMessage.text = "Unable to initialize. Controls unavailable.";
+        }
+
         public Button PlayButton => playButton;
         public Button BackButton => backButton;
         public Button SettingsButton => settingsButton;

@@ -15,6 +15,7 @@ namespace IceP.Presentation
         [SerializeField] private PaylineView paylines;
         [SerializeField] private UnityEvent onConfirmedWin = new UnityEvent();
         private SlotDisplay previous;
+        private bool initialized;
         public Button SpinButton => spinButton;
         public Button BetDownButton => betDownButton;
         public Button BetUpButton => betUpButton;
@@ -38,6 +39,8 @@ namespace IceP.Presentation
         public void Initialize(SlotRuntimeConfig config, SlotVisualSettings settings)
         {
             animationCoordinator.Initialize(config, settings); paylines.Initialize(animationCoordinator.Reels);
+            if (initialized) return;
+            initialized = true;
             spinButton.onClick.AddListener(Spin); betDownButton.onClick.AddListener(Down); betUpButton.onClick.AddListener(Up);
             backButton.onClick.AddListener(Back); retryButton.onClick.AddListener(Retry);
             animationCoordinator.Finished += Finished;
@@ -67,6 +70,7 @@ namespace IceP.Presentation
             if (spin.PotentialPayout > 0) onConfirmedWin.Invoke();
         }
         public void CancelAnimation() { if (animationCoordinator) animationCoordinator.Cancel(); }
+        private void OnDisable() => CancelAnimation();
         private void OnDestroy()
         {
             Destroyed?.Invoke();

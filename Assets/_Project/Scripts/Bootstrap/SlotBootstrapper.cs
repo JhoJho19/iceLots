@@ -15,11 +15,14 @@ namespace IceP.Bootstrap
     {
         [SerializeField] private GameNavigationView navigationView;
         [SerializeField] private SlotView slotView;
+        [SerializeField] private JackpotView jackpotView;
         [SerializeField] private SlotGameConfigSO gameConfig;
         [SerializeField] private SlotVisualConfigSO visualConfig;
         private GameNavigationPresenter presenter;
         private MainMenuPresenter menuPresenter;
         private SlotPresenter slotPresenter;
+        private JackpotPresenter jackpotPresenter;
+        public JackpotPresenter JackpotPresenter => jackpotPresenter;
         private float slotRefreshElapsed;
         public SlotPresenter SlotPresenter => slotPresenter;
         public SettingsService Settings { get; private set; }
@@ -39,11 +42,9 @@ namespace IceP.Bootstrap
 
         private void Awake()
         {
-            if (!navigationView || !navigationView.HasRequiredReferences || !slotView || !slotView.HasRequiredReferences)
+            if (!navigationView || !navigationView.HasRequiredReferences || !slotView || !slotView.HasRequiredReferences || !jackpotView || !jackpotView.HasRequiredReferences)
             {
-                InitializationError = "Missing required UI references.";
-                Debug.LogError("SlotBootstrapper requires all navigation view references.", this);
-                enabled = false;
+                FailInitialization("Missing required UI references.");
                 return;
             }
 
@@ -104,6 +105,7 @@ namespace IceP.Bootstrap
             slotView.Initialize(RuntimeConfig, new SlotVisualSettings(visualConfig.Resolve, visualConfig.SpinDurationSeconds,
                 visualConfig.ReelStopStaggerSeconds, visualConfig.ReelCellsPerSecond, visualConfig.ReelStopEasePower));
             slotPresenter = new SlotPresenter(Session, Spins, Navigation, RuntimeConfig.Economy.AvailableBets, slotView);
+            jackpotPresenter = new JackpotPresenter(WeeklyJackpot, Clock, jackpotView, slotPresenter, Navigation);
             presenter = new GameNavigationPresenter(Navigation, navigationView, false);
             menuPresenter = new MainMenuPresenter(Session, Navigation, navigationView, DailyBonus, Settings);
             presenter.RefreshAvailability();
@@ -123,22 +125,19 @@ namespace IceP.Bootstrap
         {
             presenter?.RefreshAvailability();
             menuPresenter?.Tick(Time.unscaledDeltaTime);
+            jackpotPresenter?.Tick(Time.unscaledDeltaTime);
             slotRefreshElapsed += Time.unscaledDeltaTime;
             if (slotRefreshElapsed >= .15f) { slotRefreshElapsed = 0; slotPresenter?.Refresh(); }
         }
         private void OnApplicationPause(bool paused)
-        { if (paused) menuPresenter?.FlushSettings(); else menuPresenter?.Refresh(); }
+        { if (paused) menuPresenter?.FlushSettings(); else { menuPresenter?.Refresh(); jackpotPresenter?.Refresh(); } }
         private void OnApplicationQuit() => menuPresenter?.FlushSettings();
-        private void OnApplicationFocus(bool focused) { if (focused) menuPresenter?.Refresh(); }
+        private void OnApplicationFocus(bool focused) { if (focused) { menuPresenter?.Refresh(); jackpotPresenter?.Refresh(); } }
 
         private void FailInitialization(string diagnostic)
         {
             InitializationError = diagnostic;
-            navigationView.ShowScreen(false);
-            navigationView.PlayButton.interactable = false;
-            navigationView.SettingsButton.interactable = false;
-            navigationView.DailyBonusButton.interactable = false;
-            navigationView.ShowMenuMessage("Unable to initialize. Controls unavailable.");
+            if (navigationView) navigationView.ShowInitializationFailure();
             Debug.LogError("SlotBootstrapper initialization failed: " + diagnostic, this);
             enabled = false;
         }
@@ -153,6 +152,6 @@ namespace IceP.Bootstrap
             return UnityEngine.Application.persistentDataPath;
         }
 
-        private void OnDestroy() { slotPresenter?.Dispose(); menuPresenter?.Dispose(); presenter?.Dispose(); }
+        private void OnDestroy() { jackpotPresenter?.Dispose(); slotPresenter?.Dispose(); menuPresenter?.Dispose(); presenter?.Dispose(); }
     }
 }
