@@ -1,3 +1,4 @@
+using TMPro;
 #if UNITY_EDITOR
 using System;
 using System.Collections;
@@ -66,6 +67,15 @@ namespace IceP.Tests
             nav = Object.FindFirstObjectByType<GameNavigationView>();
             slot = Object.FindFirstObjectByType<SlotView>(FindObjectsInactive.Include);
             Assert.That(boot.IsInitialized, Is.True);
+            foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                Assert.That(root.GetComponentsInChildren<UnityEngine.UI.Text>(true), Is.Empty);
+                foreach (var label in root.GetComponentsInChildren<TMP_Text>(true))
+                {
+                    Assert.That(label.font.faceInfo.familyName, Is.EqualTo("Baloo 2"), label.name);
+                    Assert.That(label.font.faceInfo.styleName, Is.EqualTo("Bold"), label.name);
+                }
+            }
             SetResolution(1920, 1080); yield return null; yield return null;
         }
         private static IEnumerator Click(Button button)
@@ -174,7 +184,7 @@ namespace IceP.Tests
             host.SetActive(true); yield return null;
             Assert.That(invalid.IsInitialized, Is.False);
             Assert.That(nav.PlayButton.interactable || nav.SettingsButton.interactable || nav.DailyBonusButton.interactable, Is.False);
-            Assert.That(nav.transform.Find("MainMenuScreen/MenuStatus").GetComponent<Text>().text, Does.Contain("Unable to initialize"));
+            Assert.That(nav.transform.Find("MainMenuScreen/MenuStatus").GetComponent<TMP_Text>().text, Does.Contain("Unable to initialize"));
             Assert.That(slot.gameObject.activeInHierarchy, Is.False);
             LogAssert.NoUnexpectedReceived();
         }
@@ -252,7 +262,7 @@ namespace IceP.Tests
                 Assert.That(bounds.xMax, Is.LessThanOrEqualTo(viewport.xMax), control.name);
                 Assert.That(bounds.yMax, Is.LessThanOrEqualTo(viewport.yMax), control.name);
             }
-            foreach (var label in Object.FindObjectsByType<Text>(FindObjectsSortMode.None))
+            foreach (var label in Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None))
             {
                 if (string.IsNullOrEmpty(label.text)) continue;
                 var bounds = Bounds(label.rectTransform);
@@ -315,13 +325,15 @@ namespace IceP.Tests
                     var projection = new GameSession(profile);
                     slot.Render(new SlotDisplay(projection, new GameNavigationService(projection), false));
                     yield return Capture(tag + "-slot-" + i);
-                    var balance = slot.transform.Find("SlotHUD/Balance").GetComponent<Text>();
-                    var win = slot.transform.Find("SlotHUD/LastWin").GetComponent<Text>();
+                    var balance = slot.transform.Find("SlotHUD/Balance").GetComponent<TMP_Text>();
+                    var win = slot.transform.Find("SlotHUD/LastWin").GetComponent<TMP_Text>();
                     Assert.That(Bounds(balance.rectTransform).Overlaps(Bounds(win.rectTransform)), Is.False);
                     foreach (var label in new[] { balance, win })
                     {
-                        Assert.That(label.cachedTextGenerator.characterCountVisible, Is.GreaterThanOrEqualTo(label.text.Length), label.text);
-                        Assert.That(label.cachedTextGenerator.fontSizeUsedForBestFit, Is.GreaterThanOrEqualTo(Mathf.FloorToInt(32 * label.pixelsPerUnit)));
+                        label.ForceMeshUpdate();
+                        Assert.That(label.textInfo.characterCount, Is.EqualTo(label.text.Length), label.text);
+                        Assert.That(label.isTextOverflowing, Is.False, label.text);
+                        Assert.That(label.fontSize, Is.GreaterThanOrEqualTo(32));
                         Assert.That(Bounds(label.rectTransform).Overlaps(Bounds((RectTransform)slot.transform.Find("JackpotHUD"))), Is.False);
                     }
                 }

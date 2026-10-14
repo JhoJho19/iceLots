@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,20 +15,59 @@ namespace IceP.Presentation
         [SerializeField] private Button backButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private Button dailyBonusButton;
+        [SerializeField] private Material dailyBonusAvailableMaterial;
         [SerializeField] private Button closeSettingsButton;
         [SerializeField] private Button closeDailyBonusButton;
         [SerializeField] private SettingsView settingsView;
         [SerializeField] private DailyBonusView dailyBonusView;
-        [SerializeField] private GameObject dailyAvailabilityIndicator;
-        [SerializeField] private Text balanceLabel;
-        [SerializeField] private Text menuMessage;
+        [SerializeField] private TMP_Text balanceLabel;
+        [SerializeField] private TMP_Text menuMessage;
 
         public SettingsView SettingsView => settingsView;
         public DailyBonusView DailyBonusView => dailyBonusView;
         public bool HasOpenPopup => settingsPopup.activeSelf || dailyBonusPopup.activeSelf;
-        public bool DailyAvailable => dailyAvailabilityIndicator.activeSelf;
+        public bool DailyAvailable { get; private set; }
+        private Vector3 dailyButtonBaseScale;
+        private bool dailyButtonScaleCaptured;
+        private float dailyPulseTime;
         public string BalanceText => balanceLabel.text;
-        public void ShowDailyAvailability(bool available) => dailyAvailabilityIndicator.SetActive(available);
+        public void ShowDailyAvailability(bool available)
+        {
+            DailyAvailable = available;
+            if (dailyBonusButton && dailyBonusButton.image)
+                dailyBonusButton.image.material = available ? dailyBonusAvailableMaterial : null;
+            if (!available) ResetDailyPulse();
+        }
+
+        public void TickDailyAttention(float delta)
+        {
+            if (!dailyBonusButton) return;
+            if (!dailyButtonScaleCaptured)
+            {
+                dailyButtonBaseScale = dailyBonusButton.transform.localScale;
+                dailyButtonScaleCaptured = true;
+            }
+            if (!DailyAvailable || !dailyBonusButton.gameObject.activeInHierarchy ||
+                !dailyBonusButton.IsInteractable())
+            {
+                ResetDailyPulse();
+                return;
+            }
+            // One soft pop over 0.8 seconds, followed by a 1.6-second pause.
+            dailyPulseTime = (dailyPulseTime + delta) % 2.4f;
+            float pulse = dailyPulseTime < .8f
+                ? .5f - .5f * Mathf.Cos(dailyPulseTime / .8f * Mathf.PI * 2f) : 0f;
+            dailyBonusButton.transform.localScale = dailyButtonBaseScale * (1f + .05f * pulse);
+        }
+
+        private void ResetDailyPulse()
+        {
+            dailyPulseTime = 0f;
+            if (dailyBonusButton && dailyButtonScaleCaptured)
+                dailyBonusButton.transform.localScale = dailyButtonBaseScale;
+        }
+
+        private void OnDisable() => ResetDailyPulse();
         public void ShowBalance(long balance) => balanceLabel.text = $"Coins: {balance:N0}";
         public void ShowMenuMessage(string message) => menuMessage.text = message;
 
@@ -35,6 +75,7 @@ namespace IceP.Presentation
         // controls safe without requiring the very references that failed validation.
         public void ShowInitializationFailure()
         {
+            ShowDailyAvailability(false);
             if (mainMenuScreen) mainMenuScreen.SetActive(true);
             if (slotScreen) slotScreen.SetActive(false);
             if (settingsPopup) settingsPopup.SetActive(false);
@@ -57,7 +98,7 @@ namespace IceP.Presentation
             settingsPopup && dailyBonusPopup && mainMenuGroup && playButton && backButton &&
             settingsButton && dailyBonusButton && closeSettingsButton && closeDailyBonusButton &&
             settingsView && settingsView.HasRequiredReferences && dailyBonusView && dailyBonusView.HasRequiredReferences &&
-            dailyAvailabilityIndicator && balanceLabel && menuMessage;
+            balanceLabel && menuMessage;
 
         public void ShowScreen(bool showSlot)
         {

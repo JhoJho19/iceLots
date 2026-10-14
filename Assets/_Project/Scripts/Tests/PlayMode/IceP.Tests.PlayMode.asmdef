@@ -1,7 +1,7 @@
 {
   "name": "IceP.Tests.PlayMode",
   "rootNamespace": "IceP.Tests",
-  "references": ["IceP.Bootstrap", "IceP.Application", "IceP.Domain", "IceP.Infrastructure", "IceP.Presentation", "Unity.ugui", "Unity.InputSystem"],
+  "references": ["IceP.Bootstrap", "IceP.Application", "IceP.Domain", "IceP.Infrastructure", "IceP.Presentation", "Unity.ugui", "Unity.TextMeshPro", "Unity.InputSystem"],
   "optionalUnityReferences": ["TestAssemblies"],
   "autoReferenced": false
 }

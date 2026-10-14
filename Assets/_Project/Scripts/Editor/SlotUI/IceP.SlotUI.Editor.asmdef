@@ -1,1 +1,1 @@
-{"name":"IceP.SlotUI.Editor","references":["IceP.Presentation","IceP.Bootstrap","IceP.Infrastructure","IceP.Domain","Unity.ugui"],"includePlatforms":["Editor"],"autoReferenced":false}
+{"name":"IceP.SlotUI.Editor","references":["IceP.Presentation","IceP.Bootstrap","IceP.Infrastructure","IceP.Domain","Unity.ugui", "Unity.TextMeshPro"],"includePlatforms":["Editor"],"autoReferenced":false}

@@ -1,3 +1,4 @@
+using TMPro;
 using IceP.Application.Persistence;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,9 @@ namespace IceP.Presentation
         [SerializeField] private Toggle soundEnabled;
         [SerializeField] private Slider musicVolume;
         [SerializeField] private Slider soundVolume;
-        [SerializeField] private Text musicPercent;
-        [SerializeField] private Text soundPercent;
-        [SerializeField] private Text message;
+        [SerializeField] private TMP_Text musicPercent;
+        [SerializeField] private TMP_Text soundPercent;
+        [SerializeField] private TMP_Text message;
         [SerializeField] private Button retryButton;
         public Toggle MusicEnabled => musicEnabled;
         public Toggle SoundEnabled => soundEnabled;

@@ -36,7 +36,7 @@ namespace IceP.Presentation
         }
         private void OpenDaily()
         {
-            if (!MenuAvailable || !(session.CanStartSpin || daily.CanRetry)) return;
+            if (!MenuAvailable || !(daily.GetStatus().CanClaim || daily.CanRetry)) return;
             view.ShowDailyBonus(); dailyPresenter.Open(); Refresh();
         }
         private void CloseSettings()
@@ -47,7 +47,9 @@ namespace IceP.Presentation
         private void CloseDaily()
         {
             if (!view.DailyBonusView.gameObject.activeSelf) return;
-            view.ClosePopups(); Refresh(); view.DailyBonusButton.Select();
+            view.ClosePopups(); Refresh();
+            if (view.DailyBonusButton.interactable) view.DailyBonusButton.Select();
+            else view.PlayButton.Select();
         }
         private void ScreenChanged(GameScreen _) => Refresh();
         public void Tick(float delta)
@@ -55,6 +57,7 @@ namespace IceP.Presentation
             if (view.SettingsView.gameObject.activeInHierarchy) settingsPresenter.Tick(delta);
             refreshTime += delta;
             if (refreshTime >= 1) { refreshTime = 0; Refresh(); }
+            view.TickDailyAttention(delta);
         }
         public void FlushSettings() => settingsPresenter.Close();
         public void Refresh()
@@ -64,7 +67,8 @@ namespace IceP.Presentation
             view.ShowBalance(session.Snapshot.Balance);
             view.PlayButton.interactable = session.CanStartSpin;
             view.SettingsButton.interactable = settings.CanUpdate || settings.CanRetry;
-            view.DailyBonusButton.interactable = session.CanStartSpin || daily.CanRetry;
+            // Keep a failed reward transaction reachable so its save can be retried.
+            view.DailyBonusButton.interactable = status.CanClaim || daily.CanRetry;
             view.ShowMenuMessage(session.State == GameSessionState.Error ? "Save unresolved. Open the affected popup to Retry." : "");
             if (view.DailyBonusView.gameObject.activeInHierarchy) dailyPresenter.Refresh();
             if (view.SettingsView.gameObject.activeInHierarchy) settingsPresenter.Refresh();

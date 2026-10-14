@@ -1,3 +1,4 @@
+using TMPro;
 using System.Linq;
 using IceP.Presentation;
 using UnityEditor;
@@ -10,7 +11,7 @@ namespace IceP.Editor
     // Explicit editor-only authoring command. Runtime uses serialized references exclusively.
     public static class MenuUiAuthoring
     {
-        private static Font font;
+        private static TMP_FontAsset font;
         private static Sprite buttonSprite;
         private static Color buttonColor;
         [MenuItem("IceP/Author section 4.9 UI")]
@@ -23,7 +24,7 @@ namespace IceP.Editor
             var menu = Ref<GameObject>(serialized, "mainMenuScreen").transform;
             var settings = Ref<GameObject>(serialized, "settingsPopup");
             var daily = Ref<GameObject>(serialized, "dailyBonusPopup");
-            font = nav.CloseSettingsButton.GetComponentInChildren<Text>(true).font;
+            font = nav.CloseSettingsButton.GetComponentInChildren<TMP_Text>(true).font;
             buttonSprite = nav.PlayButton.GetComponent<Image>().sprite;
             buttonColor = nav.PlayButton.GetComponent<Image>().color;
             var settingsPanel = Panel(settings.transform, "AudioPreferences", 760, 650);
@@ -42,7 +43,7 @@ namespace IceP.Editor
             Set(so, "soundEnabled", Toggle(settingsPanel, "Sound Effects", -5));
             Set(so, "soundVolume", Slider(settingsPanel, "EffectsVolume", -75));
             Set(so, "soundPercent", Label(settingsPanel, "EffectsPercent", "100%", 270, -75, 100, 40, 24));
-            var settingsMessage = settingsPanel.GetComponentsInChildren<Text>().Single(x => x.name == "Placeholder");
+            var settingsMessage = settingsPanel.GetComponentsInChildren<TMP_Text>().Single(x => x.name == "Placeholder");
             settingsMessage.text = ""; settingsMessage.fontSize = 22;
             Set(so, "message", settingsMessage);
             var settingsRetry = Button(settingsPanel, "RetrySettings", "Retry save", 190, -265, 240);
@@ -62,17 +63,14 @@ namespace IceP.Editor
                 labels.GetArrayElementAtIndex(i).objectReferenceValue = Label(card.transform, "Reward", "Day " + (i + 1), 0, 0, i == 6 ? 215 : 180, 130, 23);
                 panels.GetArrayElementAtIndex(i).objectReferenceValue = card;
             }
-            Set(ds, "statusLabel", Label(dailyPanel, "RewardStatus", "", 0, -120, 820, 65, 24));
-            var dailyMessage = dailyPanel.GetComponentsInChildren<Text>().Single(x => x.name == "Placeholder");
+            var dailyMessage = dailyPanel.GetComponentsInChildren<TMP_Text>().Single(x => x.name == "Placeholder");
             dailyMessage.text = ""; dailyMessage.fontSize = 23;
             Set(ds, "message", dailyMessage);
             Set(ds, "claimButton", Button(dailyPanel, "ClaimButton", "Claim", 0, -245, 280));
             var dailyRetry = Button(dailyPanel, "RetryDailyBonus", "Retry reward", 285, -245, 245);
             Set(ds, "retryButton", dailyRetry); ds.ApplyModifiedPropertiesWithoutUndo(); dailyRetry.gameObject.SetActive(false);
             Set(serialized, "settingsView", sv); Set(serialized, "dailyBonusView", dv);
-            var indicator = Label(nav.DailyBonusButton.transform, "AvailableIndicator", "AVAILABLE", 0, -50, 280, 35, 21);
-            indicator.color = new Color(1, .85f, .3f);
-            Set(serialized, "dailyAvailabilityIndicator", indicator.gameObject);
+            Set(serialized, "dailyBonusAvailableMaterial", AssetDatabase.LoadAssetAtPath<Material>("Assets/MaterialsAndShaders/ShiningIce 1.mat"));
             var balance = Label(menu, "Balance", "Coins: 20,000", -350, 440, 430, 60, 30);
             var balanceRect = (RectTransform)balance.transform;
             balanceRect.anchorMin = balanceRect.anchorMax = new Vector2(1, 1);
@@ -100,10 +98,10 @@ namespace IceP.Editor
         }
         private static RectTransform Panel(Transform parent, string name, float w, float h) =>
             (RectTransform)Image(parent, name, 0, 0, w, h, new Color(.09f, .07f, .16f, .98f)).transform;
-        private static Text Label(Transform parent, string name, string text, float x, float y, float w, float h, int size)
+        private static TMP_Text Label(Transform parent, string name, string text, float x, float y, float w, float h, int size)
         {
-            var label = Rect(parent, name, x, y, w, h).gameObject.AddComponent<Text>();
-            label.font = font; label.fontSize = size; label.alignment = TextAnchor.MiddleCenter; label.color = Color.white;
+            var label = Rect(parent, name, x, y, w, h).gameObject.AddComponent<TextMeshProUGUI>();
+            label.font = font; label.fontSize = size; label.alignment = TextAlignmentOptions.Center; label.color = Color.white;
             label.text = text; label.raycastTarget = false; return label;
         }
         private static Button Button(Transform parent, string name, string text, float x, float y, float w)

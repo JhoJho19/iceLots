@@ -1,3 +1,4 @@
+using TMPro;
 using System;
 using IceP.Application;
 using IceP.Domain.Configuration;
@@ -10,7 +11,8 @@ namespace IceP.Presentation
     public sealed class SlotView : MonoBehaviour, ISlotView
     {
         [SerializeField] private Button spinButton, betDownButton, betUpButton, backButton, retryButton;
-        [SerializeField] private Text balanceLabel, betLabel, winLabel, freeSpinsLabel, message;
+        [SerializeField] private TMP_Text balanceLabel, betLabel, winLabel, freeSpinsLabel;
+        private string message = string.Empty;
         [SerializeField] private ReelAnimationCoordinator animationCoordinator;
         [SerializeField] private PaylineView paylines;
         [SerializeField] private UnityEvent onConfirmedWin = new UnityEvent();
@@ -27,9 +29,9 @@ namespace IceP.Presentation
         public string BetText => betLabel.text;
         public string WinText => winLabel.text;
         public string FreeSpinsText => freeSpinsLabel.text;
-        public string Message => message.text;
+        public string Message => message;
         public bool HasRequiredReferences => spinButton && betDownButton && betUpButton && backButton && retryButton &&
-            balanceLabel && betLabel && winLabel && freeSpinsLabel && message && animationCoordinator && paylines;
+            balanceLabel && betLabel && winLabel && freeSpinsLabel && animationCoordinator && paylines;
         public event Action SpinRequested;
         public event Action<int> BetStepRequested;
         public event Action BackRequested;
@@ -61,7 +63,7 @@ namespace IceP.Presentation
             backButton.interactable = display.CanBack; retryButton.gameObject.SetActive(display.CanRetry); retryButton.interactable = display.CanRetry;
             previous = display;
         }
-        public void ShowMessage(string value) => message.text = value;
+        public void ShowMessage(string value) => message = value;
         public void ClearWins() => paylines.Clear();
         public void Animate(SpinResult spin) => animationCoordinator.Begin(spin);
         public void ShowConfirmedWin(SpinResult spin)

@@ -41,13 +41,28 @@ namespace IceP.Tests
         {
             yield return Load(); var session = boot.Session; var scene = SceneManager.GetActiveScene().handle;
             Assert.That(boot.Navigation.CurrentScreen, Is.EqualTo(GameScreen.MainMenu)); Assert.That(view.DailyAvailable, Is.True);
+            Assert.That(view.DailyBonusButton.interactable, Is.True);
+            Assert.That(view.DailyBonusButton.transform.Find("AvailableIndicator"), Is.Null);
+            var availableMaterial = view.DailyBonusButton.image.material;
+            Assert.That(availableMaterial.name, Is.EqualTo("ShiningIce 1"));
+            // Start at the rest scale; scene loading may already have advanced the loop.
+            view.ShowDailyAvailability(false);
+            Assert.That(view.DailyBonusButton.image.material, Is.SameAs(UnityEngine.UI.Graphic.defaultGraphicMaterial));
+            var baseScale = view.DailyBonusButton.transform.localScale;
+            view.ShowDailyAvailability(true);
+            Assert.That(view.DailyBonusButton.image.material, Is.SameAs(availableMaterial));
+            view.TickDailyAttention(.4f);
+            Assert.That(view.DailyBonusButton.transform.localScale.x, Is.GreaterThan(baseScale.x));
             view.DailyBonusButton.onClick.Invoke(); var daily = view.DailyBonusView;
             Assert.That(boot.LoadedProfile.Balance, Is.EqualTo(20000)); Assert.That(daily.RewardLabels.Length, Is.EqualTo(7));
             for (int i = 0; i < 7; i++) Assert.That(daily.RewardLabels[i].text, Does.Contain(boot.RuntimeConfig.DailyBonus.Rewards[i].ToString("N0")));
             daily.ClaimButton.onClick.Invoke(); Assert.That(boot.LoadedProfile.Balance, Is.EqualTo(20400));
             Assert.That(daily.ClaimButton.interactable, Is.False); Assert.That(view.DailyAvailable, Is.False);
+            Assert.That(view.DailyBonusButton.interactable, Is.False);
+            Assert.That(view.DailyBonusButton.image.material, Is.SameAs(UnityEngine.UI.Graphic.defaultGraphicMaterial));
+            Assert.That(view.DailyBonusButton.transform.localScale, Is.EqualTo(baseScale));
             Assert.That(view.BalanceText, Does.Contain(20400L.ToString("N0"))); Assert.That(daily.Message, Does.Contain("Received"));
-            Assert.That(daily.StatusText, Does.Contain("UTC"));
+            Assert.That(daily.GetComponentsInChildren<Transform>(true), Has.None.Matches<Transform>(x => x.name == "RewardStatus"));
             daily.ClaimButton.onClick.Invoke(); Assert.That(boot.LoadedProfile.Balance, Is.EqualTo(20400));
             view.CloseDailyBonusButton.onClick.Invoke();
             view.SettingsButton.onClick.Invoke(); var settings = view.SettingsView;
@@ -64,8 +79,9 @@ namespace IceP.Tests
             yield return Load(); Assert.That(boot.LoadedProfile.Balance, Is.EqualTo(20400)); Assert.That(view.DailyAvailable, Is.False);
             Assert.That(boot.Settings.Current.MusicEnabled || boot.Settings.Current.SoundEnabled, Is.False);
             Assert.That(boot.Settings.Current.MusicVolume, Is.EqualTo(.35).Within(.0001)); Assert.That(boot.Settings.Current.SoundVolume, Is.EqualTo(.65).Within(.0001));
-            view.DailyBonusButton.onClick.Invoke(); Assert.That(view.DailyBonusView.ClaimButton.interactable, Is.False);
-            Assert.That(view.DailyBonusView.RewardLabels[0].text, Does.Contain("Claimed"));
+            Assert.That(view.DailyBonusButton.interactable, Is.False);
+            Assert.That(view.DailyBonusButton.image.material, Is.SameAs(UnityEngine.UI.Graphic.defaultGraphicMaterial));
+            view.DailyBonusButton.onClick.Invoke(); Assert.That(view.HasOpenPopup, Is.False);
             view.CloseDailyBonusButton.onClick.Invoke(); view.PlayButton.onClick.Invoke();
             Assert.That(boot.Navigation.CurrentScreen, Is.EqualTo(GameScreen.Slot)); Assert.That(SceneManager.sceneCount, Is.EqualTo(1)); LogAssert.NoUnexpectedReceived();
         }
@@ -85,7 +101,8 @@ namespace IceP.Tests
             Assert.That(view.DailyBonusView.Message, Does.Contain("Received")); // Duplicate listeners would replace it with AlreadyClaimed.
             Assert.That(boot.LoadedProfile.Balance, Is.EqualTo(20400));
             view.CloseDailyBonusButton.onClick.Invoke(); view.DailyBonusButton.onClick.Invoke();
-            Assert.That(view.DailyBonusView.ClaimButton.interactable, Is.False); Assert.That(view.DailyBonusView.Message, Is.Empty); LogAssert.NoUnexpectedReceived();
+            Assert.That(view.DailyBonusButton.interactable, Is.False);
+            Assert.That(view.DailyBonusButton.image.material, Is.SameAs(UnityEngine.UI.Graphic.defaultGraphicMaterial)); Assert.That(view.HasOpenPopup, Is.False); LogAssert.NoUnexpectedReceived();
         }
         [UnityTest] public IEnumerator SettingsDebounceAndResumeRefreshWork()
         {
@@ -97,7 +114,9 @@ namespace IceP.Tests
             view.CloseSettingsButton.onClick.Invoke();
             Assert.That(boot.DailyBonus.Claim().Success, Is.True); // External confirmed application update.
             boot.SendMessage("OnApplicationPause", false); Assert.That(view.DailyAvailable, Is.False);
-            view.DailyBonusButton.onClick.Invoke(); Assert.That(view.DailyBonusView.ClaimButton.interactable, Is.False); LogAssert.NoUnexpectedReceived();
+            Assert.That(view.DailyBonusButton.interactable, Is.False);
+            Assert.That(view.DailyBonusButton.image.material, Is.SameAs(UnityEngine.UI.Graphic.defaultGraphicMaterial));
+            view.DailyBonusButton.onClick.Invoke(); Assert.That(view.HasOpenPopup, Is.False); LogAssert.NoUnexpectedReceived();
         }
         [UnityTest] public IEnumerator ActiveSpinCannotBeInterruptedAndPopupsCannotMutateIt()
         {

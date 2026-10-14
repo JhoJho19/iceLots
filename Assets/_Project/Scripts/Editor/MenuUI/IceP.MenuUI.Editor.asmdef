@@ -1,1 +1,1 @@
-{"name":"IceP.MenuUI.Editor","references":["IceP.Presentation","Unity.ugui"],"includePlatforms":["Editor"],"autoReferenced":false}
+{"name":"IceP.MenuUI.Editor","references":["IceP.Presentation","Unity.ugui", "Unity.TextMeshPro"],"includePlatforms":["Editor"],"autoReferenced":false}

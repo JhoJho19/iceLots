@@ -1,3 +1,4 @@
+using TMPro;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -8,25 +9,23 @@ namespace IceP.Presentation
 {
     public sealed class JackpotView : MonoBehaviour, IJackpotView
     {
-        [SerializeField] private Text titleLabel, amountLabel, statusLabel, resetLabel, availabilityLabel;
+        [SerializeField] private TMP_Text titleLabel, amountLabel, availabilityLabel;
+        private string status = string.Empty, reset = string.Empty;
         [SerializeField] private Image background;
         private Coroutine celebration;
-        private readonly Color gold = new Color(1f, .83f, .35f);
         public event Action Activated;
         public event Action Destroyed;
-        public bool HasRequiredReferences => titleLabel && amountLabel && statusLabel && resetLabel && availabilityLabel && background;
+        public bool HasRequiredReferences => titleLabel && amountLabel && availabilityLabel && background;
         public string AmountText => amountLabel.text;
-        public string StatusText => statusLabel.text;
-        public string ResetText => resetLabel.text;
+        public string StatusText => status;
+        public string ResetText => reset;
         public string AvailabilityText => availabilityLabel.text;
         public int CelebrationCount { get; private set; }
         public bool IsCelebrating => celebration != null;
         public void Render(JackpotDisplay value)
         {
-            amountLabel.text = value.Amount; statusLabel.text = value.Status;
-            resetLabel.text = value.Reset; availabilityLabel.text = value.Availability;
-            statusLabel.color = value.State == JackpotState.WonThisWeek ? gold :
-                value.State == JackpotState.Active ? new Color(.5f, 1, 1) : new Color(.75f, .8f, .85f);
+            amountLabel.text = value.Amount; status = value.Status;
+            reset = value.Reset; availabilityLabel.text = value.Availability;
         }
         public void Celebrate()
         {
@@ -52,7 +51,7 @@ namespace IceP.Presentation
         private void Restore()
         {
             if (titleLabel) titleLabel.text = "JACKPOT OF THE WEEK";
-            if (amountLabel) { amountLabel.transform.localScale = Vector3.one; amountLabel.color = gold; }
+            if (amountLabel) { amountLabel.transform.localScale = Vector3.one; amountLabel.color = Color.white; }
             if (background) background.color = BaseColor;
         }
         public void CancelCelebration() { if (celebration != null) StopCoroutine(celebration); celebration = null; Restore(); }

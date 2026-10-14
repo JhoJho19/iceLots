@@ -1,3 +1,4 @@
+using TMPro;
 using System.Linq;
 using IceP.Bootstrap;
 using IceP.Domain.Configuration;
@@ -12,7 +13,7 @@ namespace IceP.Editor
 {
     public static class SlotUiAuthoring
     {
-        private static Font font;
+        private static TMP_FontAsset font;
         private static Sprite buttonSprite;
         private static Color buttonColor;
         [MenuItem("IceP/Author section 4.10 UI")]
@@ -27,7 +28,7 @@ namespace IceP.Editor
                 EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene); return;
             }
             var nav = canvas.GetComponent<GameNavigationView>();
-            font = nav.CloseSettingsButton.GetComponentInChildren<Text>(true).font;
+            font = nav.CloseSettingsButton.GetComponentInChildren<TMP_Text>(true).font;
             buttonSprite = nav.PlayButton.GetComponent<Image>().sprite;
             buttonColor = nav.PlayButton.GetComponent<Image>().color;
             var visual = AssetDatabase.LoadAssetAtPath<SlotVisualConfigSO>("Assets/_Project/Configs/SlotVisualConfigSO.asset");
@@ -75,7 +76,6 @@ namespace IceP.Editor
             Set(vs, "spinButton", Button(controls, "SpinButton", "SPIN", 130, 35, 340));
             var retry = Button(controls, "RetrySpinSave", "Retry save", 510, 35, 290);
             Set(vs, "retryButton", retry); retry.gameObject.SetActive(false);
-            Set(vs, "message", Label(controls, "SpinStatus", "", 0, -60, 1380, 60, 25));
             vs.ApplyModifiedPropertiesWithoutUndo();
             StyleControls(slot);
             var boot = scene.GetRootGameObjects().SelectMany(x => x.GetComponentsInChildren<SlotBootstrapper>(true)).Single();
@@ -99,7 +99,7 @@ namespace IceP.Editor
                     button.name == "BetDecrease" ? "Button_Minus_Round_Blue" : "Button_Pill_Blue";
                 var image = button.GetComponent<Image>(); image.sprite = sprites.Single(x => x.name == spriteName);
                 image.color = Color.white; image.type = icon ? Image.Type.Simple : Image.Type.Sliced; image.preserveAspect = icon;
-                if (icon) button.GetComponentInChildren<Text>(true).text = "";
+                if (icon) button.GetComponentInChildren<TMP_Text>(true).text = "";
             }
             var line = slot.Find("ImageGameField/WinningPaylines");
             if (!line.GetComponent<CanvasRenderer>()) line.gameObject.AddComponent<CanvasRenderer>();
@@ -111,10 +111,10 @@ namespace IceP.Editor
             rect.anchorMin = rect.anchorMax = new Vector2(.5f, .5f); rect.sizeDelta = new Vector2(width, height); rect.anchoredPosition = new Vector2(x, y);
             return rect;
         }
-        private static Text Label(Transform parent, string name, string text, float x, float y, float w, float h, int size)
+        private static TMP_Text Label(Transform parent, string name, string text, float x, float y, float w, float h, int size)
         {
-            var label = Rect(parent, name, x, y, w, h).gameObject.AddComponent<Text>(); label.font = font;
-            label.text = text; label.fontSize = size; label.alignment = TextAnchor.MiddleCenter; label.color = Color.white;
+            var label = Rect(parent, name, x, y, w, h).gameObject.AddComponent<TextMeshProUGUI>(); label.font = font;
+            label.text = text; label.fontSize = size; label.alignment = TextAlignmentOptions.Center; label.color = Color.white;
             label.raycastTarget = false; label.gameObject.AddComponent<Shadow>().effectColor = new Color(0, .1f, .2f, .9f); return label;
         }
         private static Button Button(Transform parent, string name, string text, float x, float y, float width)

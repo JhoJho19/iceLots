@@ -1,3 +1,4 @@
+using TMPro;
 #if UNITY_EDITOR
 using System;
 using System.Collections;
@@ -193,9 +194,21 @@ namespace IceP.Tests
         [UnityTest] public IEnumerator LargeAmountFitsSingleLineAndHudAvoidsGameplay()
         {
             yield return Load(); Control(amount: 9000000000000000); yield return null; Canvas.ForceUpdateCanvases();
-            var label = hud.transform.Find("Amount").GetComponent<UnityEngine.UI.Text>();
-            Assert.That(hud.AmountText, Is.EqualTo("9,000,000,000,000,000 COINS")); Assert.That(label.cachedTextGenerator.lineCount, Is.EqualTo(1));
-            Assert.That(label.cachedTextGenerator.characterCountVisible, Is.GreaterThanOrEqualTo(hud.AmountText.Length));
+            var label = hud.transform.Find("Amount").GetComponent<TMP_Text>();
+            label.ForceMeshUpdate();
+            Assert.That(hud.AmountText, Is.EqualTo("9,000,000,000,000,000 COINS")); Assert.That(label.textInfo.lineCount, Is.EqualTo(1));
+            Assert.That(label.textInfo.characterCount, Is.EqualTo(hud.AmountText.Length));
+            Assert.That(label.isTextOverflowing, Is.False);
+            Assert.That(hud.transform.Find("Status"), Is.Null);
+            Assert.That(hud.transform.Find("Reset"), Is.Null);
+            Assert.That(slotView.transform.Find("SlotControls/SpinStatus"), Is.Null);
+            foreach (var name in new[] { "Title" })
+            {
+                var heading = hud.transform.Find(name).GetComponent<TMP_Text>();
+                heading.ForceMeshUpdate();
+                Assert.That(heading.isTextOverflowing, Is.False, name);
+                Assert.That(heading.textInfo.characterInfo[0].isVisible, Is.True, name);
+            }
             var h = Bounds((RectTransform)hud.transform);
             foreach (var r in new[] { (RectTransform)slotView.AnimationCoordinator.transform, (RectTransform)slotView.SpinButton.transform,
                 (RectTransform)slotView.BackButton.transform, (RectTransform)slotView.transform.Find("SlotHUD/Balance"),

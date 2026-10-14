@@ -1,3 +1,4 @@
+using TMPro;
 using System;
 using System.IO;
 using System.Linq;
@@ -132,9 +133,9 @@ public static class UIAtlasSlicer
     }
     static void Label(Transform parent, string text, Vector2 center, Vector2 size)
     {
-        var rt = NewRect(text, parent, center, size); var t = rt.gameObject.AddComponent<Text>();
-        t.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); t.text = text;
-        t.fontSize = 18; t.color = Color.white; t.alignment = TextAnchor.MiddleLeft; t.raycastTarget = false;
+        var rt = NewRect(text, parent, center, size); var t = rt.gameObject.AddComponent<TextMeshProUGUI>();
+        t.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/_Project/Fonts/Baloo2-Bold SDF.asset"); t.text = text;
+        t.fontSize = 18; t.color = Color.white; t.alignment = TextAlignmentOptions.MidlineLeft; t.raycastTarget = false;
     }
     static Canvas NewCanvas(string name, Vector2 origin)
     {
