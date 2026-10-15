@@ -28,6 +28,10 @@ namespace IceP.Tests
         }
         private sealed class View : ISlotView
         {
+            public event Action AutoRequested;
+            public event Action Suspended;
+            public void Auto() => AutoRequested?.Invoke();
+            public void Suspend() => Suspended?.Invoke();
             public event Action SpinRequested;
             public event Action<int> BetStepRequested;
             public event Action BackRequested;
@@ -72,6 +76,198 @@ namespace IceP.Tests
             for (int reel = 0; reel < 5; reel++)
                 for (int stop = 0; stop < 30; stop++)
                     if (config.ReelStrips[reel].Symbols[(stop + 1) % 30] == SymbolId.S1) { random.Positions[reel] = stop; break; }
+        }
+        [Test] public void AutoStartsDisabledAndFirstClickAcceptsExactlyOneSpin()
+        {
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+            view.Auto(); Assert.That(presenter.IsAutoSpinEnabled, Is.True);
+            Assert.That(view.Animations, Is.EqualTo(1)); Assert.That(repository.SaveAttemptCount, Is.EqualTo(1));
+            Assert.That(view.Display.CanAutoSpin, Is.True);
+            Assert.That(view.Display.CanSpin || view.Display.CanSelectBet, Is.False);
+        }
+        [Test] public void AutoDeterministicHandoffWalkthrough20000Bet1000Win2500StopSecondSpin()
+        {
+            var data = session.Snapshot; data.SelectedBet = 1000; Recreate(data);
+            random.Positions = new[] { 18, 2, 1, 20, 9 };
+            view.Auto(); var first = view.Animated;
+            Assert.That(session.Snapshot.Balance, Is.EqualTo(19000)); Assert.That(first.PotentialPayout, Is.EqualTo(2500));
+            Assert.That(repository.Load().Data.PendingSpin.SpinId, Is.EqualTo(first.SpinId));
+            view.Finish(first.SpinId); Assert.That(session.Snapshot.Balance, Is.EqualTo(21500));
+            Assert.That(repository.Load().Data.PendingSpin, Is.Null);
+            presenter.Tick(.39f); Assert.That(view.Animations, Is.EqualTo(1));
+            presenter.Tick(.011f); var second = view.Animated;
+            Assert.That(session.Snapshot.Balance, Is.EqualTo(20500)); Assert.That(second.PotentialPayout, Is.EqualTo(2500));
+            view.Auto(); Assert.That(presenter.ActiveSpin, Is.SameAs(second)); view.Finish(second.SpinId); presenter.Tick(100);
+            Assert.That(session.Snapshot.Balance, Is.EqualTo(23000)); Assert.That(repository.Load().Data.Balance, Is.EqualTo(23000));
+            Assert.That(view.Animations, Is.EqualTo(2)); Assert.That(repository.SaveAttemptCount, Is.EqualTo(4));
+            Assert.That(view.Display.CanSpin && view.Display.CanSelectBet, Is.True);
+        }
+        [Test] public void AutoSecondClickStopsWithoutCancellingAcceptedSpin()
+        {
+            view.Auto(); var spin = presenter.ActiveSpin; view.Auto();
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+            Assert.That(session.State, Is.EqualTo(GameSessionState.Spinning));
+            Assert.That(presenter.ActiveSpin, Is.SameAs(spin));
+            view.Finish(spin.SpinId); presenter.Tick(100);
+            Assert.That(session.Snapshot.LastSettledSpinId, Is.EqualTo(spin.SpinId));
+            Assert.That(view.Animations, Is.EqualTo(1)); Assert.That(view.Display.CanSpin, Is.True);
+        }
+        [Test] public void AutoRapidClicksAndManualCommandsCannotCreateConcurrentSpins()
+        {
+            view.Auto();
+            for (int i = 0; i < 20; i++) { view.Auto(); view.Spin(); view.Bet(1); }
+            Assert.That(view.Animations, Is.EqualTo(1)); Assert.That(repository.SaveAttemptCount, Is.EqualTo(1));
+            Assert.That(session.Snapshot.SelectedBet, Is.EqualTo(200));
+        }
+        [Test] public void AutoActivationDuringManualSpinIsRejected()
+        {
+            view.Spin(); view.Auto(); presenter.Tick(100); view.Finish(view.Animated.SpinId); presenter.Tick(100);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(view.Animations, Is.EqualTo(1));
+        }
+        [Test] public void AutoWaitsForConfirmedSettlementThenFullDelayAndIgnoresDuplicateCompletion()
+        {
+            view.Auto(); var id = view.Animated.SpinId; presenter.Tick(100);
+            Assert.That(repository.SaveAttemptCount, Is.EqualTo(1)); Assert.That(view.Animations, Is.EqualTo(1));
+            view.Finish(id); view.Finish(id); view.Finish(Guid.NewGuid());
+            Assert.That(view.Confirmed.SpinId, Is.EqualTo(id)); Assert.That(repository.SaveAttemptCount, Is.EqualTo(2));
+            presenter.Tick(.2f); Assert.That(view.Animations, Is.EqualTo(1));
+            presenter.Tick(.19f); Assert.That(view.Animations, Is.EqualTo(1));
+            presenter.Tick(.011f); Assert.That(view.Animations, Is.EqualTo(2));
+            presenter.Tick(100); view.Finish(id); Assert.That(view.Animations, Is.EqualTo(2));
+        }
+        [Test] public void AutoStopCancelsDelayAndLocksBetAndManualSpinDuringDelay()
+        {
+            view.Auto(); view.Finish(view.Animated.SpinId); view.Spin(); view.Bet(1);
+            Assert.That(view.Animations, Is.EqualTo(1)); Assert.That(session.Snapshot.SelectedBet, Is.EqualTo(200));
+            view.Auto(); presenter.Tick(100); Assert.That(view.Animations, Is.EqualTo(1));
+            Assert.That(view.Display.CanSelectBet, Is.True);
+        }
+        [Test] public void AutoInsufficientBalanceDoesNotSaveAnimateOrRetry()
+        {
+            var data = session.Snapshot; data.Balance = 0; Recreate(data);
+            view.Auto(); presenter.Tick(100); Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+            Assert.That(repository.SaveAttemptCount, Is.Zero); Assert.That(view.Animations, Is.Zero);
+            Assert.That(view.Display.CanAutoSpin, Is.False); Assert.That(view.Display.CanBack, Is.True);
+        }
+        [Test] public void AutoStopsImmediatelyAfterLastAffordableLosingSpin()
+        {
+            var data = session.Snapshot; data.Balance = 200; Recreate(data); ChooseLosingStops();
+            view.Auto(); Assert.That(view.Animated.PotentialPayout, Is.Zero); view.Finish(view.Animated.SpinId);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); presenter.Tick(100);
+            Assert.That(repository.SaveAttemptCount, Is.EqualTo(2)); Assert.That(view.Animations, Is.EqualTo(1));
+        }
+        [Test] public void AutoAcceptFailureStopsAndRetryOnlyAnimatesOriginalSpin()
+        {
+            repository.FailSaves = true; view.Auto(); presenter.Tick(100);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(view.Animations, Is.Zero);
+            Assert.That(session.State, Is.EqualTo(GameSessionState.Error));
+            repository.FailSaves = false; view.Retry(); view.Finish(view.Animated.SpinId); presenter.Tick(100);
+            Assert.That(view.Animations, Is.EqualTo(1)); Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+        }
+        [Test] public void AutoSettlementFailureRetainsOutcomeAndRetryNeverRestartsAuto()
+        {
+            ChooseWinningStops(); view.Auto(); var spin = view.Animated; repository.FailSaves = true;
+            view.Finish(spin.SpinId); presenter.Tick(100);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(session.State, Is.EqualTo(GameSessionState.Error));
+            Assert.That(presenter.ActiveSpin, Is.SameAs(spin)); Assert.That(view.Confirmed, Is.Null);
+            repository.FailSaves = false; view.Retry(); presenter.Tick(100);
+            Assert.That(view.Confirmed, Is.SameAs(spin)); Assert.That(view.Animations, Is.EqualTo(1));
+            Assert.That(random.Calls, Is.EqualTo(5));
+        }
+        [Test] public void AutoFreeSpinsAtZeroBalanceUseBonusBetMultiplierAndRetrigger()
+        {
+            var data = session.Snapshot; data.Balance = 0; data.FreeSpinsRemaining = 2; data.BonusBet = 600; Recreate(data);
+            random.Positions = new int[5];
+            for (int r = 0; r < 5; r++) for (int s = 0; s < 30; s++)
+                if (config.ReelStrips[r].Symbols[s] == SymbolId.SCATTER) { random.Positions[r] = s; break; }
+            view.Auto(); var first = view.Animated;
+            Assert.That(first.Type, Is.EqualTo(PendingSpinType.Free)); Assert.That(first.EffectiveBet, Is.EqualTo(600));
+            Assert.That(first.Evaluation.Context.IsFreeSpin, Is.True);
+            Assert.That(session.Snapshot.Balance, Is.Zero);
+            view.Finish(first.SpinId); Assert.That(session.Snapshot.FreeSpinsRemaining, Is.EqualTo(21));
+            presenter.Tick(.4f); Assert.That(view.Animations, Is.EqualTo(2));
+            Assert.That(view.Animated.EffectiveBet, Is.EqualTo(600)); Assert.That(session.Snapshot.FreeSpinsRemaining, Is.EqualTo(20));
+            view.Auto(); view.Finish(view.Animated.SpinId); presenter.Tick(100);
+            Assert.That(session.Snapshot.FreeSpinsRemaining, Is.EqualTo(40)); Assert.That(view.Animations, Is.EqualTo(2));
+        }
+        [Test] public void AutoExhaustsFreeQueueThenReturnsToSelectedPaidBet()
+        {
+            var data = session.Snapshot; data.FreeSpinsRemaining = 1; data.BonusBet = 600; Recreate(data); ChooseLosingStops();
+            view.Auto(); Assert.That(view.Animated.EffectiveBet, Is.EqualTo(600)); view.Finish(view.Animated.SpinId);
+            presenter.Tick(.4f); Assert.That(view.Animated.Type, Is.EqualTo(PendingSpinType.Paid));
+            Assert.That(view.Animated.EffectiveBet, Is.EqualTo(200)); Assert.That(session.Snapshot.Balance, Is.EqualTo(19800));
+        }
+        [Test] public void AutoBackIsBlockedDuringSpinAndStopsBeforeMenuDuringDelay()
+        {
+            view.Auto(); view.Back(); Assert.That(navigation.CurrentScreen, Is.EqualTo(GameScreen.Slot));
+            Assert.That(presenter.IsAutoSpinEnabled, Is.True); view.Finish(view.Animated.SpinId);
+            Assert.That(navigation.TryNavigateToMainMenu(), Is.True); presenter.Tick(100);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(view.Animations, Is.EqualTo(1));
+            navigation.NavigateToSlot(); presenter.Tick(100); Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+        }
+        [TestCase(false)] [TestCase(true)] public void AutoSuspendedOrDestroyedViewCancelsPendingDelay(bool destroy)
+        {
+            view.Auto(); view.Finish(view.Animated.SpinId);
+            if (destroy) view.Destroy(); else view.Suspend();
+            presenter.Tick(100); Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(view.Animations, Is.EqualTo(1));
+        }
+        [Test] public void AutoCannotBypassExternalApplicationSpinOrErrorGuard()
+        {
+            var result = spins.StartSpin(); view.Auto(); Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+            spins.CompleteSpin(result.Spin.SpinId); repository.FailSaves = true; spins.StartSpin(); view.Auto();
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(view.Animations, Is.Zero);
+        }
+        [Test] public void AutoInvalidBetIsRejectedWithoutSavingOrGenerating()
+        {
+            var invalid = session.Snapshot; invalid.SelectedBet = 123; session.Commit(invalid);
+            view.Auto(); presenter.Tick(100); Assert.That(presenter.IsAutoSpinEnabled, Is.False);
+            Assert.That(view.Message, Does.Contain("InvalidBet"));
+            Assert.That(repository.SaveAttemptCount, Is.Zero); Assert.That(random.Calls, Is.Zero);
+        }
+        [Test] public void AutoConfiguredDelayIsRespectedAndNegativeTimeDoesNotAdvanceIt()
+        {
+            presenter.Dispose(); presenter = new SlotPresenter(session, spins, navigation, config.Economy.AvailableBets, view, 2);
+            view.Auto(); view.Finish(view.Animated.SpinId); presenter.Tick(-20); presenter.Tick(1.9f);
+            Assert.That(view.Animations, Is.EqualTo(1)); presenter.Tick(.11f); Assert.That(view.Animations, Is.EqualTo(2));
+        }
+        [Test] public void AutoStopAndRestartCannotReuseOldDelayOrCompletion()
+        {
+            view.Auto(); var old = view.Animated.SpinId; view.Finish(old); presenter.Tick(.2f); view.Auto();
+            view.Auto(); var current = view.Animated.SpinId; view.Finish(old); presenter.Tick(100);
+            Assert.That(presenter.ActiveSpin.SpinId, Is.EqualTo(current)); Assert.That(view.Animations, Is.EqualTo(2));
+        }
+        [Test] public void AutoFreeSpinKeepsOriginalConfiguredMultiplier()
+        {
+            var data = session.Snapshot; data.FreeSpinsRemaining = 2; data.BonusBet = 800; Recreate(data); ChooseWinningStops();
+            view.Auto(); var spin = view.Animated;
+            Assert.That(spin.Evaluation.AppliedPayoutMultiplier, Is.EqualTo(config.Scatter.FreeSpinsMultiplier));
+            Assert.That(spin.Evaluation.FinalPayout, Is.EqualTo(spin.Evaluation.Wins.BaseWin * config.Scatter.FreeSpinsMultiplier));
+            view.Finish(spin.SpinId); presenter.Tick(.4f); Assert.That(view.Animated.EffectiveBet, Is.EqualTo(800));
+        }
+        [Test] public void AutoCancelledAnimationStopsRepetitionWithoutSettlement()
+        {
+            view.Auto(); var id = view.Animated.SpinId; view.Finish(id, false); view.Finish(id); presenter.Tick(100);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); Assert.That(repository.SaveAttemptCount, Is.EqualTo(1));
+            Assert.That(session.Snapshot.PendingSpin.SpinId, Is.EqualTo(id));
+        }
+        [Test] public void AutoStateIsPresentationOnlyAndFreshPresenterStartsDisabled()
+        {
+            view.Auto(); var data = repository.Load().Data;
+            Assert.That(typeof(SaveData).GetField("IsAutoSpinEnabled"), Is.Null);
+            view.Auto(); view.Finish(view.Animated.SpinId); Recreate(session.Snapshot);
+            Assert.That(presenter.IsAutoSpinEnabled, Is.False); presenter.Tick(100); Assert.That(view.Animations, Is.Zero);
+        }
+        private void ChooseLosingStops()
+        {
+            random.Positions = new int[5];
+            var engine = new SlotEngine(config, random);
+            for (int i = 0; i < 30; i++)
+            {
+                for (int r = 0; r < 5; r++) random.Positions[r] = (i + r * 5) % 30;
+                var result = engine.Generate(SpinEvaluationContext.Paid(200));
+                if (result.FinalPayout == 0 && result.Scatter.AwardedFreeSpins == 0) { random.Calls = 0; return; }
+            }
+            Assert.Fail("No deterministic losing fixture found.");
         }
         [Test] public void RapidSpinIntentAcceptsAndAnimatesExactlyOnce()
         {

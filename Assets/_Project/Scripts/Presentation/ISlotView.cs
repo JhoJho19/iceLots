@@ -6,6 +6,8 @@ namespace IceP.Presentation
     public interface ISlotView
     {
         event Action SpinRequested;
+        event Action AutoRequested;
+        event Action Suspended;
         event Action<int> BetStepRequested;
         event Action BackRequested;
         event Action RetryRequested;

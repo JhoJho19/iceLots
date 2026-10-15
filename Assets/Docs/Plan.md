@@ -186,7 +186,17 @@ The main architectural requirement is a pure C# Domain, Application for transact
 
 **Stage 4.13 verification on 2026-10-13:** items 1, 2, and 4–8 were verified in the original Unity project; 496 EditMode and 47 PlayMode tests passed, a Windows x64 build was produced, and five resolutions were checked visually. For item 3, separate processes using production services and JsonSaveRepository were actually forcefully terminated; terminating the graphical Unity Player directly during animation has not yet been verified. Full completion of item 3 or the entire stage is not claimed. Details and limitations: [Documentation.md](Documentation.md#verification-and-current-status).
 
-### 4.14. Documentation and Handoff
+### 4.14. Auto Spin
+
+1. Reuse the manually authored `GameScreen/AutoButton`, preserving its sprite and RectTransform.
+2. Coordinate continuous repetition in `SlotPresenter` through the existing StartSpin → five reels → CompleteSpin → confirmed UI flow.
+3. Keep Auto local to Presentation; stop repetition without interrupting accepted spins, on user stop, save errors, insufficient balance, navigation, pause/focus loss, disable, and destruction.
+4. Use the serialized `SlotView.autoSpinDelay` (0.4 seconds, unscaled); block manual Spin and bet controls while Auto is enabled.
+5. Verify Free Spins/retriggers/BonusBet, jackpot, persistence Retry, duplicate events/listeners, actual scene UI, and the full regular test suites.
+
+**Status on 2026-10-14:** implemented; Unity compilation succeeded, EditMode 520 passed (one opt-in simulation skipped), PlayMode 58 passed / 3 failed; all 24 new EditMode and 11 new PlayMode Auto tests passed. Actual Game View Auto ON/OFF was inspected. **Not marked complete** because three existing visual checks fail; details are in [AutoSpinReport.md](AutoSpinReport.md). The referenced `Assets/Docs/TZ.md` is absent from this checkout; this stage follows the supplied Auto Spin request and existing architecture/documentation.
+
+### 4.15. Documentation and Handoff (previously 4.14; not undertaken in this stage)
 
 1. Complete `README.md`: build, startup, controls, SO configuration, formulas, local jackpot limitations, and the bet-loss policy.
 2. Describe `SpinId`/two-phase persistence and the clean layer structure in 10–20 lines.
@@ -215,7 +225,8 @@ Estimates are working hours for one Unity developer **excluding production of fi
 | 4.11. JackpotHUD | 2–3 |
 | 4.12. Tests and mathematical simulation | 5–8 |
 | 4.13. PlayMode and lifecycle QA | 4–6 |
-| 4.14. Documentation and handoff | 2–3 |
+| 4.14. Auto Spin | Added after the original estimate; see AutoSpinReport.md |
+| 4.15. Documentation and handoff | 2–3 |
 | **Total, excluding contingency** | **47–73** |
 | **Integration and bug contingency (≈15–20%)** | **7–15** |
 | **Total with contingency** | **54–88 hours** |
@@ -230,7 +241,7 @@ The minimum engineering vertical slice before UI polish is stages **4.1–4.8**,
 | M2: reliable session | 4.5–4.6 | The bet is lost on interruption; no duplicate crediting |
 | M3: bonus economics | 4.7–4.8 | Daily Bonus and weekly jackpot through the C# API |
 | M4: two complete screens | 4.9–4.11 | Main menu, slot, animations, persistent JackpotHUD |
-| M5: verification and handoff | 4.12–4.14 | Simulations, tests, README, clean startup |
+| M5: verification and handoff | 4.12–4.15 | Simulations, Auto Spin, tests, README, clean startup |
 
 ## 7. Critical Risks and Mitigations
 

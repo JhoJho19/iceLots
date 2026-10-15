@@ -90,6 +90,137 @@ namespace IceP.Tests
             controlled = new SlotPresenter(controlledSession, spins, navigation, boot.RuntimeConfig.Economy.AvailableBets, view);
             return random;
         }
+        [UnityTest] public IEnumerator AutoUsesExactlyOneAuthoredButtonAndStopsAfterCurrentSpin()
+        {
+            yield return Load();
+            Assert.That(view.GetComponentsInChildren<UnityEngine.UI.Button>(true).Count(b => b.name == "AutoButton"), Is.EqualTo(1));
+            Assert.That(view.AutoButton.name, Is.EqualTo("AutoButton"));
+            var sprite = view.AutoButton.image.sprite; var rect = view.AutoButton.GetComponent<RectTransform>();
+            var position = rect.anchoredPosition; var size = rect.sizeDelta; var color = view.AutoButton.image.color;
+            // Repeated initialization must leave exactly one listener.
+            var visual = AssetDatabase.LoadAssetAtPath<SlotVisualConfigSO>("Assets/_Project/Configs/SlotVisualConfigSO.asset");
+            view.Initialize(boot.RuntimeConfig, new SlotVisualSettings(visual.Resolve, visual.SpinDurationSeconds,
+                visual.ReelStopStaggerSeconds, visual.ReelCellsPerSecond, visual.ReelStopEasePower));
+            view.AutoButton.onClick.Invoke(); var spin = boot.SlotPresenter.ActiveSpin;
+            Assert.That(boot.SlotPresenter.IsAutoSpinEnabled, Is.True);
+            Assert.That(view.AnimationCoordinator.IsRunning, Is.True);
+            Assert.That(view.AutoButton.interactable, Is.True);
+            Assert.That(view.SpinButton.interactable || view.BetUpButton.interactable || view.BetDownButton.interactable, Is.False);
+            Assert.That(view.AutoButton.image.color, Is.Not.EqualTo(color));
+            view.SpinButton.onClick.Invoke(); view.BackButton.onClick.Invoke();
+            Assert.That(boot.Navigation.CurrentScreen, Is.EqualTo(GameScreen.Slot));
+            Assert.That(boot.SlotPresenter.ActiveSpin, Is.SameAs(spin));
+            view.AutoButton.onClick.Invoke(); Assert.That(boot.SlotPresenter.IsAutoSpinEnabled, Is.False);
+            yield return Finish(boot.Session); yield return new WaitForSecondsRealtime(.55f);
+            Assert.That(boot.Session.Snapshot.LastSettledSpinId, Is.EqualTo(spin.SpinId));
+            Assert.That(boot.Session.Snapshot.Balance, Is.EqualTo(19800 + spin.PotentialPayout));
+            for (int i = 0; i < 5; i++) Assert.That(view.AnimationCoordinator.Reels[i].StopPosition, Is.EqualTo(spin.Evaluation.Outcome.Stops[i].Position));
+            Assert.That(view.SpinButton.interactable, Is.True); Assert.That(view.AutoButton.image.color, Is.EqualTo(color));
+            Assert.That(view.AutoButton.image.sprite, Is.SameAs(sprite)); Assert.That(rect.anchoredPosition, Is.EqualTo(position));
+            Assert.That(rect.sizeDelta, Is.EqualTo(size));
+        }
+        [UnityTest] public IEnumerator AutoActualBootstrapTickRepeatsAfterSettlementAndConfiguredDelay()
+        {
+            yield return Load(); view.AutoButton.onClick.Invoke(); var first = boot.SlotPresenter.ActiveSpin;
+            yield return Finish(boot.Session);
+            Assert.That(boot.Session.Snapshot.LastSettledSpinId, Is.EqualTo(first.SpinId));
+            Assert.That(boot.SlotPresenter.ActiveSpin, Is.Null);
+            yield return new WaitForSecondsRealtime(view.AutoSpinDelay * .5f);
+            Assert.That(boot.SlotPresenter.ActiveSpin, Is.Null);
+            float deadline = Time.realtimeSinceStartup + 2;
+            while (boot.SlotPresenter.ActiveSpin == null && Time.realtimeSinceStartup < deadline) yield return null;
+            Assert.That(boot.SlotPresenter.ActiveSpin, Is.Not.Null);
+            Assert.That(boot.SlotPresenter.ActiveSpin.SpinId, Is.Not.EqualTo(first.SpinId));
+            view.AutoButton.onClick.Invoke(); yield return Finish(boot.Session);
+        }
+        [UnityTest] public IEnumerator AutoDeterministicReelsSettleBeforeDelayAndFreeQueueRetriggers()
+        {
+            yield return Load(); var positions = new int[5];
+            for (int r = 0; r < 5; r++) positions[r] = Enumerable.Range(0, 30).First(i => boot.RuntimeConfig.ReelStrips[r].Symbols[i] == SymbolId.SCATTER);
+            var rng = Control(positions, 2); view.AutoButton.onClick.Invoke(); var spin = controlled.ActiveSpin;
+            Assert.That(spin.EffectiveBet, Is.EqualTo(600)); Assert.That(controlledSession.Snapshot.Balance, Is.EqualTo(20000));
+            controlled.Tick(100); Assert.That(rng.Calls, Is.EqualTo(5));
+            yield return Finish(controlledSession);
+            Assert.That(controlledSave.Data.PendingSpin, Is.Null); Assert.That(controlledSave.Data.FreeSpinsRemaining, Is.EqualTo(21));
+            for (int r = 0; r < 5; r++) Assert.That(view.AnimationCoordinator.Reels[r].StopPosition, Is.EqualTo(positions[r]));
+            controlled.Tick(.39f); Assert.That(rng.Calls, Is.EqualTo(5));
+            controlled.Tick(.02f); Assert.That(rng.Calls, Is.EqualTo(10));
+            Assert.That(controlled.ActiveSpin.EffectiveBet, Is.EqualTo(600));
+            view.AutoButton.onClick.Invoke(); yield return Finish(controlledSession); controlled.Tick(100);
+            Assert.That(controlledSession.Snapshot.FreeSpinsRemaining, Is.EqualTo(40)); Assert.That(rng.Calls, Is.EqualTo(10));
+        }
+        [UnityTest] public IEnumerator AutoPersistenceFailureStopsAndSettlementRetryDoesNotRepeat()
+        {
+            yield return Load(); var rng = Control(new[] { 29, 29, 29, 29, 29 });
+            view.AutoButton.onClick.Invoke(); var spin = controlled.ActiveSpin; controlledSave.Fail = true;
+            yield return Finish(controlledSession); controlled.Tick(100);
+            Assert.That(controlled.IsAutoSpinEnabled, Is.False); Assert.That(controlledSession.State, Is.EqualTo(GameSessionState.Error));
+            Assert.That(controlledSession.Snapshot.LastWin, Is.Zero); Assert.That(view.RetryButton.interactable, Is.True);
+            controlledSave.Fail = false; view.RetryButton.onClick.Invoke(); controlled.Tick(100);
+            Assert.That(controlledSession.Snapshot.LastSettledSpinId, Is.EqualTo(spin.SpinId)); Assert.That(rng.Calls, Is.EqualTo(5));
+            Assert.That(controlled.IsAutoSpinEnabled, Is.False);
+        }
+        [UnityTest] public IEnumerator AutoFreeQueueEndsAndNextPaidSpinUsesSelectedBet()
+        {
+            yield return Load(); Control(new[] { 29, 29, 29, 29, 29 }, 1, 600);
+            view.AutoButton.onClick.Invoke(); var free = controlled.ActiveSpin;
+            Assert.That(free.Type, Is.EqualTo(PendingSpinType.Free)); Assert.That(free.EffectiveBet, Is.EqualTo(600));
+            yield return Finish(controlledSession); Assert.That(controlledSession.Snapshot.FreeSpinsRemaining, Is.Zero);
+            long balance = controlledSession.Snapshot.Balance; controlled.Tick(.4f);
+            Assert.That(controlled.ActiveSpin.Type, Is.EqualTo(PendingSpinType.Paid));
+            Assert.That(controlled.ActiveSpin.EffectiveBet, Is.EqualTo(200));
+            Assert.That(controlledSession.Snapshot.Balance, Is.EqualTo(balance - 200));
+            view.AutoButton.onClick.Invoke(); yield return Finish(controlledSession);
+        }
+        [UnityTest] public IEnumerator AutoAcceptanceFailureNeverAnimatesAndRetryStaysManual()
+        {
+            yield return Load(); var rng = Control(new[] { 29, 29, 29, 29, 29 }); controlledSave.Fail = true;
+            view.AutoButton.onClick.Invoke(); Assert.That(controlled.IsAutoSpinEnabled, Is.False);
+            Assert.That(view.AnimationCoordinator.IsRunning, Is.False); Assert.That(rng.Calls, Is.Zero);
+            controlledSave.Fail = false; view.RetryButton.onClick.Invoke(); yield return Finish(controlledSession);
+            controlled.Tick(100); Assert.That(rng.Calls, Is.EqualTo(5));
+        }
+        [UnityTest] public IEnumerator AutoPauseAndFocusLossStopWithoutCancellingAcceptedSpin()
+        {
+            yield return Load();
+            foreach (string callback in new[] { "OnApplicationPause", "OnApplicationFocus" })
+            {
+                view.AutoButton.onClick.Invoke(); var spin = boot.SlotPresenter.ActiveSpin;
+                boot.SendMessage(callback, callback == "OnApplicationPause");
+                Assert.That(boot.SlotPresenter.IsAutoSpinEnabled, Is.False); Assert.That(view.AnimationCoordinator.IsRunning, Is.True);
+                boot.SendMessage(callback, callback != "OnApplicationPause");
+                yield return Finish(boot.Session); yield return new WaitForSecondsRealtime(.5f);
+                Assert.That(boot.Session.Snapshot.LastSettledSpinId, Is.EqualTo(spin.SpinId));
+                Assert.That(boot.SlotPresenter.ActiveSpin, Is.Null);
+            }
+        }
+        [UnityTest] public IEnumerator AutoMenuDuringDelayCancelsLoopAndReloadStartsDisabled()
+        {
+            yield return Load(); Control(new[] { 29, 29, 29, 29, 29 });
+            view.AutoButton.onClick.Invoke(); yield return Finish(controlledSession);
+            view.BackButton.onClick.Invoke(); controlled.Tick(100); Assert.That(controlled.IsAutoSpinEnabled, Is.False);
+            yield return Load(); Assert.That(boot.SlotPresenter.IsAutoSpinEnabled, Is.False);
+            yield return new WaitForSecondsRealtime(.5f); Assert.That(boot.Session.Snapshot.PendingSpin, Is.Null);
+        }
+        [UnityTest] public IEnumerator AutoViewDisableOrDestroyCannotLeaveDelayedStarts()
+        {
+            yield return Load(); Control(new[] { 29, 29, 29, 29, 29 }); view.AutoButton.onClick.Invoke();
+            yield return Finish(controlledSession); view.gameObject.SetActive(false); controlled.Tick(100);
+            Assert.That(controlled.IsAutoSpinEnabled, Is.False); Assert.That(controlledSave.Writes, Is.EqualTo(2));
+            view.gameObject.SetActive(true); view.AutoButton.onClick.Invoke(); yield return Finish(controlledSession);
+            Object.Destroy(view.gameObject); yield return null; controlled.Tick(100);
+            Assert.That(controlled.IsAutoSpinEnabled, Is.False); Assert.That(controlledSave.Writes, Is.EqualTo(4));
+        }
+        [UnityTest] public IEnumerator AutoInsufficientBalanceRejectsWithoutChangingSelectedBet()
+        {
+            var config = new LocalSlotConfigProvider(AssetDatabase.LoadAssetAtPath<SlotGameConfigSO>("Assets/_Project/Configs/SlotGameConfigSO.asset")).Load();
+            var profile = InitialProfileFactory.Create(config); profile.Balance = 0; profile.SelectedBet = 1000;
+            Assert.That(new JsonSaveRepository(directory, config).Save(profile).Success, Is.True);
+            yield return Load(); Assert.That(view.AutoButton.interactable, Is.False);
+            view.AutoButton.onClick.Invoke(); yield return new WaitForSecondsRealtime(.5f);
+            Assert.That(boot.SlotPresenter.IsAutoSpinEnabled, Is.False); Assert.That(boot.Session.Snapshot.Balance, Is.Zero);
+            Assert.That(boot.Session.Snapshot.SelectedBet, Is.EqualTo(1000)); Assert.That(view.AnimationCoordinator.IsRunning, Is.False);
+        }
         [UnityTest] public IEnumerator PlayOpensExistingScreenAndAllEightMappingsRender()
         {
             yield return Load(false); var handle = SceneManager.GetActiveScene().handle;

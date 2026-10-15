@@ -14,13 +14,18 @@ namespace IceP.Presentation
         public bool CanSelectBet { get; }
         public bool CanBack { get; }
         public bool CanRetry { get; }
-        public SlotDisplay(GameSession session, GameNavigationService navigation, bool retry)
+        public bool IsAutoSpinEnabled { get; }
+        public bool CanAutoSpin { get; }
+        public SlotDisplay(GameSession session, GameNavigationService navigation, bool retry, bool autoSpin = false)
         {
             var state = session.Snapshot;
             Balance = state.Balance; LastWin = state.LastWin; FreeSpins = state.FreeSpinsRemaining;
             EffectiveBet = state.PendingSpin?.EffectiveBet ?? (FreeSpins > 0 ? state.BonusBet : state.SelectedBet);
             CanSpin = session.CanStartSpin && (FreeSpins > 0 || Balance >= state.SelectedBet);
-            CanSelectBet = session.CanSelectBet; CanBack = navigation.CanNavigateBack;
+            IsAutoSpinEnabled = autoSpin;
+            CanAutoSpin = autoSpin || (navigation.CurrentScreen == GameScreen.Slot && CanSpin);
+            CanSpin &= !autoSpin;
+            CanSelectBet = session.CanSelectBet && !autoSpin; CanBack = navigation.CanNavigateBack;
             CanRetry = retry && session.State == GameSessionState.Error;
         }
     }

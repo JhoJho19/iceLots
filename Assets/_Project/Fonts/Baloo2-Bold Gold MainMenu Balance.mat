@@ -87,8 +87,8 @@ Material:
     - _ShineSpeed: 0.22
     - _ShineWidth: 0.1
     - _SparkleIntensity: 0.8
-    - _SparkleOffsetX: -0.12
-    - _SparkleOffsetY: -0.08
+    - _SparkleOffsetX: 0.18
+    - _SparkleOffsetY: 0.08
     - _SparklePulseSpeed: 0.55
     - _SparkleSize: 0.32
     - _SpecularPower: 2
@@ -112,8 +112,8 @@ Material:
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
-    - _GoldColorA: {r: 1, g: 0.86, b: 0.37999994, a: 1}
-    - _GoldColorB: {r: 0.72, g: 0.33999997, b: 0.054999977, a: 1}
+    - _GoldColorA: {r: 1, g: 0.86, b: 0.3799999, a: 1}
+    - _GoldColorB: {r: 0.72, g: 0.33999994, b: 0.054999955, a: 1}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 0.16, g: 0.065, b: 0.015, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
@@ -121,7 +121,7 @@ Material:
     - _ShineColor: {r: 1, g: 0.97999996, b: 0.8, a: 1}
     - _SparkleColor: {r: 1, g: 0.94, b: 0.65, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TextBounds: {r: 0, g: 0, b: 200, a: 50}
+    - _TextBounds: {r: -54.56767, g: -9.882917, b: 110.09375, a: 21.328125}
     - _UnderlayColor: {r: 0.05, g: 0.035, b: 0.01, a: 0.65}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

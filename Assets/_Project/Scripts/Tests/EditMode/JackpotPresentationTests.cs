@@ -40,6 +40,8 @@ namespace IceP.Tests
         }
         private sealed class SlotFake : ISlotView
         {
+            public event Action AutoRequested { add { } remove { } }
+            public event Action Suspended { add { } remove { } }
             public event Action SpinRequested;
             public event Action<int> BetStepRequested { add { } remove { } }
             public event Action BackRequested { add { } remove { } }
@@ -108,6 +110,15 @@ namespace IceP.Tests
             view.Start(); var spin = view.Spin; view.Finish();
             presenter.OnSettlement(spin, spins.CompleteSpin(spin.SpinId));
             Assert.That(hud.Celebrations, Is.EqualTo(1)); Assert.That(hud.Display.Status, Is.EqualTo("WON THIS WEEK")); Assert.That(hud.Display.Amount, Is.EqualTo("100,000 COINS"));
+        }
+        [Test] public void AutoJackpotConfirmsOnceAndContinuesWithoutExtraDraws()
+        {
+            slot.ToggleAutoSpin(); Assert.That(view.Spin.Jackpot.JackpotWon, Is.True);
+            int draws = bits.Calls; Assert.That(hud.Celebrations, Is.Zero);
+            view.Finish(); Assert.That(hud.Celebrations, Is.EqualTo(1));
+            Assert.That(slot.IsAutoSpinEnabled, Is.True); slot.Tick(.4f);
+            Assert.That(view.Spin.Jackpot.JackpotWon, Is.False); Assert.That(bits.Calls, Is.EqualTo(draws));
+            view.Finish(); Assert.That(hud.Celebrations, Is.EqualTo(1)); Assert.That(slot.IsAutoSpinEnabled, Is.True);
         }
         [Test] public void AcceptanceIsNotSettlementConfirmation()
         { var start = spins.StartSpin(); presenter.OnSettlement(start.Spin, start); Assert.That(hud.Celebrations, Is.Zero); }

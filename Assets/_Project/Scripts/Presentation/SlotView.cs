@@ -11,6 +11,11 @@ namespace IceP.Presentation
     public sealed class SlotView : MonoBehaviour, ISlotView
     {
         [SerializeField] private Button spinButton, betDownButton, betUpButton, backButton, retryButton;
+        [SerializeField] private Button autoButton;
+        [SerializeField, Min(0)] private float autoSpinDelay = .4f;
+        private Color autoNormalColor;
+        public Button AutoButton => autoButton;
+        public float AutoSpinDelay => autoSpinDelay;
         [SerializeField] private TMP_Text balanceLabel, betLabel, winLabel, freeSpinsLabel;
         private string message = string.Empty;
         [SerializeField] private ReelAnimationCoordinator animationCoordinator;
@@ -30,9 +35,11 @@ namespace IceP.Presentation
         public string WinText => winLabel.text;
         public string FreeSpinsText => freeSpinsLabel.text;
         public string Message => message;
-        public bool HasRequiredReferences => spinButton && betDownButton && betUpButton && backButton && retryButton &&
+        public bool HasRequiredReferences => autoButton && spinButton && betDownButton && betUpButton && backButton && retryButton &&
             balanceLabel && betLabel && winLabel && freeSpinsLabel && animationCoordinator && paylines;
         public event Action SpinRequested;
+        public event Action AutoRequested;
+        public event Action Suspended;
         public event Action<int> BetStepRequested;
         public event Action BackRequested;
         public event Action RetryRequested;
@@ -43,11 +50,14 @@ namespace IceP.Presentation
             animationCoordinator.Initialize(config, settings); paylines.Initialize(animationCoordinator.Reels);
             if (initialized) return;
             initialized = true;
+            autoNormalColor = autoButton.image.color;
+            autoButton.onClick.AddListener(Auto);
             spinButton.onClick.AddListener(Spin); betDownButton.onClick.AddListener(Down); betUpButton.onClick.AddListener(Up);
             backButton.onClick.AddListener(Back); retryButton.onClick.AddListener(Retry);
             animationCoordinator.Finished += Finished;
         }
         private void Spin() => SpinRequested?.Invoke();
+        private void Auto() => AutoRequested?.Invoke();
         private void Down() => BetStepRequested?.Invoke(-1);
         private void Up() => BetStepRequested?.Invoke(1);
         private void Back() => BackRequested?.Invoke();
@@ -60,6 +70,8 @@ namespace IceP.Presentation
             if (previous == null || previous.LastWin != display.LastWin) winLabel.text = $"Last win: {display.LastWin:N0}";
             if (previous == null || previous.FreeSpins != display.FreeSpins) freeSpinsLabel.text = $"Free Spins: {display.FreeSpins}";
             spinButton.interactable = display.CanSpin; betDownButton.interactable = betUpButton.interactable = display.CanSelectBet;
+            autoButton.interactable = display.CanAutoSpin;
+            autoButton.image.color = display.IsAutoSpinEnabled ? autoNormalColor * new Color(.7f, 1f, .8f, 1f) : autoNormalColor;
             backButton.interactable = display.CanBack; retryButton.gameObject.SetActive(display.CanRetry); retryButton.interactable = display.CanRetry;
             previous = display;
         }
@@ -72,10 +84,11 @@ namespace IceP.Presentation
             if (spin.PotentialPayout > 0) onConfirmedWin.Invoke();
         }
         public void CancelAnimation() { if (animationCoordinator) animationCoordinator.Cancel(); }
-        private void OnDisable() => CancelAnimation();
+        private void OnDisable() { Suspended?.Invoke(); CancelAnimation(); }
         private void OnDestroy()
         {
             Destroyed?.Invoke();
+            if (autoButton) autoButton.onClick.RemoveListener(Auto);
             if (animationCoordinator) animationCoordinator.Finished -= Finished;
             if (spinButton) spinButton.onClick.RemoveListener(Spin);
             if (betDownButton) betDownButton.onClick.RemoveListener(Down);

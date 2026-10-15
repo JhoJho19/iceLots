@@ -113,6 +113,17 @@ namespace IceP.Tests
             yield return Finish(); Assert.That(bits.Calls, Is.EqualTo(draws)); Assert.That(hud.CelebrationCount, Is.EqualTo(1));
             yield return new WaitForSecondsRealtime(2.1f); Assert.That(hud.IsCelebrating, Is.False); Assert.That(hud.gameObject.activeInHierarchy, Is.True);
         }
+        [UnityTest] public IEnumerator AutoConfirmedJackpotCelebratesOnceAndContinuesSameFlow()
+        {
+            yield return Load(); Control(); slotView.AutoButton.onClick.Invoke(); var first = slot.ActiveSpin;
+            Assert.That(first.Jackpot.JackpotWon, Is.True); Assert.That(hud.CelebrationCount, Is.Zero);
+            yield return Finish(); Assert.That(hud.CelebrationCount, Is.EqualTo(1));
+            Assert.That(hud.StatusText, Is.EqualTo("WON THIS WEEK")); Assert.That(slot.IsAutoSpinEnabled, Is.True);
+            int draws = bits.Calls; slot.Tick(.4f);
+            Assert.That(slot.ActiveSpin.Jackpot.Participated, Is.False); Assert.That(bits.Calls, Is.EqualTo(draws));
+            slotView.AutoButton.onClick.Invoke(); yield return Finish();
+            Assert.That(hud.CelebrationCount, Is.EqualTo(1)); Assert.That(hud.gameObject.activeInHierarchy, Is.True);
+        }
         [UnityTest] public IEnumerator FailedSettlementRetainsConfirmedStateUntilRetry()
         {
             yield return Load(); Control(); slotView.SpinButton.onClick.Invoke(); var spin = slot.ActiveSpin; var draws = bits.Calls;

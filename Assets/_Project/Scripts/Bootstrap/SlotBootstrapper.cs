@@ -104,7 +104,7 @@ namespace IceP.Bootstrap
             Navigation = new GameNavigationService(Session);
             slotView.Initialize(RuntimeConfig, new SlotVisualSettings(visualConfig.Resolve, visualConfig.SpinDurationSeconds,
                 visualConfig.ReelStopStaggerSeconds, visualConfig.ReelCellsPerSecond, visualConfig.ReelStopEasePower));
-            slotPresenter = new SlotPresenter(Session, Spins, Navigation, RuntimeConfig.Economy.AvailableBets, slotView);
+            slotPresenter = new SlotPresenter(Session, Spins, Navigation, RuntimeConfig.Economy.AvailableBets, slotView, slotView.AutoSpinDelay);
             jackpotPresenter = new JackpotPresenter(WeeklyJackpot, Clock, jackpotView, slotPresenter, Navigation);
             presenter = new GameNavigationPresenter(Navigation, navigationView, false);
             menuPresenter = new MainMenuPresenter(Session, Navigation, navigationView, DailyBonus, Settings);
@@ -124,15 +124,16 @@ namespace IceP.Bootstrap
         private void Update()
         {
             presenter?.RefreshAvailability();
+            slotPresenter?.Tick(Time.unscaledDeltaTime);
             menuPresenter?.Tick(Time.unscaledDeltaTime);
             jackpotPresenter?.Tick(Time.unscaledDeltaTime);
             slotRefreshElapsed += Time.unscaledDeltaTime;
             if (slotRefreshElapsed >= .15f) { slotRefreshElapsed = 0; slotPresenter?.Refresh(); }
         }
         private void OnApplicationPause(bool paused)
-        { if (paused) menuPresenter?.FlushSettings(); else { menuPresenter?.Refresh(); jackpotPresenter?.Refresh(); } }
+        { if (paused) { slotPresenter?.StopAutoSpin(); menuPresenter?.FlushSettings(); } else { menuPresenter?.Refresh(); jackpotPresenter?.Refresh(); } }
         private void OnApplicationQuit() => menuPresenter?.FlushSettings();
-        private void OnApplicationFocus(bool focused) { if (focused) { menuPresenter?.Refresh(); jackpotPresenter?.Refresh(); } }
+        private void OnApplicationFocus(bool focused) { if (!focused) slotPresenter?.StopAutoSpin(); else { menuPresenter?.Refresh(); jackpotPresenter?.Refresh(); } }
 
         private void FailInitialization(string diagnostic)
         {
