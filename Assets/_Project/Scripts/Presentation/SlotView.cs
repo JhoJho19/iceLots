@@ -68,7 +68,7 @@ namespace IceP.Presentation
             if (previous == null || previous.Balance != display.Balance) balanceLabel.text = $"Coins: {display.Balance:N0}";
             if (previous == null || previous.EffectiveBet != display.EffectiveBet) betLabel.text = $"Bet: {display.EffectiveBet:N0}";
             if (previous == null || previous.LastWin != display.LastWin) winLabel.text = $"Last win: {display.LastWin:N0}";
-            if (previous == null || previous.FreeSpins != display.FreeSpins) freeSpinsLabel.text = $"Free Spins: {display.FreeSpins}";
+            if (previous == null || previous.FreeSpins != display.FreeSpins) freeSpinsLabel.text = display.FreeSpins.ToString();
             spinButton.interactable = display.CanSpin; betDownButton.interactable = betUpButton.interactable = display.CanSelectBet;
             autoButton.interactable = display.CanAutoSpin;
             autoButton.image.color = display.IsAutoSpinEnabled ? autoNormalColor * new Color(.7f, 1f, .8f, 1f) : autoNormalColor;

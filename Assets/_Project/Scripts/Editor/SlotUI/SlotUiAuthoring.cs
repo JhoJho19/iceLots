@@ -68,7 +68,7 @@ namespace IceP.Editor
             var hud = Rect(slot, "SlotHUD", 0, 475, 1350, 150);
             Set(vs, "balanceLabel", Label(hud, "Balance", "Coins: 20,000", -420, 30, 420, 52, 32));
             Set(vs, "winLabel", Label(hud, "LastWin", "Last win: 0", 20, 30, 420, 52, 32));
-            Set(vs, "freeSpinsLabel", Label(hud, "FreeSpins", "Free Spins: 0", 475, 30, 400, 52, 30));
+            Set(vs, "freeSpinsLabel", Label(hud, "FreeSpins", "0", 475, 30, 400, 52, 30));
             var controls = Rect(slot, "SlotControls", 0, -460, 1400, 170);
             Set(vs, "betLabel", Label(controls, "Bet", "Bet: 200", -375, 35, 300, 60, 30));
             Set(vs, "betDownButton", Button(controls, "BetDecrease", "−", -580, 35, 90));
