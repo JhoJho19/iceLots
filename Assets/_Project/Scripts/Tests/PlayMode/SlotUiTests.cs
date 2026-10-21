@@ -106,11 +106,16 @@ namespace IceP.Tests
             Assert.That(view.AnimationCoordinator.IsRunning, Is.True);
             Assert.That(view.AutoButton.interactable, Is.True);
             Assert.That(view.SpinButton.interactable || view.BetUpButton.interactable || view.BetDownButton.interactable, Is.False);
-            Assert.That(view.AutoButton.image.color, Is.Not.EqualTo(color));
+            var activeSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Project/Sprites/AUTO button active sprite.png");
+            Assert.That(activeSprite, Is.Not.Null);
+            Assert.That(view.AutoButton.image.sprite, Is.SameAs(activeSprite));
+            Assert.That(view.AutoButton.image.sprite, Is.Not.SameAs(sprite));
+            Assert.That(view.AutoButton.image.color, Is.EqualTo(color));
             view.SpinButton.onClick.Invoke(); view.BackButton.onClick.Invoke();
             Assert.That(boot.Navigation.CurrentScreen, Is.EqualTo(GameScreen.Slot));
             Assert.That(boot.SlotPresenter.ActiveSpin, Is.SameAs(spin));
             view.AutoButton.onClick.Invoke(); Assert.That(boot.SlotPresenter.IsAutoSpinEnabled, Is.False);
+            Assert.That(view.AutoButton.image.sprite, Is.SameAs(sprite));
             yield return Finish(boot.Session); yield return new WaitForSecondsRealtime(.55f);
             Assert.That(boot.Session.Snapshot.LastSettledSpinId, Is.EqualTo(spin.SpinId));
             Assert.That(boot.Session.Snapshot.Balance, Is.EqualTo(19800 + spin.PotentialPayout));

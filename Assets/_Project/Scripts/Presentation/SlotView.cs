@@ -12,8 +12,9 @@ namespace IceP.Presentation
     {
         [SerializeField] private Button spinButton, betDownButton, betUpButton, backButton, retryButton;
         [SerializeField] private Button autoButton;
+        [SerializeField] private Sprite autoActiveSprite;
         [SerializeField, Min(0)] private float autoSpinDelay = .4f;
-        private Color autoNormalColor;
+        private Sprite autoNormalSprite;
         public Button AutoButton => autoButton;
         public float AutoSpinDelay => autoSpinDelay;
         [SerializeField] private TMP_Text balanceLabel, betLabel, winLabel, freeSpinsLabel;
@@ -35,7 +36,7 @@ namespace IceP.Presentation
         public string WinText => winLabel.text;
         public string FreeSpinsText => freeSpinsLabel.text;
         public string Message => message;
-        public bool HasRequiredReferences => autoButton && spinButton && betDownButton && betUpButton && backButton && retryButton &&
+        public bool HasRequiredReferences => autoButton && autoActiveSprite && spinButton && betDownButton && betUpButton && backButton && retryButton &&
             balanceLabel && betLabel && winLabel && freeSpinsLabel && animationCoordinator && paylines;
         public event Action SpinRequested;
         public event Action AutoRequested;
@@ -50,7 +51,7 @@ namespace IceP.Presentation
             animationCoordinator.Initialize(config, settings); paylines.Initialize(animationCoordinator.Reels);
             if (initialized) return;
             initialized = true;
-            autoNormalColor = autoButton.image.color;
+            autoNormalSprite = autoButton.image.sprite;
             autoButton.onClick.AddListener(Auto);
             spinButton.onClick.AddListener(Spin); betDownButton.onClick.AddListener(Down); betUpButton.onClick.AddListener(Up);
             backButton.onClick.AddListener(Back); retryButton.onClick.AddListener(Retry);
@@ -71,7 +72,7 @@ namespace IceP.Presentation
             if (previous == null || previous.FreeSpins != display.FreeSpins) freeSpinsLabel.text = display.FreeSpins.ToString();
             spinButton.interactable = display.CanSpin; betDownButton.interactable = betUpButton.interactable = display.CanSelectBet;
             autoButton.interactable = display.CanAutoSpin;
-            autoButton.image.color = display.IsAutoSpinEnabled ? autoNormalColor * new Color(.7f, 1f, .8f, 1f) : autoNormalColor;
+            autoButton.image.sprite = display.IsAutoSpinEnabled ? autoActiveSprite : autoNormalSprite;
             backButton.interactable = display.CanBack; retryButton.gameObject.SetActive(display.CanRetry); retryButton.interactable = display.CanRetry;
             previous = display;
         }

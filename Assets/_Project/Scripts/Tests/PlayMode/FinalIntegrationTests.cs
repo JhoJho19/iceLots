@@ -106,7 +106,6 @@ namespace IceP.Tests
         {
             yield return Load(); var session = boot.Session; var scene = slot.gameObject.scene.handle;
             yield return Click(nav.SettingsButton);
-            nav.SettingsView.MusicEnabled.isOn = false; nav.SettingsView.SoundEnabled.isOn = false;
             nav.SettingsView.MusicVolume.value = .35f; nav.SettingsView.SoundVolume.value = .65f;
             yield return Click(nav.CloseSettingsButton); yield return Click(nav.DailyBonusButton);
             Assert.That(boot.LoadedProfile.Balance, Is.EqualTo(20000));
@@ -135,7 +134,7 @@ namespace IceP.Tests
             Assert.That(boot.LoadedProfile.DailyLastClaimUtc, Is.EqualTo(saved.DailyLastClaimUtc));
             Assert.That(boot.Settings.Current.MusicVolume, Is.EqualTo(.35).Within(.0001));
             Assert.That(boot.Settings.Current.SoundVolume, Is.EqualTo(.65).Within(.0001));
-            Assert.That(boot.Settings.Current.MusicEnabled || boot.Settings.Current.SoundEnabled, Is.False);
+            Assert.That(boot.Settings.Current.MusicEnabled && boot.Settings.Current.SoundEnabled, Is.True);
             Assert.That(boot.Spins.CompleteSpin(spin.SpinId).AlreadySettled, Is.True);
             LogAssert.NoUnexpectedReceived();
         }

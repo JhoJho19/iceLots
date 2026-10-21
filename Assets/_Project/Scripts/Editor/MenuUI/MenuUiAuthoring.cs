@@ -37,22 +37,22 @@ namespace IceP.Editor
             MoveButton(nav.CloseDailyBonusButton, dailyPanel, -310);
             var sv = settings.AddComponent<SettingsView>();
             var so = new SerializedObject(sv);
-            Set(so, "musicEnabled", Toggle(settingsPanel, "Music", 155));
+            Label(settingsPanel, "Music", "Music", -85, 155, 380, 50, 28);
             Set(so, "musicVolume", Slider(settingsPanel, "MusicVolume", 85));
             Set(so, "musicPercent", Label(settingsPanel, "MusicPercent", "100%", 270, 85, 100, 40, 24));
-            Set(so, "soundEnabled", Toggle(settingsPanel, "Sound Effects", -5));
+            Label(settingsPanel, "Sound Effects", "Sound Effects", -85, -5, 380, 50, 28);
             Set(so, "soundVolume", Slider(settingsPanel, "EffectsVolume", -75));
             Set(so, "soundPercent", Label(settingsPanel, "EffectsPercent", "100%", 270, -75, 100, 40, 24));
             var settingsMessage = settingsPanel.GetComponentsInChildren<TMP_Text>().Single(x => x.name == "Placeholder");
             settingsMessage.text = ""; settingsMessage.fontSize = 22;
             Set(so, "message", settingsMessage);
-            var settingsRetry = Button(settingsPanel, "RetrySettings", "Retry save", 190, -265, 240);
             ((RectTransform)nav.CloseSettingsButton.transform).anchoredPosition = new Vector2(-160, -265);
-            Set(so, "retryButton", settingsRetry); so.ApplyModifiedPropertiesWithoutUndo();
-            settingsRetry.gameObject.SetActive(false);
+            so.ApplyModifiedPropertiesWithoutUndo();
 
             var dv = daily.AddComponent<DailyBonusView>();
             var ds = new SerializedObject(dv);
+            Set(ds, "rewardDefaultSprite", AssetDatabase.LoadAllAssetsAtPath("Assets/_Project/Sprites/UiAtlas.png").OfType<Sprite>().Single(x => x.name == "Button_Hex_Blue"));
+            Set(ds, "rewardClaimedSprite", AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Project/Sprites/Reward day claimed sprite.png"));
             var labels = ds.FindProperty("rewardLabels"); var panels = ds.FindProperty("rewardPanels");
             labels.arraySize = panels.arraySize = 7;
             for (int i = 0; i < 7; i++)
@@ -109,15 +109,6 @@ namespace IceP.Editor
             var image = Image(parent, name, x, y, w, 58, buttonColor); image.sprite = buttonSprite; image.type = UnityEngine.UI.Image.Type.Sliced;
             var button = image.gameObject.AddComponent<Button>(); button.targetGraphic = image;
             Label(image.transform, "Label", text, 0, 0, w - 16, 50, 25); return button;
-        }
-        private static Toggle Toggle(Transform parent, string name, float y)
-        {
-            var row = Rect(parent, name, 0, y, 620, 55);
-            var toggle = row.gameObject.AddComponent<Toggle>();
-            var box = Image(row, "Switch", 240, 0, 48, 48, new Color(.4f, .3f, .5f));
-            var check = Image(box.transform, "Enabled", 0, 0, 28, 28, new Color(1, .8f, .25f));
-            toggle.targetGraphic = box; toggle.graphic = check;
-            Label(row, "Label", name, -85, 0, 380, 50, 28); return toggle;
         }
         private static Slider Slider(Transform parent, string name, float y)
         {
