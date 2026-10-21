@@ -3707,7 +3707,7 @@ MonoBehaviour:
   moduleMovementFoldout: 0
   moduleEventsFoldout: 0
   moduleAdvancedFoldout: 0
-  m_Sprite: {fileID: 21300000, guid: 62caf8fa8077346f98e18477f3872a95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eadbe73f5cef128448f4657fd1e7bbed, type: 3}
   m_Texture: {fileID: 0}
 --- !u!222 &372040515
 CanvasRenderer:
@@ -15479,7 +15479,7 @@ MonoBehaviour:
   moduleMovementFoldout: 1
   moduleEventsFoldout: 0
   moduleAdvancedFoldout: 0
-  m_Sprite: {fileID: 21300000, guid: 62caf8fa8077346f98e18477f3872a95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eadbe73f5cef128448f4657fd1e7bbed, type: 3}
   m_Texture: {fileID: 0}
 --- !u!222 &1987478384
 CanvasRenderer:
