@@ -334,8 +334,6 @@ namespace IceP.Tests
                 case "frame": visual.SlotFrame = null; break;
                 case "duration": visual.SpinDurationSeconds = float.NaN; break;
                 case "stagger": visual.ReelStopStaggerSeconds = -1; break;
-                case "effect": visual.EnableWinEffect = true; visual.WinEffectPrefab = null; break;
-                case "audio": visual.EnableSpinAudio = true; visual.SpinAudio = null; break;
             }
             var errors = VisualConfigValidator.Validate(visual, new LocalSlotConfigProvider(game).Load());
             Assert.That(errors.Any(e => e.Contains(field)), Is.True, string.Join("\n", errors));

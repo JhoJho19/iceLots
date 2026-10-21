@@ -21,14 +21,15 @@ namespace IceP.Application
         public DateTimeOffset? NextResetUtc { get; }
         public DateTimeOffset? StartUtc { get; }
         public DateTimeOffset? EndUtc { get; }
-        internal JackpotStatus(JackpotRulesConfig rules, DateTimeOffset week, int wins, bool active, bool eligible)
+        internal JackpotStatus(JackpotRulesConfig rules, DateTimeOffset week, int wins, bool active, bool eligible,
+            bool ignoreWeeklyLimit = false)
         {
             EventId = rules.EventId; Enabled = rules.Enabled; JackpotAmount = rules.Amount;
             CurrentWeekId = week; WinsThisWeek = wins; MaxWinsPerWeek = rules.MaxWinsPerWeek;
             IsEligible = eligible; StartUtc = rules.StartUtc; EndUtc = rules.EndUtc;
             NextResetUtc = week.UtcTicks <= DateTime.MaxValue.Ticks - TimeSpan.TicksPerDay * 7 ?
                 week.AddDays(7) : (DateTimeOffset?)null;
-            State = !active ? JackpotState.Inactive : wins >= rules.MaxWinsPerWeek ?
+            State = !active ? JackpotState.Inactive : !ignoreWeeklyLimit && wins >= rules.MaxWinsPerWeek ?
                 JackpotState.WonThisWeek : JackpotState.Active;
         }
     }
@@ -41,10 +42,13 @@ namespace IceP.Application
         public DateTimeOffset? WeekId { get; }
         public bool JackpotWon { get; }
         public long JackpotAmount { get; }
-        internal JackpotSpinResult(JackpotRulesConfig rules, DateTimeOffset? week, bool participated, bool won)
+        internal bool IsDebug { get; }
+        internal JackpotSpinResult(JackpotRulesConfig rules, DateTimeOffset? week, bool participated, bool won,
+            bool isDebug = false)
         {
             EventId = rules.EventId; ConfigVersion = rules.ConfigVersion; WeekId = week;
             Participated = participated; JackpotWon = won; JackpotAmount = won ? rules.Amount : 0;
+            IsDebug = isDebug;
         }
     }
 
@@ -57,6 +61,23 @@ namespace IceP.Application
         private readonly IClock clock;
         private readonly IRandomSource random;
         private readonly JackpotRules probability;
+        private bool debugJackpotEvery10Spins;
+        private int debugPaidSpins;
+
+        // Runtime-only test mode. Changing it starts a fresh ten-spin sequence.
+        public bool DebugJackpotEvery10Spins
+        {
+            get { lock (session.Gate) return debugJackpotEvery10Spins; }
+            set
+            {
+                lock (session.Gate)
+                {
+                    if (debugJackpotEvery10Spins == value) return;
+                    debugJackpotEvery10Spins = value;
+                    debugPaidSpins = 0;
+                }
+            }
+        }
 
         public WeeklyJackpotService(GameSession session, SlotRuntimeConfig config, IClock clock, IRandomSource random)
         {
@@ -85,7 +106,9 @@ namespace IceP.Application
                 int wins = WinsAt(state, week);
                 bool active = IsActive(now);
                 return new JackpotStatus(config.Jackpot, week, wins, active,
-                    active && wins < config.Jackpot.MaxWinsPerWeek && !IsEarlierWeek(state, week));
+                    active && (debugJackpotEvery10Spins ||
+                        (wins < config.Jackpot.MaxWinsPerWeek && !IsEarlierWeek(state, week))),
+                    debugJackpotEvery10Spins);
             }
         }
 
@@ -121,6 +144,20 @@ namespace IceP.Application
         internal JackpotSpinResult Draw(PendingSpin pending, SaveData confirmed)
         {
             var week = pending.JackpotWeekId;
+            if (debugJackpotEvery10Spins)
+            {
+                bool paid = pending.Type == PendingSpinType.Paid && week.HasValue &&
+                    confirmed.PendingSpin?.SpinId == pending.SpinId &&
+                    config.Economy.AvailableBets.Contains(pending.EffectiveBet);
+                bool debugWon = false;
+                if (paid)
+                {
+                    debugPaidSpins = (debugPaidSpins + 1) % 10;
+                    debugWon = debugPaidSpins == 0 && IsActive(pending.AcceptedUtc);
+                }
+                return new JackpotSpinResult(config.Jackpot, week,
+                    paid && IsActive(pending.AcceptedUtc), debugWon, isDebug: true);
+            }
             bool eligible = pending.Type == PendingSpinType.Paid && week.HasValue &&
                 confirmed.PendingSpin?.SpinId == pending.SpinId && IsActive(pending.AcceptedUtc) &&
                 config.Economy.AvailableBets.Contains(pending.EffectiveBet) &&
@@ -153,7 +190,9 @@ namespace IceP.Application
 
         internal void ApplyWin(SaveData proposed, JackpotSpinResult result)
         {
-            if (!result.JackpotWon) return;
+            // Test rewards use normal payout settlement but never consume the real weekly allowance.
+            // Capture the mode in the result so toggling during animation cannot change settlement.
+            if (!result.JackpotWon || result.IsDebug) return;
             var week = result.WeekId.Value;
             if (IsEarlierWeek(proposed, week))
                 throw new InvalidOperationException("Cannot overwrite newer jackpot settlement metadata.");

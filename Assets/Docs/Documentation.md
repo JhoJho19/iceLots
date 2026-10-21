@@ -10,7 +10,25 @@ Assembly dependencies: `Application → Domain`; `Infrastructure → Application
 
 At startup, `SlotBootstrapper` validates configuration and UI, loads or creates the profile, creates the shared `GameSession`, recovers an interrupted spin, and connects presenters. Configuration is defined in `Assets/_Project/Configs/SlotGameConfigSO.asset` and `SlotVisualConfigSO.asset`. The profile is stored in `Application.persistentDataPath`; Editor tests can override the directory through `ICEP_TEST_SAVE_DIRECTORY`.
 
-A spin reserves the bet/free spin and saves `PendingSpin`, generates the outcome, plays animation, and then confirms the payout through a successful save. Services share the session command gate; write failures retain the proposed snapshot for an exact retry. An unfinished spin is recovered on the next launch. The jackpot uses a separate RNG and a weekly limit; the daily bonus uses injected UTC clocks. Audio preferences are persisted; audio playback is not implemented yet.
+A spin reserves the bet/free spin and saves `PendingSpin`, generates the outcome, plays animation, and then confirms the payout through a successful save. Services share the session command gate; write failures retain the proposed snapshot for an exact retry. An unfinished spin is recovered on the next launch. The jackpot uses a separate RNG and a weekly limit; the daily bonus uses injected UTC clocks. Audio preferences are persisted and applied to scene-owned audio playback.
+
+## Audio
+
+`SlotBootstrapper` references `Assets/_Project/Configs/AudioConfigSO.asset` and creates a child `Game Audio` object with `GameAudioController` at startup. Its six 2D AudioSources separate music, reel loop, UI, reel accents, ordinary reward celebrations, and jackpot audio. Music continues between screens. Leaving the slot stops its effects; focus loss/application pause pauses loops and stops one-shot effects. Animation cancellation stops reel audio without celebrating an unconfirmed payout.
+
+`AudioConfigSO` references all ten clips in `Assets/_Project/Audio`. `ui_click` is reused for buttons, bets, and reel stops (with slightly rising pitch); `ui_open` for navigation and popup opening; `scatter` for visible Scatter landings and confirmed free-spin awards; `win_medium` for daily rewards; `big_win` for large ordinary wins; `jackpot.wav` exclusively for jackpots. `spin_start`, `reel_spin_loop`, `win_small`, and `music_main_loop` cover the remaining events. Normal win tiers use final slot payout divided by effective bet, with configurable thresholds of 5x and 20x. One celebration is selected per confirmed spin, prioritizing jackpot, free-spin award, then payout tier. A subsequent spin stops ordinary reward audio to avoid stacking during autoplay; it does not stop the separate jackpot channel. Ordinary win fanfares are suppressed while the jackpot animation is active.
+
+The existing settings sliders preview audio immediately; a failed settings save restores the confirmed levels. Rewards subscribe to successful settlement/claim events rather than button input or UI refresh. `GameAudioTests` covers scene wiring, volume preview/persistence, five reel stop events, cancellation, and daily reward playback.
+
+## Jackpot Coin Celebration
+
+During the same three-second celebration, `JackpotView` shows a centered bright pink `JACKPOT` label over the coin rain and all other UI. Its maximum font size is 400 (twice the initial size), with responsive auto-sizing, a dark violet outline, and a shadow to separate it from the gold coins. The authored `JackpotAnnouncement` uses a nested Canvas with sorting override/order 100 and a non-interactive TextMeshPro label. Visibility switches every 0.5 unscaled seconds (`BlinkIntervalSeconds`), starting visible. Completion, cancellation, disabling, and destruction hide the label through the same cleanup path as the coin rain and audio.
+
+`JackpotPresenter` continues to call `IJackpotView.Celebrate()` only after successful paid-spin settlement, once per `SpinId`. `JackpotView` owns the three-second unscaled presentation interval (`CelebrationDurationSeconds`), the existing HUD pulse, and calls to `JackpotCoinRainView`. It emits `CelebrationStarted` and `CelebrationEnded` for the audio controller. The end event fires once on natural completion or cancellation; disabling/destroying the HUD also clears the rain and stops the sound. No particle or audio callback credits currency, writes a profile, or changes slot mathematics.
+
+The authored `Canvas/GameScreen/JackpotCoinRain` is stretched over the game screen and drawn last. Its child `Coins` uses the installed AssetKits `ParticleImage` with the package's `Demo/Sprites/Coin.png` sprite. It ignores raycasts and masks, uses local simulation/unscaled time, and does not autoplay. `JackpotCoinRainView` positions its horizontal emitter above the top edge and calculates negative speed from the current viewport height. Coins are 90–170 Canvas units at maximum size (with 80–100% random variation), emitted at 30 per second. Each travels beyond the lower edge in 1.05 seconds; emission ends after 1.95 seconds so the tail exits within the total three-second celebration. The size and emitter width adapt to the current Canvas dimensions when each celebration starts.
+
+`GameAudioController` subscribes to the concrete View's lifecycle events through `SlotBootstrapper`. Its dedicated `Jackpot` AudioSource plays the configured `AudioConfigSO.Jackpot` clip at the existing effects volume and explicitly stops when the animation ends, cutting off the remaining portion of the 8.31-second source clip. Auto/manual spins cannot truncate this channel. Screen changes and application focus/pause follow the normal audio suspension rules. `Domain`, `Application`, the save schema, and jackpot eligibility/payout rules are unchanged by this presentation feature.
 
 ## Scene Components
 
@@ -24,6 +42,8 @@ The table below lists all custom MonoBehaviour components, including `PaylineVie
 | `SettingsView` | `Presentation/SettingsView.cs` | `Canvas/SettingsPopup` | Music/effects toggles and volume controls, availability, and settings messages. |
 | `DailyBonusView` | `Presentation/DailyBonusView.cs` | `Canvas/DailyBonusPopup` | Displays seven rewards, card states, Claim/Retry, and messages. |
 | `JackpotView` | `Presentation/JackpotView.cs` | `Canvas/GameScreen/JackpotHUD` | Displays jackpot amount/status/timer and the celebration effect. |
+| `JackpotCoinRainView` | `Presentation/JackpotCoinRainView.cs` | `Canvas/GameScreen/JackpotCoinRain` | Sizes/positions the Particle Image coin emitter for the viewport and clears the effect on completion/cancellation. |
+| `GameAudioController` | `Presentation/GameAudioController.cs` | `SlotBootstrapper/Game Audio` (runtime) | Owns six audio channels and connects UI, spin, settings, and jackpot lifecycle events to playback. |
 | `ReelAnimationCoordinator` | `Presentation/ReelAnimationCoordinator.cs` | `Canvas/GameScreen/ImageGameField/SlotWheels` | Starts/cancels five reels together and signals completion for the spin ID. |
 | `ReelView` | `Presentation/ReelView.cs` | `Canvas/GameScreen/ImageGameField/SlotWheels/SlotWheel`, `SlotWheel (1)`, `SlotWheel (2)`, `SlotWheel (3)`, `SlotWheel (4)` under the same parent | Scrolls the symbol strip through five Image cells and stops at the specified position. |
 | `PaylineView` | `Presentation/PaylineView.cs` | `Canvas/GameScreen/ImageGameField/WinningPaylines` | Draws winning paylines and highlights symbols, including Scatter. |
@@ -232,7 +252,7 @@ Components in this folder are described in the scene-object table above. Present
 | `SlotUiTests` | `Tests/PlayMode/SlotUiTests.cs` | Slot controls, reels, paylines, animation completion/cancellation, and Retry. |
 | `SlotUiTests.Stops` | `Tests/PlayMode/SlotUiTests.cs` | Specified stops for visual scenarios. |
 | `SlotUiTests.MemorySave` | `Tests/PlayMode/SlotUiTests.cs` | Fake storage for slot UI tests. |
-| `JackpotHudTests` | `Tests/PlayMode/JackpotHudTests.cs` | Actual jackpot display, timer, and celebration. |
+| `JackpotHudTests` | `Tests/PlayMode/JackpotHudTests.cs` | Actual jackpot display, timer, and celebration; includes coin traversal, three-second unscaled timing, dedicated sound, next-spin isolation, and cancellation. |
 | `JackpotHudTests.Clock` | `Tests/PlayMode/JackpotHudTests.cs` | Adjustable UTC clock for HUD tests. |
 | `JackpotHudTests.Bits` | `Tests/PlayMode/JackpotHudTests.cs` | Controlled RNG with call tracking. |
 | `JackpotHudTests.MemorySave` | `Tests/PlayMode/JackpotHudTests.cs` | Fake storage for HUD tests. |
@@ -253,6 +273,8 @@ This code is outside Assets, runs in a separate process, and is excluded from Un
 `AssemblyInfo.cs` in Domain/Application/Infrastructure contains assembly attributes and declares no classes. External packages and generated Library/build code are not custom project sources.
 
 ## Verification and Current Status
+
+Jackpot celebration verification on 2026-10-21: compilation succeeded; both new PlayMode tests and all 23 `JackpotPresentationTests` EditMode tests passed. Nine related PlayMode regression tests also passed (confirmed/failed jackpot settlement, autoplay, Free Spins, HUD destruction/reload, general audio, daily-reward coins). The coin rain was inspected in the real Game View; a screenshot is available in ignored `Logs/JackpotCelebration/preview.png`. These are targeted results, not a claim that all historical visual checks now pass.
 
 Run tests in Unity Test Runner: `IceP.Tests.EditMode` and `IceP.Tests.PlayMode`. The expensive `SlotSimulationTests.GenerateSection412Report` simulation must be run explicitly; ordinary runs include a short simulation. This test can regenerate a separate results report.
 

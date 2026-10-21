@@ -1,4 +1,5 @@
 using TMPro;
+using AssetKits.ParticleImage;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,12 @@ namespace IceP.Presentation
         [SerializeField] private TMP_Text message;
         [SerializeField] private Button claimButton;
         [SerializeField] private Button retryButton;
+        [SerializeField] private ParticleImage rewardCoins;
         public Button ClaimButton => claimButton;
         public Button RetryButton => retryButton;
         public TMP_Text[] RewardLabels => (TMP_Text[])rewardLabels.Clone();
         public string Message => message.text;
+        public bool IsRewardCoinsPlaying => rewardCoins && rewardCoins.isActiveAndEnabled && rewardCoins.isPlaying;
         public bool HasRequiredReferences => rewardLabels != null && rewardLabels.Length == 7 &&
             rewardPanels != null && rewardPanels.Length == 7 && System.Array.TrueForAll(rewardLabels, x => x) &&
             System.Array.TrueForAll(rewardPanels, x => x) && rewardDefaultSprite && rewardClaimedSprite && message && claimButton && retryButton;
@@ -40,6 +43,21 @@ namespace IceP.Presentation
             retryButton.gameObject.SetActive(canRetry);
             retryButton.interactable = canRetry;
         }
+        public void PlayRewardCoins(int rewardDay)
+        {
+            if (!rewardCoins || rewardPanels == null || rewardDay < 1 || rewardDay > rewardPanels.Length)
+                return;
+            var source = rewardPanels[rewardDay - 1];
+            if (!source || !rewardCoins.attractorTarget) return;
+
+            // Use the confirmed day, since refreshing the status advances to the next reward.
+            Canvas.ForceUpdateCanvases();
+            rewardCoins.Stop(true);
+            rewardCoins.rectTransform.position = source.rectTransform.TransformPoint(source.rectTransform.rect.center);
+            rewardCoins.transform.SetAsLastSibling();
+            rewardCoins.Play();
+        }
+
         public void ShowMessage(string value) => message.text = value;
     }
 }

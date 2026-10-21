@@ -13,6 +13,17 @@ namespace IceP.Presentation
         private readonly SettingsPresenter settingsPresenter;
         private readonly DailyBonusPresenter dailyPresenter;
         private float refreshTime;
+        private bool balanceRefreshPending;
+        public event Action<DailyBonusClaimResult> RewardConfirmed
+        {
+            add => dailyPresenter.RewardConfirmed += value;
+            remove => dailyPresenter.RewardConfirmed -= value;
+        }
+        public event Action<IceP.Application.Persistence.UserSettings> AudioSettingsChanged
+        {
+            add => settingsPresenter.AudioSettingsChanged += value;
+            remove => settingsPresenter.AudioSettingsChanged -= value;
+        }
         public MainMenuPresenter(GameSession session, GameNavigationService navigation, GameNavigationView view,
             DailyBonusService daily, SettingsService settings)
         {
@@ -54,6 +65,7 @@ namespace IceP.Presentation
         private void ScreenChanged(GameScreen _) => Refresh();
         public void Tick(float delta)
         {
+            if (balanceRefreshPending && !view.DailyBonusView.IsRewardCoinsPlaying) Refresh();
             if (view.SettingsView.gameObject.activeInHierarchy) settingsPresenter.Tick(delta);
             refreshTime += delta;
             if (refreshTime >= 1) { refreshTime = 0; Refresh(); }
@@ -64,7 +76,9 @@ namespace IceP.Presentation
         {
             var status = daily.GetStatus();
             view.ShowDailyAvailability(status.CanClaim);
-            view.ShowBalance(session.Snapshot.Balance);
+            // Keep the old balance visible until the last reward coin has arrived.
+            balanceRefreshPending = view.DailyBonusView.IsRewardCoinsPlaying;
+            if (!balanceRefreshPending) view.ShowBalance(session.Snapshot.Balance);
             view.PlayButton.interactable = session.CanStartSpin;
             view.SettingsButton.interactable = settings.CanUpdate || settings.CanRetry;
             // Keep a failed reward transaction reachable so its save can be retried.

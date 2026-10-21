@@ -119,6 +119,89 @@ namespace IceP.Tests
             }
         }
 
+        [Test]
+        public void DebugJackpotWinsEveryTenthPaidSpinBeyondWeeklyLimit()
+        {
+            Complete(Start());
+            int calls = bits.Calls;
+            jackpot.DebugJackpotEvery10Spins = true;
+            Assert.That(jackpot.GetStatus().IsEligible, Is.True);
+            Assert.That(jackpot.GetStatus().State, Is.EqualTo(JackpotState.Active));
+            for (int i = 1; i <= 20; i++)
+            {
+                jackpot.DebugJackpotEvery10Spins = true; // Bootstrap synchronizes the checkbox every frame.
+                var spin = Start();
+                Assert.That(spin.Jackpot.JackpotWon, Is.EqualTo(i % 10 == 0), "Paid spin " + i);
+                long before = session.Snapshot.Balance;
+                Complete(spin);
+                Assert.That(session.Snapshot.Balance - before,
+                    Is.EqualTo(spin.Evaluation.FinalPayout + (i % 10 == 0 ? config.Jackpot.Amount : 0)));
+            }
+            Assert.That(bits.Calls, Is.EqualTo(calls));
+            Assert.That(repository.Load().Data.JackpotWinsThisWeek, Is.EqualTo(1));
+            jackpot.DebugJackpotEvery10Spins = false;
+            Assert.That(jackpot.GetStatus().IsEligible, Is.False);
+            Assert.That(Start().Jackpot.Participated, Is.False);
+        }
+
+        [Test]
+        public void DebugJackpotSkipsFreeBusyAndFailedDebitAndKeepsSettlementOnToggle()
+        {
+            Profile(s => { s.FreeSpinsRemaining = 2; s.BonusBet = 1000; });
+            jackpot.DebugJackpotEvery10Spins = true;
+            for (int i = 0; i < 2; i++)
+            {
+                var free = Start();
+                Assert.That(free.Jackpot.Participated, Is.False);
+                Assert.That(free.Jackpot.JackpotWon, Is.False);
+                Complete(free);
+            }
+            repository.FailSaves = true;
+            Assert.That(spins.StartSpin().Error, Is.EqualTo(SpinError.PersistenceFailure));
+            repository.FailSaves = false;
+            var retry = spins.RetryPersistence();
+            Assert.That(retry.Success, Is.True, retry.Diagnostic);
+            Assert.That(retry.Spin.Jackpot.JackpotWon, Is.False);
+            Complete(retry.Spin);
+            for (int i = 2; i <= 10; i++)
+            {
+                var spin = Start();
+                Assert.That(spins.StartSpin().Error, Is.EqualTo(SpinError.Busy));
+                Assert.That(spin.Jackpot.JackpotWon, Is.EqualTo(i == 10));
+                if (i < 10) { Complete(spin); continue; }
+                jackpot.DebugJackpotEvery10Spins = false;
+                repository.CommitThenFail = true;
+                Assert.That(spins.CompleteSpin(spin.SpinId).Success, Is.False);
+                repository.CommitThenFail = false;
+                Assert.That(spins.RetryPersistence().ConfirmedPayout,
+                    Is.EqualTo(spin.Evaluation.FinalPayout + config.Jackpot.Amount));
+                Assert.That(spins.CompleteSpin(spin.SpinId).AlreadySettled, Is.True);
+            }
+            Assert.That(repository.Load().Data.JackpotWinsThisWeek, Is.Zero);
+            Assert.That(bits.Calls, Is.Zero);
+        }
+
+        [Test]
+        public void DebugJackpotToggleAndRestartResetCounterAndRestoreNormalDraw()
+        {
+            jackpot.DebugJackpotEvery10Spins = true;
+            for (int i = 0; i < 9; i++) Complete(Start());
+            jackpot.DebugJackpotEvery10Spins = false;
+            jackpot.DebugJackpotEvery10Spins = true;
+            var first = Start(); Assert.That(first.Jackpot.JackpotWon, Is.False); Complete(first);
+            Recreate();
+            Assert.That(jackpot.DebugJackpotEvery10Spins, Is.False);
+            jackpot.DebugJackpotEvery10Spins = true;
+            for (int i = 1; i <= 9; i++)
+            {
+                var spin = Start(); Assert.That(spin.Jackpot.JackpotWon, Is.False); Complete(spin);
+            }
+            jackpot.DebugJackpotEvery10Spins = false;
+            var normal = Start(); Assert.That(normal.Jackpot.JackpotWon, Is.True); Complete(normal);
+            Assert.That(repository.Load().Data.JackpotWinsThisWeek, Is.EqualTo(1));
+            Assert.That(bits.Calls, Is.GreaterThan(0));
+        }
+
         [TestCase("2026-10-12T00:00:00Z", "2026-10-12T00:00:00Z")]
         [TestCase("2026-10-11T23:59:59Z", "2026-10-05T00:00:00Z")]
         [TestCase("2026-11-01T23:59:59Z", "2026-10-26T00:00:00Z")]

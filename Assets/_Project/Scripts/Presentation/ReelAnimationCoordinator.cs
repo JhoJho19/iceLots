@@ -12,6 +12,8 @@ namespace IceP.Presentation
         private SlotVisualSettings visual;
         private Guid id;
         public event Action<Guid, bool> Finished;
+        public event Action<SpinResult> Started;
+        public event Action<Guid, int> ReelStopped;
         public ReelView[] Reels => reels;
         public bool IsRunning { get; private set; }
         public void Initialize(SlotRuntimeConfig config, SlotVisualSettings settings)
@@ -26,9 +28,12 @@ namespace IceP.Presentation
             id = spin.SpinId; barrier.Begin(id); IsRunning = true;
             for (int i = 0; i < reels.Length; i++)
                 reels[i].Begin(id, i, spin.Evaluation.Outcome.Stops[i].Position, visual.Duration + i * visual.Stagger, Stopped);
+            Started?.Invoke(spin);
         }
         private void Stopped(Guid spin, int reel)
         {
+            if (!IsRunning || spin != id) return;
+            ReelStopped?.Invoke(spin, reel);
             if (!barrier.Report(spin, reel)) return;
             IsRunning = false; Finished?.Invoke(spin, true);
         }

@@ -6,6 +6,7 @@ namespace IceP.Presentation
 {
     public sealed class SettingsPresenter : IDisposable
     {
+        public event Action<UserSettings> AudioSettingsChanged;
         private readonly SettingsService service;
         private readonly SettingsView view;
         private bool dirty;
@@ -24,7 +25,11 @@ namespace IceP.Presentation
             view.ShowMessage(service.CanRetry ? "Save not confirmed." : service.CanUpdate ? "" : "Session blocked.");
             Refresh();
         }
-        private void VolumeChanged(float _) { pending = view.Read(); dirty = true; quietTime = 0; view.ShowPercent(); }
+        private void VolumeChanged(float _)
+        {
+            pending = view.Read(); dirty = true; quietTime = 0; view.ShowPercent();
+            AudioSettingsChanged?.Invoke(pending);
+        }
         // Debounce keyboard/drag changes; never write every frame. Close flushes the last value.
         public void Tick(float delta)
         {
@@ -36,6 +41,7 @@ namespace IceP.Presentation
         {
             dirty = false;
             var result = service.Update(pending);
+            AudioSettingsChanged?.Invoke(service.Current);
             view.Show(service.Current); // Failed or ambiguous proposals are never displayed as confirmed.
             view.ShowMessage(result.Success ? "Saved" : result.Error == SettingsError.PersistenceFailure ?
                 "Save not confirmed." : "Settings unavailable: " + result.Error);

@@ -20,6 +20,8 @@ No real money slot MVP
 
 Reel animation uses custom `ReelView` and `ReelAnimationCoordinator` components.
 
+Music and sound effects use the clips in `Assets/_Project/Audio`. Adjust clip assignments, base volumes, and win thresholds in `Assets/_Project/Configs/AudioConfigSO.asset`; the main scene already references it. Player music/effects sliders apply immediately and save with the profile.
+
 ## Architecture
 
 - Game code lives in `Assets/_Project/Scripts`.

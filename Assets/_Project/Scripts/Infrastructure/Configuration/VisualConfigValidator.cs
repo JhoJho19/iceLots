@@ -34,8 +34,6 @@ namespace IceP.Infrastructure.Configuration
                 errors.Add("Visual.ReelCellsPerSecond: must be finite and positive.");
             if (float.IsNaN(visual.ReelStopEasePower) || float.IsInfinity(visual.ReelStopEasePower) || visual.ReelStopEasePower < 1)
                 errors.Add("Visual.ReelStopEasePower: must be finite and at least one.");
-            if (visual.EnableWinEffect && !visual.WinEffectPrefab) errors.Add("Visual.WinEffectPrefab: required when EnableWinEffect is true.");
-            if (visual.EnableSpinAudio && !visual.SpinAudio) errors.Add("Visual.SpinAudio: required when EnableSpinAudio is true.");
             return errors.AsReadOnly();
         }
 

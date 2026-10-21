@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f12883b70cd49aa8c7045ada6306a6f, type: 3}
+  m_Name: AudioConfigSO
+  m_EditorClassIdentifier: IceP.Presentation::IceP.Presentation.AudioConfigSO
+  Music: {fileID: 8300000, guid: e1c6214562a1ffc46b5a6f5664a01795, type: 3}
+  UiClick: {fileID: 8300000, guid: c2afa262e6727cc468e46d238eed8608, type: 3}
+  UiOpen: {fileID: 8300000, guid: 3f9577495ffa46b4d90c123b4f1a54ba, type: 3}
+  SpinStart: {fileID: 8300000, guid: f257ba4eb14acd84fb2fb783f1b840ae, type: 3}
+  ReelLoop: {fileID: 8300000, guid: 5310cffad6d973e41890f6e630f2de9e, type: 3}
+  Scatter: {fileID: 8300000, guid: 0b9fc18970bb26846ba1bed71018764b, type: 3}
+  SmallWin: {fileID: 8300000, guid: e7f3628107042f84894caa67215bc3dd, type: 3}
+  MediumWin: {fileID: 8300000, guid: df130db1db04eef4e83c543624b92a47, type: 3}
+  BigWin: {fileID: 8300000, guid: d1cb7e8eb31a0f44183484c38a74f19e, type: 3}
+  Jackpot: {fileID: 8300000, guid: 4a9d256967ceea447a252f1b1dbaa4e8, type: 3}
+  MusicGain: 0.3
+  EffectsGain: 0.7
+  ReelGain: 0.35
+  MediumWinMultiplier: 5
+  BigWinMultiplier: 20
+

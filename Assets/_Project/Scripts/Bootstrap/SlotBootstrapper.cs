@@ -18,6 +18,11 @@ namespace IceP.Bootstrap
         [SerializeField] private JackpotView jackpotView;
         [SerializeField] private SlotGameConfigSO gameConfig;
         [SerializeField] private SlotVisualConfigSO visualConfig;
+        [SerializeField] private AudioConfigSO audioConfig;
+        [Header("Testing")]
+        [Tooltip("Guarantee a jackpot on every 10th paid spin. Free spins do not count. Bypasses the weekly limit; resets when disabled or restarted.")]
+        [SerializeField] private bool debugJackpotEvery10Spins;
+        private GameAudioController audioController;
         private GameNavigationPresenter presenter;
         private MainMenuPresenter menuPresenter;
         private SlotPresenter slotPresenter;
@@ -78,6 +83,7 @@ namespace IceP.Bootstrap
                 var balance = new BalanceService(config);
                 WeeklyJackpot = new WeeklyJackpotService(Session, config, Clock,
                     RandomSourceFactory.CreateJackpot(config.DebugRandom));
+                WeeklyJackpot.DebugJackpotEvery10Spins = debugJackpotEvery10Spins;
                 Spins = new SpinService(Session, config, new SlotEngine(config, random),
                     balance, SaveRepository, () => Clock.UtcNow, WeeklyJackpot);
                 DailyBonus = new DailyBonusService(Session, config, balance, SaveRepository, Clock);
@@ -108,6 +114,14 @@ namespace IceP.Bootstrap
             jackpotPresenter = new JackpotPresenter(WeeklyJackpot, Clock, jackpotView, slotPresenter, Navigation);
             presenter = new GameNavigationPresenter(Navigation, navigationView, false);
             menuPresenter = new MainMenuPresenter(Session, Navigation, navigationView, DailyBonus, Settings);
+            if (audioConfig)
+            {
+                var audioRoot = new GameObject("Game Audio");
+                audioRoot.transform.SetParent(transform, false);
+                audioController = audioRoot.AddComponent<GameAudioController>();
+                audioController.Initialize(audioConfig, Settings.Current, slotPresenter, menuPresenter,
+                    Navigation, navigationView, slotView, jackpotView);
+            }
             presenter.RefreshAvailability();
         }
 
@@ -123,6 +137,8 @@ namespace IceP.Bootstrap
 
         private void Update()
         {
+            if (WeeklyJackpot != null)
+                WeeklyJackpot.DebugJackpotEvery10Spins = debugJackpotEvery10Spins;
             presenter?.RefreshAvailability();
             slotPresenter?.Tick(Time.unscaledDeltaTime);
             menuPresenter?.Tick(Time.unscaledDeltaTime);

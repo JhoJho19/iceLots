@@ -2,7 +2,7 @@
   "noEngineReferences": false,
   "references": [
     "IceP.Application", "IceP.Domain",
-    "Unity.ugui", "Unity.TextMeshPro"
+    "Unity.ugui", "Unity.TextMeshPro", "ParticleImage"
   ],
   "name": "IceP.Presentation",
   "autoReferenced": false,

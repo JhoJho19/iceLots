@@ -29,10 +29,5 @@ namespace IceP.Infrastructure.Configuration
             foreach (var mapping in Symbols) if (mapping.Symbol == id) return mapping.Sprite;
             throw new ArgumentOutOfRangeException(nameof(id));
         }
-        [Header("Optional effects and audio (required only when enabled)")]
-        public bool EnableWinEffect;
-        public GameObject WinEffectPrefab;
-        public bool EnableSpinAudio;
-        public AudioClip SpinAudio;
     }
 }

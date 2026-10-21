@@ -135,6 +135,64 @@ namespace IceP.Tests
             Assert.That(hud.CelebrationCount, Is.EqualTo(1)); Assert.That(bits.Calls, Is.EqualTo(draws)); Assert.That(slotView.AnimationCoordinator.IsRunning, Is.False);
             presenter.OnSettlement(spin, spins.CompleteSpin(spin.SpinId)); Assert.That(hud.CelebrationCount, Is.EqualTo(1));
         }
+        [UnityTest] public IEnumerator JackpotRainCrossesViewportAndStopsSoundAfterThreeUnscaledSeconds()
+        {
+            yield return Load(); Control();
+            var rain = slotView.GetComponentInChildren<JackpotCoinRainView>(true);
+            var audio = Object.FindFirstObjectByType<GameAudioController>();
+            var channel = Array.Find(audio.GetComponentsInChildren<AudioSource>(), x => x.name == "Jackpot");
+            Assert.That(rain, Is.Not.Null); Assert.That(channel.clip.name, Is.EqualTo("jackpot"));
+            Assert.That(channel.isPlaying, Is.False);
+            slotView.SpinButton.onClick.Invoke();
+            Assert.That(rain.Coins.isPlaying || channel.isPlaying, Is.False, "Potential awards cannot celebrate.");
+            yield return Finish();
+            Assert.That(channel.isPlaying && rain.Coins.isPlaying, Is.True);
+            float started = Time.realtimeSinceStartup;
+            Time.timeScale = 0;
+            var coins = rain.Coins;
+            var viewport = (RectTransform)rain.transform;
+            Assert.That(coins.raycastTarget, Is.False);
+            Assert.That(coins.rectTransform.anchoredPosition.y, Is.GreaterThan(coins.startSize.mainCurve.constantMax / 2));
+            bool crossedBottom = false;
+            while (Time.realtimeSinceStartup - started < 1.2f)
+            {
+                foreach (var particle in coins.particles)
+                {
+                    var local = viewport.InverseTransformPoint(coins.transform.TransformPoint(particle.Position));
+                    if (local.y < viewport.rect.yMin) crossedBottom = true;
+                }
+                yield return null;
+            }
+            Assert.That(crossedBottom, Is.True, "Coins must leave through the bottom before their lifetime ends.");
+            Assert.That(coins.startSize.mainCurve.constantMin, Is.GreaterThanOrEqualTo(72));
+            Assert.That(coins.particleCount, Is.GreaterThan(0));
+            Assert.That(hud.IsCelebrating && channel.isPlaying, Is.True);
+            // A new spin must not cut the dedicated jackpot channel.
+            slotView.SpinButton.onClick.Invoke();
+            Assert.That(channel.isPlaying, Is.True);
+            while (Time.realtimeSinceStartup - started < 2.85f) yield return null;
+            Assert.That(hud.IsCelebrating && channel.isPlaying, Is.True);
+            while (hud.IsCelebrating && Time.realtimeSinceStartup - started < 3.3f) yield return null;
+            Assert.That(Time.realtimeSinceStartup - started, Is.InRange(2.95f, 3.3f));
+            Assert.That(channel.isPlaying || coins.isPlaying, Is.False);
+            Assert.That(coins.particleCount, Is.Zero);
+            Time.timeScale = 1;
+        }
+        [UnityTest] public IEnumerator JackpotRainCancellationStopsDedicatedSoundAndClearsParticles()
+        {
+            yield return Load(); Control(); slotView.SpinButton.onClick.Invoke(); yield return Finish();
+            var rain = slotView.GetComponentInChildren<JackpotCoinRainView>(true);
+            var audio = Object.FindFirstObjectByType<GameAudioController>();
+            var channel = Array.Find(audio.GetComponentsInChildren<AudioSource>(), x => x.name == "Jackpot");
+            Assert.That(channel.isPlaying, Is.True);
+            int ended = 0; hud.CelebrationEnded += () => ended++;
+            long balance = session.Snapshot.Balance; int writes = save.Writes;
+            hud.gameObject.SetActive(false);
+            Assert.That(channel.isPlaying || rain.Coins.isPlaying, Is.False);
+            Assert.That(rain.Coins.particleCount, Is.Zero);
+            hud.CancelCelebration(); Assert.That(ended, Is.EqualTo(1));
+            Assert.That(session.Snapshot.Balance, Is.EqualTo(balance)); Assert.That(save.Writes, Is.EqualTo(writes));
+        }
         [UnityTest] public IEnumerator FreeSpinKeepsHudWithoutJackpotDraw()
         {
             yield return Load(); Control(2); slotView.SpinButton.onClick.Invoke(); var spin = slot.ActiveSpin;
